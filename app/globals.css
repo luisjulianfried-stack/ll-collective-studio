@@ -411,3 +411,21 @@
   .contact-v2 .contact-cta{width:auto}
 }
 @media(prefers-reduced-motion:reduce){.motion-ready .services-v2-head.is-visible .services-v2-lead .system-mark,.motion-ready .services-v2-head.is-visible .services-v2-lead p{animation:none}}
+
+/* Possibilities: editorial scenes with safe captions and reliable mobile crops. */
+.possibility-canvas.possibility-photo{background:#171716}
+.possibility-photo .possibility-photo-image{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.showcase-card:hover .possibility-photo-image{transform:scale(1.035)}
+.possibility-canvas.possibility-photo>.possibility-photo-shade{position:absolute;inset:0;background:linear-gradient(180deg,#10100f9c 0%,transparent 28%,transparent 48%,#10100fe3 100%);pointer-events:none}
+.possibility-canvas.possibility-photo>.possibility-photo-caption{position:absolute;inset:auto clamp(23px,3vw,42px) clamp(27px,3vw,42px);z-index:3;display:flex;flex-direction:column;gap:13px;max-width:min(80%,650px);text-shadow:0 2px 18px #000a}
+.possibility-photo-caption span{font-size:11px;letter-spacing:.17em;font-weight:600;color:#e1d4c0}
+.possibility-photo-caption strong{font-size:clamp(33px,4.1vw,64px);font-weight:500;line-height:1.02;letter-spacing:-.055em;text-wrap:balance}
+.possibility-photo .possibility-top{color:#f8f5ec;text-shadow:0 2px 14px #000c}
+@media(max-width:700px){
+  .possibility-canvas.possibility-photo>.possibility-photo-image{height:70%!important;bottom:auto!important;object-position:center 43%}
+  .possibility-canvas.possibility-photo>.possibility-photo-shade{background:linear-gradient(180deg,#10100f96 0%,transparent 26%,transparent 57%,#171716 72%)}
+  .possibility-canvas.possibility-photo>.possibility-photo-caption{inset:auto 21px 26px;max-width:none;gap:12px;text-shadow:none}
+  .possibility-photo-caption span{font-size:9px;line-height:1.5;letter-spacing:.13em}
+  .possibility-photo-caption strong{font-size:clamp(28px,8vw,40px);max-width:100%}
+}
+@media(prefers-reduced-motion:reduce){.possibility-photo .possibility-photo-image,.showcase-card:hover .possibility-photo-image{transition:none;transform:none}}
