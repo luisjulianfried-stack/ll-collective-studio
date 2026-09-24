@@ -19,14 +19,11 @@ export default function Home() {
         <p className="hero-kicker"><Asterisk size={18}/> STRATEGY · BRANDING · CONTENT · DIGITAL</p>
         <h1>BUILT TO BE<br/><span><em>remembered.</em></span></h1>
         <div className="hero-bottom hero-bottom-v2">
-          <p>Strategie, Branding, Content und digitale Auftritte für Unternehmen, die sichtbar wachsen wollen.</p>
-          <div className="hero-actions">
-            <a className="pill-button light" href="#contact">PROJEKT STARTEN <ArrowUpRight size={16}/></a>
-            <a className="pill-button outline" href="#services">LEISTUNGEN ANSEHEN <ArrowDown size={16}/></a>
-          </div>
+          <p>Wir entwickeln Markenauftritte, Websites und Content, die Unternehmen klar positionieren und Menschen erreichen.</p>
         </div>
+        <div className="hero-offer-v2"><span>MARKENSTRATEGIE & DESIGN</span><span>WEBSITES & DIGITALE AUFTRITTE</span><span>CONTENT & KAMPAGNEN</span></div>
       </div>
-      <div className="hero-foot"><span>LL COLLECTIVE STUDIO © {new Date().getFullYear()}</span><span>INDEPENDENT CREATIVE STUDIO</span><span>01 / 06</span></div>
+      <div className="hero-foot"><span>LL COLLECTIVE STUDIO © {new Date().getFullYear()}</span><a href="#services">LEISTUNGEN ENTDECKEN <ArrowDown size={15}/></a><span>01 / 06</span></div>
     </section>
 
     <Services/>

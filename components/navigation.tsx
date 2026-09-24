@@ -5,7 +5,7 @@ import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { site } from '@/lib/site';
 import { BrandMark } from '@/components/brand-mark';
 
-const links = [['Services', '#services'], ['Work', '#work'], ['About', '#about'], ['Process', '#process'], ['Contact', '#contact']];
+const links = [['Leistungen', '#services'], ['Beispiele', '#work'], ['Studio', '#about'], ['Ablauf', '#process'], ['Kontakt', '#contact']];
 
 export function Navigation() {
   const [open, setOpen] = useState(false);
