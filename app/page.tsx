@@ -8,9 +8,10 @@ import { SystemMark } from '@/components/system-mark';
 import { site } from '@/lib/site';
 import { Motion } from '@/components/motion';
 import { Footer } from '@/components/footer';
+import { Welcome } from '@/components/welcome';
 
 export default function Home() {
-  return <><Navigation/><main>
+  return <><Welcome/><Navigation/><main>
     <section className="hero hero-v2" id="top">
       <div className="hero-atmosphere" aria-hidden="true"><div className="hero-orb"/></div>
       <div className="hero-meta"><span>INDEPENDENT CREATIVE STUDIO</span><span>MUNICH / GERMANY</span></div>

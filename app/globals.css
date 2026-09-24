@@ -479,3 +479,26 @@
   .motion-ready .hero-v2.motion-in-view .hero-chrome:after,.motion-ready .about-v2.motion-in-view .about-visual.is-visible:after,.motion-ready .services-v2.motion-in-view .services-v2-head.is-visible .services-v2-lead .system-mark,.motion-ready .service-card-v2.is-visible:after,.motion-ready .process-v2 .process-row.is-visible:after,.motion-ready .contact-v2.motion-in-view .contact-cta svg{animation:none}
   .service-card-v2:after,.process-v2 .process-row:after{transform:scaleX(1)}
 }
+
+/* A short studio signature before the home page; the existing page stays in place. */
+.welcome-screen{position:fixed;inset:0;z-index:1100;display:grid;place-items:center;overflow:hidden;background:#111110;color:#efede7;isolation:isolate}
+.welcome-screen:before{content:'';position:absolute;inset:-25%;z-index:-1;background:radial-gradient(ellipse at 50% 52%,#76645032 0%,#1b1916 28%,transparent 59%);animation:welcomeAura 3s ease-out both}
+.welcome-inner{display:flex;flex-direction:column;align-items:center;justify-content:center;width:min(86vw,520px);text-align:center}
+.welcome-eyebrow,.welcome-detail{font-size:10px;font-weight:600;letter-spacing:.26em;color:#bbae9d}
+.welcome-eyebrow{animation:welcomeRise .7s .1s both}
+.welcome-emblem{position:relative;width:clamp(180px,31vw,335px);margin:clamp(14px,3vh,28px) 0 0;animation:welcomeMark 1.25s .2s cubic-bezier(.18,.7,.22,1) both}
+.welcome-emblem .system-mark{width:100%;height:auto;filter:drop-shadow(0 16px 35px #0009)}
+.welcome-emblem:after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 37%,#fff8 50%,transparent 63%);mix-blend-mode:screen;animation:welcomeGlint 1.5s .75s ease-in-out both}
+.welcome-rule{width:min(100%,340px);height:1px;margin:0 0 22px;background:#b5a38d;transform-origin:center;animation:welcomeRule .75s .9s both}
+.welcome-name{font-size:clamp(17px,2.4vw,25px);font-weight:600;letter-spacing:.32em;padding-left:.32em;animation:welcomeRise .7s 1.15s both}
+.welcome-detail{margin-top:19px;letter-spacing:.14em;line-height:1.5;animation:welcomeRise .7s 1.35s both}
+.welcome-skip{position:absolute;bottom:clamp(24px,4vw,52px);right:clamp(24px,5.5vw,90px);border:0;background:transparent;color:#c5bcb1;font-size:10px;letter-spacing:.18em;padding:12px;animation:welcomeRise .7s 1.1s both}
+.welcome-skip:hover,.welcome-skip:focus-visible{color:#fff}
+.welcome-leaving{animation:welcomeExit .85s cubic-bezier(.66,0,.3,1) both;pointer-events:none}
+@keyframes welcomeAura{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+@keyframes welcomeMark{from{opacity:0;transform:translateY(18px) scale(.9);filter:blur(11px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+@keyframes welcomeGlint{from{opacity:0;transform:translateX(-70%)}40%{opacity:.45}to{opacity:0;transform:translateX(70%)}}
+@keyframes welcomeRule{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes welcomeRise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes welcomeExit{to{opacity:0;clip-path:inset(0 0 100% 0)}}
+@media(prefers-reduced-motion:reduce){.welcome-screen{display:none}}
