@@ -332,7 +332,6 @@
 .hero-offer-v2 span{font-size:10px;font-weight:700;line-height:1.45;letter-spacing:.1em;color:#dbd2c4}
 .services-v2-head .services-v2-lead{grid-column:2;max-width:440px;justify-self:end;display:flex;flex-direction:column;align-items:flex-start;gap:18px}
 .services-v2-lead p{font-size:18px;line-height:1.5;color:#4e4a43;margin:0}
-.services-v2-lead .system-mark{width:105px;filter:drop-shadow(0 8px 8px #24211b45) brightness(.58)}
 .service-card-v2{min-height:520px}
 .service-card-v2 h3{margin:55px 0 22px}
 .service-card-description{font-size:16px;line-height:1.55;max-width:480px;color:inherit;opacity:.84;min-height:75px;margin-bottom:17px}
@@ -344,8 +343,8 @@
 .about-v2 .about-visual:after{animation-play-state:paused;animation-delay:.45s}
 .motion-ready .about-v2 .about-visual.is-visible:after{animation-play-state:running}
 .identity-cover .system-mark{width:min(75%,320px);height:44%;object-fit:contain}
-@media(max-width:900px){.services-v2-head .services-v2-lead{grid-column:1;justify-self:start;max-width:640px;flex-direction:row;align-items:center}.services-v2-lead .system-mark{width:75px;flex:none}.hero-v2 .hero-chrome{right:-9vw;opacity:.34}}
-@media(max-width:700px){.hero-v2 .hero-chrome{width:75vw;right:-29vw;top:18%;opacity:.28}.hero-offer-v2{flex-direction:column;gap:7px;margin-top:25px;padding-top:14px}.hero-offer-v2 span{font-size:9px}.hero-v2 .hero-body{margin-bottom:48px}.hero-bottom-v2>p{margin-bottom:0}.services-v2-head .services-v2-lead{align-items:flex-start;gap:15px}.services-v2-lead p{font-size:16px}.services-v2-lead .system-mark{width:60px}.service-card-v2,.service-card-v2:nth-child(odd),.service-card-v2:nth-child(even){min-height:0}.service-card-v2 h3{margin:40px 0 18px}.service-card-description{min-height:0;font-size:15px}.service-card-output{min-height:0;margin-bottom:25px}.about-v2 .about-visual .system-mark{width:72%}}
+@media(max-width:900px){.services-v2-head .services-v2-lead{grid-column:1;justify-self:start;max-width:640px;flex-direction:row;align-items:center}.hero-v2 .hero-chrome{right:-9vw;opacity:.34}}
+@media(max-width:700px){.hero-v2 .hero-chrome{width:75vw;right:-29vw;top:18%;opacity:.28}.hero-offer-v2{flex-direction:column;gap:7px;margin-top:25px;padding-top:14px}.hero-offer-v2 span{font-size:9px}.hero-v2 .hero-body{margin-bottom:48px}.hero-bottom-v2>p{margin-bottom:0}.services-v2-head .services-v2-lead{align-items:flex-start;gap:15px}.services-v2-lead p{font-size:16px}.service-card-v2,.service-card-v2:nth-child(odd),.service-card-v2:nth-child(even){min-height:0}.service-card-v2 h3{margin:40px 0 18px}.service-card-description{min-height:0;font-size:15px}.service-card-output{min-height:0;margin-bottom:25px}.about-v2 .about-visual .system-mark{width:72%}}
 @media(prefers-reduced-motion:reduce){.hero-v2 .hero-chrome .system-mark,.hero-v2 .hero-chrome:after,.about-v2 .about-visual:after{animation:none;opacity:1;transform:none}.hero-v2 .hero-chrome:after,.about-v2 .about-visual:after{display:none}}
 
 /* The supplied chrome monogram is the only brand mark. Content stays clear of decoration. */
@@ -360,7 +359,6 @@
 .services-v2-head h2{font-size:clamp(66px,6vw,108px);line-height:.88;margin:0}
 .services-v2-head .services-v2-lead{max-width:520px;justify-self:stretch;gap:23px}
 .services-v2-lead p{font-size:clamp(20px,2vw,27px);line-height:1.4;color:#36332e}
-.services-v2-lead .system-mark{width:142px;filter:drop-shadow(0 12px 14px #24211b55)}
 .service-grid-v2{gap:0}
 .service-card-v2,.service-card-v2:nth-child(odd),.service-card-v2:nth-child(even){box-sizing:border-box;min-width:0;min-height:535px;padding:36px clamp(23px,3vw,58px) 42px;background:transparent;transition:background .45s ease,color .45s ease}
 .service-card-v2:nth-child(odd){padding-left:0}
@@ -377,7 +375,6 @@
 .contact-v2 .contact-invite{align-self:end;padding-bottom:8px;gap:50px}
 .contact-v2 .contact-cta{position:relative;z-index:1;max-width:100%;white-space:nowrap}
 .contact-details{min-width:0}
-.motion-ready .services-v2-head.is-visible .services-v2-lead .system-mark{animation:markAppear 1s .23s both}
 .motion-ready .services-v2-head.is-visible .services-v2-lead p{animation:serviceCopyIn .85s .12s both}
 @keyframes serviceCopyIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .service-card-v2:nth-child(2){transition-delay:.09s}
@@ -386,7 +383,7 @@
 @media(max-width:1100px){
   .hero-v2 h1{font-size:clamp(65px,10vw,110px)}
   .services-v2-head{grid-template-columns:1fr;gap:35px}
-  .services-v2-head .services-v2-lead{grid-column:1;justify-self:start;flex-direction:row;align-items:center;max-width:760px}
+  .services-v2-head .services-v2-lead{grid-column:1;justify-self:start;flex-direction:column;align-items:flex-start;max-width:760px}
   .contact-v2{grid-template-columns:1fr;gap:48px}
   .contact-v2 .contact-invite{align-self:auto;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:end;gap:clamp(25px,5vw,60px)}
 }
@@ -396,8 +393,7 @@
   .hero-v2 .hero-body{margin-bottom:50px}
   .services-v2-head{margin-bottom:52px}
   .services-v2-head h2{font-size:clamp(58px,13vw,87px)}
-  .services-v2-head .services-v2-lead{flex-direction:column-reverse;align-items:flex-start;gap:14px}
-  .services-v2-lead .system-mark{width:112px}
+  .services-v2-head .services-v2-lead{flex-direction:column;align-items:flex-start;gap:14px}
   .services-v2-lead p{font-size:20px}
   .service-card-v2,.service-card-v2:nth-child(odd),.service-card-v2:nth-child(even){min-height:0;padding:32px 0 38px}
   .service-card-v2:hover,.service-card-v2:nth-child(even):hover{padding-left:15px}
@@ -410,7 +406,7 @@
   .contact-v2 .contact-invite{display:flex;align-items:flex-start;gap:35px}
   .contact-v2 .contact-cta{width:auto}
 }
-@media(prefers-reduced-motion:reduce){.motion-ready .services-v2-head.is-visible .services-v2-lead .system-mark,.motion-ready .services-v2-head.is-visible .services-v2-lead p{animation:none}}
+@media(prefers-reduced-motion:reduce){.motion-ready .services-v2-head.is-visible .services-v2-lead p{animation:none}}
 
 /* Possibilities: editorial scenes with safe captions and reliable mobile crops. */
 .possibility-canvas.possibility-photo{background:#171716}
@@ -460,8 +456,6 @@
 @keyframes markLightCycle{0%,17%,100%{opacity:0;transform:translateX(-45%)}7%{opacity:.32}18%{transform:translateX(60%)}}
 
 /* The service emblem catches light, while the list gets an understated reading cue. */
-.motion-ready .services-v2.motion-in-view .services-v2-head.is-visible .services-v2-lead .system-mark{animation:markAppear 1s .23s both,emblemLight 8s 1.5s ease-in-out infinite}
-@keyframes emblemLight{0%,70%,100%{filter:drop-shadow(0 8px 8px #24211b45) brightness(.58)}83%{filter:drop-shadow(0 12px 17px #76614f88) brightness(.9)}}
 .service-card-v2:after{content:'';position:absolute;bottom:-1px;left:0;width:100%;height:2px;background:#947e62;transform:scaleX(0);transform-origin:left;pointer-events:none}
 .motion-ready .service-card-v2.is-visible:after{animation:cardLineIn .9s cubic-bezier(.2,.7,.2,1) both}
 .motion-ready .service-card-v2:nth-child(2).is-visible:after{animation-delay:.12s}
@@ -476,7 +470,7 @@
 .motion-ready .contact-v2.motion-in-view .contact-cta svg{animation:inviteArrow 5s 1s ease-in-out infinite}
 @keyframes inviteArrow{0%,67%,100%{transform:translate(0,0)}76%{transform:translate(3px,-3px)}85%{transform:translate(0,0)}}
 @media(prefers-reduced-motion:reduce){
-  .motion-ready .hero-v2.motion-in-view .hero-chrome:after,.motion-ready .about-v2.motion-in-view .about-visual.is-visible:after,.motion-ready .services-v2.motion-in-view .services-v2-head.is-visible .services-v2-lead .system-mark,.motion-ready .service-card-v2.is-visible:after,.motion-ready .process-v2 .process-row.is-visible:after,.motion-ready .contact-v2.motion-in-view .contact-cta svg{animation:none}
+  .motion-ready .hero-v2.motion-in-view .hero-chrome:after,.motion-ready .about-v2.motion-in-view .about-visual.is-visible:after,.motion-ready .service-card-v2.is-visible:after,.motion-ready .process-v2 .process-row.is-visible:after,.motion-ready .contact-v2.motion-in-view .contact-cta svg{animation:none}
   .service-card-v2:after,.process-v2 .process-row:after{transform:scaleX(1)}
 }
 
@@ -544,3 +538,32 @@
   .menu-bottom{align-items:flex-start;gap:17px;padding:18px 0 24px}
   .menu-bottom div{line-height:1.5}
 }
+
+/* Final spacing and interaction polish; keep the service introduction editorial. */
+.services-v2-head h2{line-height:.94}
+.services-v2-head .services-v2-lead{align-self:end;display:flex;flex-direction:column;align-items:flex-start;gap:25px}
+.services-v2-lead p{margin:0;max-width:500px;text-wrap:pretty}
+.services-lead-note{display:block;width:100%;max-width:490px;padding-top:16px;border-top:1px solid #51493f7a;color:#51473c;font-size:12px;font-weight:700;letter-spacing:.14em;line-height:1.5}
+.motion-ready .services-v2-head.is-visible .services-lead-note{animation:serviceCopyIn .85s .26s both}
+.services-v2 .service-card-v2:hover{padding-left:0}
+.services-v2 .service-card-v2:nth-child(even):hover{padding-left:clamp(23px,3vw,58px)}
+.services-v2 .service-card-top{font-size:11px}
+.motion-ready .reveal.is-visible{will-change:auto}
+.process-v2 .process-row h3{min-width:0;overflow-wrap:anywhere}
+.footer-v2-links>div{flex-wrap:wrap;row-gap:13px}
+.footer-v2-links a,.footer-v2 .footer-bottom a{transition:color .25s ease}
+.footer-v2-links a:hover,.footer-v2 .footer-bottom a:hover{color:#e9d5ba}
+@media(max-width:1100px){.services-v2-head .services-v2-lead{grid-column:1;justify-self:start;align-self:start;max-width:710px}}
+@media(max-width:700px){
+  .services-v2-head{gap:28px;margin-bottom:46px}
+  .services-v2-head h2{line-height:.96}
+  .services-v2-head .services-v2-lead{gap:18px}
+  .services-v2-lead p{font-size:18px;line-height:1.48}
+  .services-lead-note{font-size:11px;padding-top:14px}
+  .services-v2 .service-card-v2:nth-child(even):hover{padding-left:0}
+  .motion-ready .reveal{transform:translate3d(0,26px,0);filter:blur(2px)}
+  .motion-ready .reveal.is-visible{transform:translate3d(0,0,0);filter:blur(0)}
+  .footer-v2-links>div{gap:13px 23px}
+}
+@media(hover:none){.services-v2 .service-card-v2:hover{background:transparent;color:#191918;padding-left:0}.services-v2 .service-card-v2:nth-child(even):hover{padding-left:0}}
+@media(prefers-reduced-motion:reduce){.motion-ready .services-v2-head.is-visible .services-lead-note{animation:none}}

@@ -1,5 +1,3 @@
-import { SystemMark } from '@/components/system-mark';
-
 const services = [
   { number: '01', title: <>BRAND STRATEGY<br/>& IDENTITY</>, description: 'Wir schärfen, wofür Ihre Marke steht, und gestalten einen Auftritt mit Wiedererkennungswert.', output: 'Positionierung · Logo · visuelles System', items: ['Positionierung','Markenstrategie','Visual Identity','Logo & Brand System'] },
   { number: '02', title: <>SOCIAL MEDIA<br/>& CONTENT</>, description: 'Wir planen Themen und Formate und entwickeln Inhalte, die Ihre Marke regelmäßig sichtbar machen.', output: 'Content-Plan · Social-Formate · Creative Direction', items: ['Content Strategy','Redaktionsplanung','Social Media','Foto & Video Konzepte'] },
@@ -12,7 +10,7 @@ export function Services() {
     <div className="services-v2-head reveal">
       <span className="eyebrow">WHAT WE DO</span>
       <h2>FROM STRATEGY<br/>TO <em>PRESENCE.</em></h2>
-      <div className="services-v2-lead"><p>Was können wir für Sie übernehmen? Vier Bereiche, die einzeln funktionieren und zusammen einen klaren Markenauftritt ergeben.</p><SystemMark/></div>
+      <div className="services-v2-lead"><p>Was können wir für Sie übernehmen? Vier Bereiche, die einzeln funktionieren und zusammen einen klaren Markenauftritt ergeben.</p><span className="services-lead-note">VIER LEISTUNGEN. EIN GEMEINSAMER AUFTRITT.</span></div>
     </div>
     <div className="service-grid-v2">
       {services.map(service => <article className="service-card-v2 reveal" key={service.number}>
