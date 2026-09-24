@@ -4,7 +4,7 @@ export function SystemMark({ active = 0 }: { active?: number }) {
   return (
     <Image
       key={active}
-      src="/brand/ll-balloon.svg"
+      src="/brand/ll-chrome.png"
       alt="LL Collective Studio Monogram"
       className="system-mark"
       width={512}

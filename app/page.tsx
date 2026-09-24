@@ -13,7 +13,6 @@ export default function Home() {
   return <><Navigation/><main>
     <section className="hero hero-v2" id="top">
       <div className="hero-atmosphere" aria-hidden="true"><div className="hero-orb"/></div>
-      <div className="hero-chrome" aria-hidden="true"><SystemMark/></div>
       <div className="hero-meta"><span>INDEPENDENT CREATIVE STUDIO</span><span>MUNICH / GERMANY</span></div>
       <div className="hero-body">
         <p className="hero-kicker"><Asterisk size={18}/> STRATEGY · BRANDING · CONTENT · DIGITAL</p>
