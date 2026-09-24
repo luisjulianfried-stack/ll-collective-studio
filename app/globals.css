@@ -429,3 +429,53 @@
   .possibility-photo-caption strong{font-size:clamp(28px,8vw,40px);max-width:100%}
 }
 @media(prefers-reduced-motion:reduce){.possibility-photo .possibility-photo-image,.showcase-card:hover .possibility-photo-image{transition:none;transform:none}}
+
+/* A vertical studio campaign film in its own framed slide, never cropped to landscape. */
+.possibility-film{background:#282724}
+.possibility-film .campaign-film-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(18px,3vw,46px);align-items:stretch}
+.campaign-film-copy{min-width:0;display:flex;flex-direction:column;justify-content:center;padding:clamp(12px,2.8vw,38px) 0;color:#efede7}
+.campaign-film-copy>span,.campaign-film-copy small{font-size:10px;letter-spacing:.17em;color:#cab9a2}
+.campaign-film-copy strong{font-size:clamp(38px,5vw,74px);font-weight:500;letter-spacing:-.065em;line-height:.97;margin:30px 0 25px}
+.campaign-film-copy strong em{font-size:.88em}
+.campaign-film-copy p{font-size:clamp(14px,1.3vw,18px);line-height:1.5;max-width:360px;color:#c7c2b9;margin:0}
+.campaign-film-copy small{margin-top:auto;padding-top:32px}
+.campaign-film-frame{position:relative;min-width:0;min-height:0;overflow:hidden;background:#111110;display:grid;place-items:center;border:1px solid #eee9df3b}
+.campaign-film-frame video,.campaign-film-frame .campaign-film-poster{display:block;width:100%;height:100%;object-fit:contain}
+.campaign-film-frame .campaign-film-poster{position:absolute;inset:0}
+.campaign-film-frame video{position:relative;z-index:1}
+@media(max-width:700px){
+  .possibility-film .campaign-film-layout{display:flex;flex-direction:column;gap:13px}
+  .campaign-film-frame{height:57%;flex:none}
+  .campaign-film-copy{order:2;flex:1;padding:0;justify-content:flex-start}
+  .campaign-film-copy>span,.campaign-film-copy small{font-size:8px}
+  .campaign-film-copy strong{font-size:clamp(28px,8vw,42px);margin:9px 0 8px;line-height:1}
+  .campaign-film-copy p{font-size:12px;line-height:1.35;margin:0}
+  .campaign-film-copy small{padding-top:8px}
+}
+@media(prefers-reduced-motion:reduce){.campaign-film-frame video{display:none}}
+
+/* Quiet, viewport-bound motion adds rhythm without changing the page layout. */
+.motion-ready .hero-v2.motion-in-view .hero-chrome:after{animation:markLightCycle 11s 1.2s ease-in-out infinite}
+.motion-ready .about-v2.motion-in-view .about-visual.is-visible:after{animation:markLightCycle 12s 1s ease-in-out infinite}
+@keyframes markLightCycle{0%,17%,100%{opacity:0;transform:translateX(-45%)}7%{opacity:.32}18%{transform:translateX(60%)}}
+
+/* The service emblem catches light, while the list gets an understated reading cue. */
+.motion-ready .services-v2.motion-in-view .services-v2-head.is-visible .services-v2-lead .system-mark{animation:markAppear 1s .23s both,emblemLight 8s 1.5s ease-in-out infinite}
+@keyframes emblemLight{0%,70%,100%{filter:drop-shadow(0 8px 8px #24211b45) brightness(.58)}83%{filter:drop-shadow(0 12px 17px #76614f88) brightness(.9)}}
+.service-card-v2:after{content:'';position:absolute;bottom:-1px;left:0;width:100%;height:2px;background:#947e62;transform:scaleX(0);transform-origin:left;pointer-events:none}
+.motion-ready .service-card-v2.is-visible:after{animation:cardLineIn .9s cubic-bezier(.2,.7,.2,1) both}
+.motion-ready .service-card-v2:nth-child(2).is-visible:after{animation-delay:.12s}
+.motion-ready .service-card-v2:nth-child(3).is-visible:after{animation-delay:.18s}
+.motion-ready .service-card-v2:nth-child(4).is-visible:after{animation-delay:.28s}
+@keyframes cardLineIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* The process draws its steps as they enter; the call to action keeps a gentle pulse. */
+.process-v2 .process-row{position:relative}
+.process-v2 .process-row:after{content:'';position:absolute;bottom:-1px;left:0;width:100%;height:1px;background:#b39f86;transform:scaleX(0);transform-origin:left;pointer-events:none}
+.motion-ready .process-v2 .process-row.is-visible:after{animation:cardLineIn 1.1s cubic-bezier(.2,.7,.2,1) both}
+.motion-ready .contact-v2.motion-in-view .contact-cta svg{animation:inviteArrow 5s 1s ease-in-out infinite}
+@keyframes inviteArrow{0%,67%,100%{transform:translate(0,0)}76%{transform:translate(3px,-3px)}85%{transform:translate(0,0)}}
+@media(prefers-reduced-motion:reduce){
+  .motion-ready .hero-v2.motion-in-view .hero-chrome:after,.motion-ready .about-v2.motion-in-view .about-visual.is-visible:after,.motion-ready .services-v2.motion-in-view .services-v2-head.is-visible .services-v2-lead .system-mark,.motion-ready .service-card-v2.is-visible:after,.motion-ready .process-v2 .process-row.is-visible:after,.motion-ready .contact-v2.motion-in-view .contact-cta svg{animation:none}
+  .service-card-v2:after,.process-v2 .process-row:after{transform:scaleX(1)}
+}

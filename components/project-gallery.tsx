@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { showcases } from '@/lib/site';
@@ -7,11 +7,36 @@ import { showcases } from '@/lib/site';
 const scenes: Record<string, { image: string; label: string; caption: string }> = {
   identity: { image: '/possibilities/brand-strategy.webp', label: 'STRATEGIE & IDENTITÄT', caption: 'Klarheit beginnt im Gespräch.' },
   social: { image: '/possibilities/content-production.webp', label: 'CONTENT & SOCIAL', caption: 'Ideen werden zu Inhalten.' },
-  campaign: { image: '/possibilities/campaign-planning.webp', label: 'KAMPAGNENKONZEPT', caption: 'Eine Idee. Viele Kontaktpunkte.' },
   event: { image: '/possibilities/event-planning.webp', label: 'EVENT & EXPERIENCE', caption: 'Erlebnisse werden geplant.' },
 };
 
+function CampaignFilm() {
+  const video = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const element = video.current;
+    if (!element || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) void element.play().catch(() => {});
+      else element.pause();
+    }, { threshold: 0.25 });
+    observer.observe(element);
+    return () => { observer.disconnect(); element.pause(); };
+  }, []);
+
+  return <div className="possibility-canvas possibility-film">
+    <div className="possibility-top"><span>LL COLLECTIVE / POSSIBILITIES</span><span>04 / 05</span></div>
+    <div className="campaign-film-layout">
+      <div className="campaign-film-copy"><span>CAMPAIGNS / MOTION</span><strong>Eine Idee.<br/><em>In Bewegung.</em></strong><p>Wie eine Marke auch außerhalb des Screens sichtbar werden kann. Eine Konzeptvisualisierung für unseren eigenen Auftritt – kein Kundenprojekt.</p><small>VISUALISIERUNG / LL COLLECTIVE STUDIO</small></div>
+      <div className="campaign-film-frame">
+        <Image src="/media/ll-campaign-poster.jpg" alt="" fill unoptimized sizes="(max-width: 700px) 50vw, 340px" className="campaign-film-poster"/>
+        <video ref={video} src="/media/ll-campaign-concept.mp4" poster="/media/ll-campaign-poster.jpg" muted loop playsInline preload="none" aria-label="Animierte Konzeptvisualisierung eines LL-Motivs auf einer Litfaßsäule"/>
+      </div>
+    </div>
+  </div>;
+}
+
 function Visual({ kind, number }: { kind: string; number: string }) {
+  if (kind === 'campaign') return <CampaignFilm/>;
   const scene = scenes[kind];
   if (scene) return <div className={`possibility-canvas possibility-photo possibility-${kind}`} aria-hidden="true">
     <Image src={scene.image} alt="" fill unoptimized sizes="(max-width: 700px) 88vw, 850px" className="possibility-photo-image"/>
