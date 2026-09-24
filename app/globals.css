@@ -502,3 +502,11 @@
 @keyframes welcomeRise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @keyframes welcomeExit{to{opacity:0;clip-path:inset(0 0 100% 0)}}
 @media(prefers-reduced-motion:reduce){.welcome-screen{display:none}}
+
+/* Studio signature: the existing chrome monogram gains depth and a cursor-following reflection. */
+.about-v2 .about-visual{background:radial-gradient(circle at var(--light-x,50%) var(--light-y,43%),#464039 0%,#24221f 45%,#111110 100%);transition:background-color .4s ease}
+.about-v2 .about-mark-stage{position:relative;z-index:2;width:min(73%,475px);aspect-ratio:1;display:grid;place-items:center;transform:translate3d(var(--mark-x,0px),var(--mark-y,0px),0);transition:transform .38s cubic-bezier(.2,.7,.2,1);filter:drop-shadow(0 24px 35px #000a)}
+.about-v2 .about-mark-stage .system-mark{width:100%;height:auto;max-height:none;object-fit:contain;filter:drop-shadow(0 8px 10px #0808079c)}
+.about-v2 .about-mark-stage:after{content:'';position:absolute;inset:0;z-index:3;background:url('/brand/ll-chrome.png') center/contain no-repeat;filter:brightness(1.75);opacity:.52;mask-image:radial-gradient(circle at var(--light-x,50%) var(--light-y,43%),#000 0%,transparent 38%);pointer-events:none}
+@media(max-width:700px){.about-v2 .about-mark-stage{width:76%}}
+@media(prefers-reduced-motion:reduce){.about-v2 .about-mark-stage{transform:none;transition:none}.about-v2 .about-mark-stage:after{display:none}}

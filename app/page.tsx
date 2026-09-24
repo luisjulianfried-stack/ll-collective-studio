@@ -4,11 +4,11 @@ import { ArrowDown, ArrowUpRight, Asterisk } from 'lucide-react';
 import { Navigation } from '@/components/navigation';
 import { ProjectGallery } from '@/components/project-gallery';
 import { Services } from '@/components/services';
-import { SystemMark } from '@/components/system-mark';
 import { site } from '@/lib/site';
 import { Motion } from '@/components/motion';
 import { Footer } from '@/components/footer';
 import { Welcome } from '@/components/welcome';
+import { AboutVisual } from '@/components/about-visual';
 
 export default function Home() {
   return <><Welcome/><Navigation/><main>
@@ -32,7 +32,7 @@ export default function Home() {
     <section id="about" className="about-section section-pad about-v2">
       <div className="about-heading reveal"><span className="eyebrow">ABOUT THE STUDIO</span><h2>TWO PERSPECTIVES.<br/><em>ONE COLLECTIVE.</em></h2></div>
       <div className="about-content">
-        <div className="about-visual reveal"><div className="about-visual-top"><span>LL COLLECTIVE</span><span>MUNICH / GERMANY</span></div><SystemMark/><div className="about-visual-caption">STRATEGY / DESIGN / CONTENT / DIGITAL</div></div>
+        <AboutVisual/>
         <div className="about-copy reveal">
           <p>LL Collective Studio verbindet strategisches Marketing mit moderner visueller Gestaltung.</p>
           <p>Gegründet von Luis Fried und Leander Ballhausen in München entwickeln wir Marken nicht in einzelnen Maßnahmen, sondern als zusammenhängenden Auftritt.</p>
