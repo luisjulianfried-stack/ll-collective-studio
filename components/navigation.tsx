@@ -26,7 +26,7 @@ export function Navigation() {
       else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     };
     document.addEventListener('keydown', key);
-    return () => { document.body.style.overflow = old; document.removeEventListener('keydown', key); triggerButton?.focus(); };
+    return () => { document.body.style.overflow = old; document.removeEventListener('keydown', key); triggerButton?.focus({ preventScroll: true }); };
   }, [open]);
   return <>
     <div className="scroll-progress" style={{ transform: `scaleX(${progress / 100})` }} aria-hidden="true" />

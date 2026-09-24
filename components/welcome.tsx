@@ -1,33 +1,43 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { SystemMark } from '@/components/system-mark';
 
 export function Welcome() {
   const [phase, setPhase] = useState<'enter' | 'leave' | 'done'>('enter');
+  const timers = useRef<number[]>([]);
   const visible = phase !== 'done';
 
+  const finish = useCallback(() => {
+    timers.current.forEach(id => window.clearTimeout(id));
+    timers.current = [];
+    setPhase('done');
+  }, []);
+
   useEffect(() => {
+    let seen = false;
+    try { seen = window.sessionStorage.getItem('ll-welcome-seen') === '1'; } catch {}
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-        window.location.hash || window.sessionStorage.getItem('ll-welcome-seen')) {
-      setPhase('done');
+        window.location.hash || seen) {
+      finish();
       return;
     }
 
-    window.sessionStorage.setItem('ll-welcome-seen', '1');
+    try { window.sessionStorage.setItem('ll-welcome-seen', '1'); } catch {}
     const leave = window.setTimeout(() => setPhase('leave'), 2400);
-    const done = window.setTimeout(() => setPhase('done'), 3250);
+    const done = window.setTimeout(finish, 3250);
+    timers.current = [leave, done];
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setPhase('done');
+      if (event.key === 'Escape') finish();
     };
     window.addEventListener('keydown', onKeyDown);
 
     return () => {
-      window.clearTimeout(leave);
-      window.clearTimeout(done);
+      timers.current.forEach(id => window.clearTimeout(id));
+      timers.current = [];
       window.removeEventListener('keydown', onKeyDown);
     };
-  }, []);
+  }, [finish]);
 
   useEffect(() => {
     if (!visible) return;
@@ -46,6 +56,6 @@ export function Welcome() {
       <span className="welcome-name">COLLECTIVE STUDIO</span>
       <span className="welcome-detail">STRATEGY · DESIGN · CONTENT · DIGITAL</span>
     </div>
-    <button type="button" className="welcome-skip" onClick={() => setPhase('done')}>ÜBERSPRINGEN <span aria-hidden="true">↗</span></button>
+    <button type="button" className="welcome-skip" onClick={finish}>ÜBERSPRINGEN <span aria-hidden="true">↗</span></button>
   </div>;
 }
