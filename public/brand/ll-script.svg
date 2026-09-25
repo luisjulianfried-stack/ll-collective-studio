@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 265 148" fill="none" role="img" aria-labelledby="title">
+  <title id="title">LL Collective Studio – geschwungenes LL</title>
+  <g stroke="#504637" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M95 24C80 18 68 23 60 34C46 53 45 88 36 110C32 120 25 126 16 130" stroke-width="9"/>
+    <path d="M16 130C32 120 39 115 54 116C76 118 96 128 117 117C126 112 133 106 139 97" stroke-width="3"/>
+    <path d="M202 24C187 18 175 23 167 34C153 53 152 88 143 110C139 120 132 126 123 130" stroke-width="9"/>
+    <path d="M123 130C139 120 146 115 161 116C183 118 203 128 224 117C233 112 240 106 246 97" stroke-width="3"/>
+  </g>
+</svg>
