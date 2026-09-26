@@ -38,6 +38,6 @@ export function AboutVisual() {
   return <div ref={visual} className="about-visual reveal" onPointerMove={move} onPointerLeave={reset}>
     <div className="about-visual-top"><span>LL COLLECTIVE</span><span>MUNICH / GERMANY</span></div>
     <div className="about-mark-stage"><SystemMark/></div>
-    <div className="about-visual-caption">STRATEGY / DESIGN / CONTENT / DIGITAL</div>
+    <div className="about-visual-caption">WEBDESIGN / MARKETING / CONTENT</div>
   </div>;
 }
