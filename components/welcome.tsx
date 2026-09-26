@@ -54,7 +54,7 @@ export function Welcome() {
       <div className="welcome-emblem"><SystemMark/></div>
       <div className="welcome-rule" aria-hidden="true"/>
       <span className="welcome-name">COLLECTIVE STUDIO</span>
-      <span className="welcome-detail">STRATEGY · DESIGN · CONTENT · DIGITAL</span>
+      <span className="welcome-detail">WEBDESIGN · MARKETING · CONTENT</span>
     </div>
     <button type="button" className="welcome-skip" onClick={finish}>ÜBERSPRINGEN <span aria-hidden="true">↗</span></button>
   </div>;
