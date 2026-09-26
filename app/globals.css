@@ -607,3 +607,6 @@
 @keyframes demo-load{from{transform:translateX(-100%)}to{transform:translateX(250%)}}
 @media(max-width:700px){.web-demo-cta{min-height:40px;padding:0 15px;font-size:9px;gap:8px}.demo-modal-bar{min-height:60px;padding:8px 12px;gap:10px}.demo-modal-title span{font-size:8px}.demo-modal-title strong{font-size:18px}.demo-modal-actions{gap:6px}.demo-modal-actions a{display:none}.demo-modal-actions button{min-height:40px;padding:0 14px;font-size:10px}.demo-modal-note{font-size:10px;padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px))}}
 @media(prefers-reduced-motion:reduce){.demo-modal,.demo-modal-loading span:after{animation:none}.web-demo-preview .web-demo-image,.web-demo-cta{transition:none}.web-demo-preview:hover .web-demo-image{transform:none}}
+
+/* Two example projects side by side on wide screens */
+@media(min-width:1000px){.gallery-duo .output-card-v2{width:calc((100% - 22px) / 2);flex:none}.gallery-duo .gallery{cursor:default}.gallery-duo .showcase-card .project-art{height:clamp(440px,34vw,560px)}.gallery-duo .output-info-v2 h3{font-size:clamp(28px,2.8vw,44px)}.gallery-controls-duo{display:none}}

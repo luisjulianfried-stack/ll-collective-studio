@@ -27,4 +27,15 @@ export const showcases: ShowcaseProject[] = [
     features: ['Hausführung', 'Grundriss', 'Materialien'],
     note: 'Konzept-Demo von LL Collective Studio für ein fiktives Architektur- und Bauunternehmen. Visualisierungen und Inhalte sind Beispiele, kein Kundenprojekt.',
   },
+  {
+    slug: 'cafe-still',
+    title: 'Café-Website',
+    category: 'WEBDESIGN & GASTRONOMIE',
+    chromeLabel: 'CAFÉ STILL / KONZEPT-DEMO',
+    demoUrl: '/showcase/cafe-still/',
+    preview: '/showcase/cafe-still-preview.webp',
+    previewAlt: 'Startseite der Café-Website „Café Still“: Cappuccino mit Croissant und die Headline „Ein guter Kaffee. Ein bisschen Zeit.“',
+    features: ['Speisekarte', 'Bildwelt', 'Mobil optimiert'],
+    note: 'Konzept-Demo von LL Collective Studio für ein fiktives Café. Die Bilder sind KI-generierte Visualisierungen, Karte und Preise sind Beispiele, kein Kundenprojekt.',
+  },
 ];
