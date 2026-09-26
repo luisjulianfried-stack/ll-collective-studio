@@ -16,7 +16,7 @@ export default function Home() {
       <div className="hero-atmosphere" aria-hidden="true"><div className="hero-orb"/></div>
       <div className="hero-meta"><span>INDEPENDENT CREATIVE STUDIO</span><span>MUNICH / GERMANY</span></div>
       <div className="hero-body">
-        <p className="hero-kicker"><Asterisk size={18}/> STRATEGY · BRANDING · CONTENT · DIGITAL</p>
+        <p className="hero-kicker"><Asterisk size={18}/> WEBDESIGN · MARKETING · CONTENT</p>
         <h1>BUILT TO BE<br/><span><em>remembered.</em></span></h1>
         <div className="hero-bottom hero-bottom-v2">
           <p>Wir entwickeln Markenauftritte, Websites und Content, die Unternehmen klar positionieren und Menschen erreichen.</p>
