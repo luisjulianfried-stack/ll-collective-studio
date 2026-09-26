@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { showcases } from '@/lib/site';
+import { ArchitectureShowcase } from '@/components/architecture-demo';
 
 const scenes: Record<string, { image: string; label: string; caption: string }> = {
   identity: { image: '/possibilities/brand-strategy.webp', label: 'STRATEGIE & IDENTITÄT', caption: 'Klarheit beginnt im Gespräch.' },
@@ -37,6 +38,7 @@ function CampaignFilm() {
 
 function Visual({ kind, number }: { kind: string; number: string }) {
   if (kind === 'campaign') return <CampaignFilm/>;
+  if (kind === 'web') return <ArchitectureShowcase number={number}/>;
   const scene = scenes[kind];
   if (scene) return <div className={`possibility-canvas possibility-photo possibility-${kind}`} aria-hidden="true">
     <Image src={scene.image} alt="" fill unoptimized sizes="(max-width: 700px) 88vw, 850px" className="possibility-photo-image"/>
@@ -46,7 +48,6 @@ function Visual({ kind, number }: { kind: string; number: string }) {
   </div>;
   return <div className={`possibility-canvas possibility-${kind}`} aria-hidden="true">
     <div className="possibility-top"><span>LL COLLECTIVE / OUTPUT</span><span>{number} / 05</span></div>
-    {kind === 'web' && <div className="study-web"><div className="web-chrome"><span>● &nbsp; ● &nbsp; ●</span><span>WEBSITE / EXPERIENCE</span></div><div className="web-preview"><div className="web-preview-nav">LL COLLECTIVE STUDIO <span>MENU ＋</span></div><div className="web-preview-hero"><span>STRATEGY · DESIGN · CONTENT</span><strong>Built to be<br/><em>remembered.</em></strong><div>Klare Nutzerführung.<br/>Eine eindeutige nächste Handlung. <span>↗</span></div></div></div><div className="web-flow"><span>USER FLOW</span><strong>Orientieren</strong><i>→</i><strong>Verstehen</strong><i>→</i><strong>Handeln</strong></div></div>}
   </div>;
 }
 
