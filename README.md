@@ -17,8 +17,6 @@ npm run dev
 - `components/project-gallery.tsx`: interaktive Leistungsbeispiele
 - `components/services.tsx`, `growth.tsx`, `motion.tsx`, `brand-mark.tsx`: Leistungen, Interaktionen und Monogramm
 - `lib/site.ts`: E-Mail-Adresse und Inhalte
-- `components/architecture-demo.tsx`: Website-Karte bei „Ideas become Identity“ mit Vollbild-Overlay der Architektur-Demo
-- `public/showcase/architektur/`: eigenständige Konzept-Demo einer Architektur-Website (statisch, `noindex`, Hash-Navigation)
 - `app/impressum`, `app/datenschutz`: rechtliche Entwürfe
 - `app/globals.css`: Gestaltung, responsive Regeln und Animationen
 
