@@ -1,5 +1,5 @@
 window.SITE = {
-  name: 'NAME DER FIRMA', email: '', phone: '', address: '', region: '', contactEndpoint: '',
+  name: 'Villa Serena', email: '', phone: '', address: '', region: '', contactEndpoint: '',
   tour: { mode: 'preview', video: '', mobileVideo: '', frames: [], poster: (window.SITE_BASE||'')+'/assets/villa.webp', scenes: [
     {label:'Anflug', image:'villa', title:'Die erste Annäherung.', text:'Die Villa im Grünen. Klare Linien zwischen Naturstein, Wasser und Bäumen.', alt:'Frontaler Blick auf das Villenkonzept und seinen Pool'},
     {label:'Fassade', image:'tour-facade', title:'Ganz nah an der Architektur.', text:'Entlang der Fassade: heller Travertin, tiefe Laibungen und filigrane Glasflächen.', alt:'Nahansicht der Travertinfassade mit großzügigen Glastüren'},
