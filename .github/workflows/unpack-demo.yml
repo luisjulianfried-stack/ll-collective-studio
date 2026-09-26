@@ -3,7 +3,7 @@ name: Architektur-Demo entpacken (einmalig)
 on:
   push:
     branches: [main]
-    paths: ['ll-architektur-demo.zip']
+    paths: ['ll-architektur-demo*.zip', '.github/workflows/unpack-demo.yml']
   workflow_dispatch:
 
 permissions:
@@ -17,12 +17,16 @@ jobs:
       - name: ZIP entpacken und entfernen
         run: |
           set -e
-          if [ ! -f ll-architektur-demo.zip ]; then
+          shopt -s nullglob
+          zips=(ll-architektur-demo*.zip)
+          if [ ${#zips[@]} -eq 0 ]; then
             echo "Keine ZIP gefunden, nichts zu tun."
             exit 0
           fi
-          unzip -o -q ll-architektur-demo.zip
-          git rm -q ll-architektur-demo.zip
+          for z in "${zips[@]}"; do
+            unzip -o -q "$z"
+            git rm -q "$z"
+          done
           git add -A app components public README.md
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
