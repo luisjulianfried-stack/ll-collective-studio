@@ -1,0 +1,30 @@
+name: Architektur-Demo entpacken (einmalig)
+
+on:
+  push:
+    branches: [main]
+    paths: ['ll-architektur-demo.zip']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: ZIP entpacken und entfernen
+        run: |
+          set -e
+          if [ ! -f ll-architektur-demo.zip ]; then
+            echo "Keine ZIP gefunden, nichts zu tun."
+            exit 0
+          fi
+          unzip -o -q ll-architektur-demo.zip
+          git rm -q ll-architektur-demo.zip
+          git add -A app components public README.md
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Add architecture concept demo (ChatGPT project) to Ideas become Identity"
+          git push
