@@ -38,4 +38,15 @@ export const showcases: ShowcaseProject[] = [
     features: ['Speisekarte', 'Bildwelt', 'Mobil optimiert'],
     note: 'Konzept-Demo von LL Collective Studio für ein fiktives Café. Die Bilder sind KI-generierte Visualisierungen, Karte und Preise sind Beispiele, kein Kundenprojekt.',
   },
+  {
+    slug: 'casa-oliva',
+    title: 'Restaurant-Website',
+    category: 'WEBDESIGN & GASTRONOMIE',
+    chromeLabel: 'CASA OLIVA / KONZEPT-DEMO',
+    demoUrl: '/showcase/casa-oliva/',
+    preview: '/showcase/casa-oliva-preview.webp',
+    previewAlt: 'Startseite der Restaurant-Website „Casa Oliva“: Pasta-Teller und die Headline „Gute Abende beginnen bei Tisch.“',
+    features: ['Speisekarte', 'Atmosphäre', 'Mobil optimiert'],
+    note: 'Konzept-Demo von LL Collective Studio für ein fiktives italienisches Restaurant. Die Bilder sind KI-generierte Visualisierungen, Speisen und Preise sind Beispiele, kein Kundenprojekt.',
+  },
 ];

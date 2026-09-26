@@ -609,4 +609,4 @@
 @media(prefers-reduced-motion:reduce){.demo-modal,.demo-modal-loading span:after{animation:none}.web-demo-preview .web-demo-image,.web-demo-cta{transition:none}.web-demo-preview:hover .web-demo-image{transform:none}}
 
 /* Two example projects side by side on wide screens */
-@media(min-width:1000px){.gallery-duo .output-card-v2{width:calc((100% - 22px) / 2);flex:none}.gallery-duo .gallery{cursor:default}.gallery-duo .showcase-card .project-art{height:clamp(440px,34vw,560px)}.gallery-duo .output-info-v2 h3{font-size:clamp(28px,2.8vw,44px)}.gallery-controls-duo{display:none}}
+@media(min-width:1000px){.gallery-duo .output-card-v2{width:calc((100% - 22px) / 2);flex:none}.gallery-duo .showcase-card .project-art{height:clamp(440px,34vw,560px)}.gallery-duo .output-info-v2 h3{font-size:clamp(28px,2.8vw,44px)}.gallery-controls-duo{display:none}}
