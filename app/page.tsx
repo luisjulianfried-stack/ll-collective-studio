@@ -49,11 +49,11 @@ export default function Home() {
 
     <section id="about" className="sx section-pad">
       <div className="sx-head reveal">
-        <span className="eyebrow">STUDIO</span>
-        <h2>ZWEI GRÜNDER.<br/><em>Ein Ansprechpartner.</em></h2>
+        <span className="eyebrow">ÜBER UNS</span>
+        <h2>JUNGES TEAM.<br/><em>Frischer Blick.</em></h2>
       </div>
       <div className="sx-body reveal">
-        <p>Luis Fried und Leander Ballhausen verbinden Marketing, Content und Design. Sie sprechen direkt mit den Menschen, die Ihr Projekt umsetzen.</p>
+        <p>Wir sind zwei Marketing-Studenten aus München. Wir kennen die Kanäle, auf denen Ihre Kunden unterwegs sind – und setzen Ihr Projekt persönlich um, ohne Umwege über eine große Agentur.</p>
         <div className="sx-founders"><div><span>CO-FOUNDER</span><strong>Luis Fried</strong></div><div><span>CO-FOUNDER</span><strong>Leander Ballhausen</strong></div></div>
       </div>
       <div id="process" className="sx-steps">

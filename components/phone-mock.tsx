@@ -7,7 +7,7 @@ export function PhoneMock() {
   return <div className="ph" aria-hidden="true">
     <i className="ph-btn ph-btn-a"/><i className="ph-btn ph-btn-b"/><i className="ph-btn ph-btn-c"/>
     <div className="ph-screen">
-      <Image className="ph-media" src="/showcase/atelier-strand/assets/blonde.webp" alt="" fill unoptimized sizes="240px"/>
+      <Image className="ph-media" src="/showcase/atelier-strand/assets/blonde.webp" alt="" fill priority unoptimized sizes="240px"/>
       <div className="ph-shade"/>
       <div className="ph-island"/>
       <div className="ph-status">
