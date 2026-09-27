@@ -1,14 +1,15 @@
 const services = [
-  { number: '01', title: 'Webdesign', text: 'Moderne Websites, die Ihr Angebot auf den ersten Blick erklären – schnell, mobil und bei Google auffindbar.', tags: ['Website', 'Relaunch', 'Landingpage'] },
-  { number: '02', title: 'Marketing', text: 'Social Media und Kampagnen, die Ihre Marke sichtbar machen – und aus Interessenten Kunden.', tags: ['Social Media', 'Kampagnen', 'Strategie'] },
-  { number: '03', title: 'Content', text: 'Fotos, Videos und Texte, die zu Ihrer Marke passen – für einen Auftritt mit Wiedererkennung.', tags: ['Foto & Video', 'Texte', 'Branding'] },
+  { number: '01', title: 'Strategie', text: 'Wir klären, wofür Ihre Marke steht, wen Sie erreichen wollen und über welche Kanäle.', tags: ['Positionierung', 'Zielgruppen', 'Marketing-Plan'] },
+  { number: '02', title: 'Social Media', text: 'Wir betreuen Ihre Kanäle und produzieren Content, der zu Ihrer Marke passt.', tags: ['Redaktionsplan', 'Foto & Video', 'Texte'] },
+  { number: '03', title: 'Kampagnen', text: 'Kampagnen und Anzeigen, die aus Aufmerksamkeit Anfragen machen – online wie offline.', tags: ['Ads', 'Events', 'PR'] },
+  { number: '04', title: 'Webdesign', text: 'Websites und ein visueller Auftritt, die Ihr Angebot auf den ersten Blick erklären.', tags: ['Website', 'Logo', 'Branding'] },
 ];
 
 export function Services() {
   return <section id="services" className="vx section-pad">
     <div className="vx-head reveal">
       <span className="eyebrow">LEISTUNGEN</span>
-      <h2>DREI DINGE.<br/><em>Richtig gemacht.</em></h2>
+      <h2>VIER BEREICHE.<br/><em>Ein Ziel.</em></h2>
     </div>
     <div className="vx-grid">
       {services.map(s => <article className="vx-card reveal" key={s.number}>

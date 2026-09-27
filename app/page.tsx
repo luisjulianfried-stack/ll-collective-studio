@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 export const metadata: Metadata = { alternates: { canonical: '/' } };
 import Image from 'next/image';
-import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, Bookmark, Heart, MessageCircle, Send } from 'lucide-react';
 import { Navigation } from '@/components/navigation';
 import { ProjectGallery } from '@/components/project-gallery';
 import { Services } from '@/components/services';
@@ -11,31 +11,36 @@ import { Footer } from '@/components/footer';
 import { Welcome } from '@/components/welcome';
 import { showcases } from '@/lib/showcases';
 
-const offer = [['01', 'Webdesign'], ['02', 'Marketing & Social Media'], ['03', 'Content & Branding']];
+const offer = [['01', 'Strategie'], ['02', 'Social Media & Content'], ['03', 'Kampagnen & Werbung'], ['04', 'Webdesign & Branding']];
 const steps = [
   ['01', 'Gespräch', 'Wir klären Ziel, Umfang und Zeitplan.'],
-  ['02', 'Umsetzung', 'Design, Website und Content aus einer Hand.'],
-  ['03', 'Launch', 'Live gehen, sichtbar werden, weiter wachsen.'],
+  ['02', 'Umsetzung', 'Content, Kampagnen und Website aus einer Hand.'],
+  ['03', 'Wachstum', 'Ergebnisse messen und laufend verbessern.'],
 ];
 
 export default function Home() {
-  const [front, back] = showcases;
+  const front = showcases[0];
   return <><Welcome/><Navigation/><main>
     <section className="hx" id="top">
       <div className="hx-glow" aria-hidden="true"/>
       <div className="hx-grid">
         <div className="hx-copy">
-          <p className="hx-kicker">WEBDESIGN · MARKETING · CONTENT</p>
-          <h1>WEBSITES, DIE<br/><em>Kunden gewinnen.</em></h1>
-          <p className="hx-lead">Wir bauen Ihre Website und sorgen mit Marketing und Content dafür, dass sie gesehen wird. Alles aus einer Hand – aus München.</p>
+          <p className="hx-kicker">MARKETING-AGENTUR · MÜNCHEN</p>
+          <h1>MARKETING,<br/>DAS <em>wirkt.</em></h1>
+          <p className="hx-lead">Strategie, Social Media, Kampagnen und Websites – wir machen Ihre Marke sichtbar und bringen Sie zu Ihren Kunden. Alles aus einer Hand.</p>
           <div className="hx-actions">
             <a className="pill-button light" href={`mailto:${site.email}`}>PROJEKT ANFRAGEN <ArrowUpRight size={18}/></a>
             <a className="pill-button outline" href="#work">PROJEKTE ANSEHEN <ArrowDown size={18}/></a>
           </div>
         </div>
-        {front && <a className="hx-stage" href="#work" aria-label="Beispielprojekte ansehen">
-          {back && <figure className="hx-frame hx-frame-back"><div className="hx-bar"><i/><i/><i/></div><div className="hx-shot"><Image src={back.preview} alt="" fill unoptimized /></div></figure>}
-          <figure className="hx-frame hx-frame-front"><div className="hx-bar"><i/><i/><i/><span>{front.title}</span></div><div className="hx-shot"><Image src={front.preview} alt="" fill priority unoptimized /></div></figure>
+        {front && <a className="hx-stage" href="#work" aria-label="Projekte ansehen">
+                    <figure className="hx-frame hx-frame-front"><div className="hx-bar"><i/><i/><i/><span>{front.title}</span></div><div className="hx-shot"><Image src={front.preview} alt="" fill priority unoptimized /></div></figure>
+          <div className="hx-phone" aria-hidden="true"><div className="hx-screen">
+            <div className="hx-post-head"><i className="hx-avatar"/><b>cafe.still</b><span>Gesponsert</span></div>
+            <div className="hx-post-img"/>
+            <div className="hx-post-actions"><Heart size={14}/><MessageCircle size={14}/><Send size={14}/><Bookmark size={14}/></div>
+            <div className="hx-post-lines"><i/><i/></div>
+          </div></div>
         </a>}
       </div>
       <nav className="hx-offer" aria-label="Leistungen">
@@ -52,7 +57,7 @@ export default function Home() {
         <h2>ZWEI GRÜNDER.<br/><em>Ein Ansprechpartner.</em></h2>
       </div>
       <div className="sx-body reveal">
-        <p>Luis Fried und Leander Ballhausen verbinden Webdesign und Marketing. Sie sprechen direkt mit den Menschen, die Ihr Projekt umsetzen.</p>
+        <p>Luis Fried und Leander Ballhausen verbinden Marketing, Content und Design. Sie sprechen direkt mit den Menschen, die Ihr Projekt umsetzen.</p>
         <div className="sx-founders"><div><span>CO-FOUNDER</span><strong>Luis Fried</strong></div><div><span>CO-FOUNDER</span><strong>Leander Ballhausen</strong></div></div>
       </div>
       <div id="process" className="sx-steps">

@@ -4,7 +4,7 @@ import { BrandMark } from '@/components/brand-mark';
 
 export function Footer() {
   return <footer className="footer footer-v2">
-    <div className="footer-v2-brand"><BrandMark large/><div><strong>LL COLLECTIVE STUDIO</strong><span>Webdesign & Marketing — München</span></div></div>
+    <div className="footer-v2-brand"><BrandMark large/><div><strong>LL COLLECTIVE STUDIO</strong><span>Marketing & Webdesign — München</span></div></div>
     <div className="footer-v2-links">
       <div>{site.instagram && <a href={site.instagram} target="_blank" rel="noreferrer">Instagram</a>}{site.linkedin && <a href={site.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>}</div>
       <div><Link href="/impressum">Impressum</Link><Link href="/datenschutz">Datenschutz</Link></div>
