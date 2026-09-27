@@ -4,9 +4,9 @@ import { site } from '@/lib/site';
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: 'LL Collective Studio — Marken mit Richtung', template: '%s | LL Collective Studio' },
-  description: 'LL Collective Studio entwickelt Markenauftritte, Social-Media-Content, Kampagnen und digitale Erlebnisse für Unternehmen in München und darüber hinaus.',
-  openGraph: { title: 'LL Collective Studio — Built to be remembered.', description: 'Strategie, Design und Content für Marken, die im Gedächtnis bleiben.', type: 'website', locale: 'de_DE', images: ['/brand/ll-chrome.png'] },
+  title: { default: 'LL Collective Studio — Webdesign & Marketing aus München', template: '%s | LL Collective Studio' },
+  description: 'Websites, Marketing und Content aus einer Hand. LL Collective Studio gestaltet Webauftritte und Social Media für Unternehmen – aus München.',
+  openGraph: { title: 'LL Collective Studio — Webdesign & Marketing aus München', description: 'Websites, die Kunden gewinnen. Webdesign, Marketing und Content aus einer Hand.', type: 'website', locale: 'de_DE', images: ['/brand/ll-chrome.png'] },
   robots: { index: true, follow: true },
 };
 
