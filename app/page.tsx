@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 export const metadata: Metadata = { alternates: { canonical: '/' } };
 import Image from 'next/image';
-import { ArrowDown, ArrowUpRight, Bookmark, Heart, MessageCircle, Send } from 'lucide-react';
+import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import { PhoneMock } from '@/components/phone-mock';
 import { Navigation } from '@/components/navigation';
 import { ProjectGallery } from '@/components/project-gallery';
 import { Services } from '@/components/services';
@@ -35,12 +36,7 @@ export default function Home() {
         </div>
         {front && <a className="hx-stage" href="#work" aria-label="Projekte ansehen">
                     <figure className="hx-frame hx-frame-front"><div className="hx-bar"><i/><i/><i/><span>{front.title}</span></div><div className="hx-shot"><Image src={front.preview} alt="" fill priority unoptimized /></div></figure>
-          <div className="hx-phone" aria-hidden="true"><div className="hx-screen">
-            <div className="hx-post-head"><i className="hx-avatar"/><b>cafe.still</b><span>Gesponsert</span></div>
-            <div className="hx-post-img"/>
-            <div className="hx-post-actions"><Heart size={14}/><MessageCircle size={14}/><Send size={14}/><Bookmark size={14}/></div>
-            <div className="hx-post-lines"><i/><i/></div>
-          </div></div>
+          <PhoneMock/>
         </a>}
       </div>
       <nav className="hx-offer" aria-label="Leistungen">
