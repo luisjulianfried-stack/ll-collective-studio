@@ -1,0 +1,41 @@
+# Stellt die installierten Abhaengigkeiten (node_modules) als Archiv im Branch
+# ci-node-modules bereit, damit die Website auch ausserhalb von GitHub gebaut
+# und vor dem Veroeffentlichen getestet werden kann. Nur manuell starten.
+name: Abhaengigkeiten fuer Vorschau-Builds bereitstellen
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  pack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Abhaengigkeiten installieren
+        run: npm ci
+      - name: Archiv erstellen
+        run: |
+          set -e
+          tar -cf - node_modules | xz -6 -T0 > /tmp/nm.tar.xz
+          mkdir -p /tmp/out
+          split -b 45m -d /tmp/nm.tar.xz /tmp/out/nm.tar.xz.part-
+          sha256sum package-lock.json > /tmp/out/package-lock.sha256
+          ls -la /tmp/out
+      - name: In Branch ci-node-modules ablegen
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan ci-node-modules
+          git rm -rq --cached .
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp /tmp/out/* .
+          git add -A
+          git commit -qm "node_modules archive"
+          git push -f origin ci-node-modules
