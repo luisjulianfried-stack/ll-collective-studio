@@ -60,4 +60,15 @@ export const showcases: ShowcaseProject[] = [
     features: ['Arbeiten', 'Ablauf', 'Mobil optimiert'],
     note: 'Konzept-Demo von LL Collective Studio für die fiktive Schreinerei Form / Werk. Die Bilder sind KI-generierte Visualisierungen, keine Referenzen eines realen Betriebs, kein Kundenprojekt.',
   },
+  {
+    slug: 'atelier-strand',
+    title: 'Atelier Strand – Friseursalon',
+    category: 'WEBDESIGN & BEAUTY',
+    chromeLabel: 'ATELIER STRAND / KONZEPT-DEMO',
+    demoUrl: '/showcase/atelier-strand/',
+    preview: '/showcase/atelier-strand-preview.webp',
+    previewAlt: 'Startseite der Friseursalon-Website „Atelier Strand“: Porträts mit natürlichen Wellen und die Headline „Ihr Haar. Ihr Stil. Ganz Sie.“',
+    features: ['Preisliste', 'Looks', 'Terminvorschau'],
+    note: 'Konzept-Demo von LL Collective Studio für den fiktiven Friseursalon Atelier Strand. Die Bilder sind KI-generierte Visualisierungen, Preise beispielhaft, die Terminauswahl bucht nichts – kein Kundenprojekt.',
+  },
 ];
