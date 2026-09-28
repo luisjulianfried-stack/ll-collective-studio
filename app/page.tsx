@@ -12,7 +12,6 @@ import { Footer } from '@/components/footer';
 import { Welcome } from '@/components/welcome';
 import { showcases } from '@/lib/showcases';
 
-const offer = [['01', 'Strategie'], ['02', 'Social Media & Content'], ['03', 'Kampagnen & Werbung'], ['04', 'Webdesign & Branding']];
 const steps = [
   ['01', 'Gespräch', 'Wir klären Ziel, Umfang und Zeitplan.'],
   ['02', 'Umsetzung', 'Content, Kampagnen und Website aus einer Hand.'],
@@ -39,9 +38,6 @@ export default function Home() {
           <PhoneMock/>
         </a>}
       </div>
-      <nav className="hx-offer" aria-label="Leistungen">
-        {offer.map(([n, label]) => <a href="#services" key={n}><span>{n}</span>{label}</a>)}
-      </nav>
     </section>
 
     <Services/>
