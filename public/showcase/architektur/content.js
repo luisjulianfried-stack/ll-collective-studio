@@ -1,12 +1,22 @@
 window.SITE = {
+  // Bildbeschreibungen (Alt-Texte) je Bild, werden überall dort genutzt, wo das Bild erscheint.
+  alts: {
+    villa:'Moderne Villa aus hellem Naturstein mit großen Glasflächen, langem Pool und Olivenbäumen im Abendlicht',
+    house:'Zweigeschossiges Haus mit dunkler Holzfassade und hellem Stein, davor Rasen, Gräser und Bäume im Gegenlicht',
+    interior:'Offener Wohnraum mit Kücheninsel aus hellem Stein, Holzschränken, cremefarbenen Sofas und raumhohen Fenstern zum Garten',
+    'tour-facade':'Travertinfassade mit raumhohen Glasschiebetüren, dahinter der Wohnraum, rechts der Pool im Abendlicht',
+    'tour-living':'Wohnraum mit cremefarbenen Sofas und Couchtisch, offen zur Terrasse mit Pool und Blick in die Landschaft',
+    'tour-terrace':'Überdachte Terrasse mit Loungemöbeln direkt am Pool, dahinter Olivenbäume und Sonnenuntergang',
+    'tour-aerial':'Villa von oben in der Dämmerung: beleuchtete Terrassen, Pool und Garten, im Hintergrund Hügel und Meer'
+  },
   name: 'Villa Serena', email: '', phone: '', address: '', region: '', contactEndpoint: '',
   tour: { mode: 'preview', video: '', mobileVideo: '', frames: [], poster: (window.SITE_BASE||'')+'/assets/villa.webp', scenes: [
-    {label:'Anflug', image:'villa', title:'Die erste Annäherung.', text:'Die Villa im Grünen. Klare Linien zwischen Naturstein, Wasser und Bäumen.', alt:'Frontaler Blick auf das Villenkonzept und seinen Pool'},
-    {label:'Fassade', image:'tour-facade', title:'Ganz nah an der Architektur.', text:'Entlang der Fassade: heller Travertin, tiefe Laibungen und filigrane Glasflächen.', alt:'Nahansicht der Travertinfassade mit großzügigen Glastüren'},
-    {label:'Wohnbereich', image:'tour-living', title:'Ankommen. Und bleiben.', text:'Im Wohnraum öffnen sich weite Blickachsen. Helle Stoffe und Holz geben dem Raum Wärme.', alt:'Wohnraumkonzept mit cremefarbenem Sofa und Blick zum Garten'},
-    {label:'Küche', image:'interior', title:'Der Mittelpunkt des Alltags.', text:'Eine offene Küche mit ruhigen Holzflächen verbindet Kochen, Essen und Zusammensein.', alt:'Offene Eichenküche mit Kochinsel und lichtdurchflutetem Essbereich'},
-    {label:'Terrasse', image:'tour-terrace', title:'Der Raum geht weiter.', text:'Unter dem Dachüberstand wird die Terrasse zum geschützten Wohnzimmer im Freien.', alt:'Überdachte Terrasse mit Sitzbereich am Pool'},
-    {label:'Außenansicht', image:'tour-aerial', title:'Alles fügt sich zusammen.', text:'Ein letzter Blick von oben auf Gebäude, Garten und die Beziehung der Räume zum Außenbereich.', alt:'Erhöhte Außenansicht des Villenkonzepts mit Garten und Pool'}
+    {label:'Anflug', image:'villa', title:'Die erste Annäherung.', text:'Die Villa im Grünen. Klare Linien zwischen Naturstein, Wasser und Bäumen.', alt:'Frontaler Blick auf die Villa aus hellem Naturstein mit langem Pool und Olivenbäumen'},
+    {label:'Fassade', image:'tour-facade', title:'Ganz nah an der Architektur.', text:'Entlang der Fassade: heller Travertin, tiefe Laibungen und filigrane Glasflächen.', alt:'Nahansicht der Travertinfassade mit raumhohen Glasschiebetüren, rechts der Pool im Abendlicht'},
+    {label:'Wohnbereich', image:'tour-living', title:'Ankommen. Und bleiben.', text:'Im Wohnraum öffnen sich weite Blickachsen. Helle Stoffe und Holz geben dem Raum Wärme.', alt:'Wohnraum mit cremefarbenen Sofas, offen zur Terrasse mit Pool und Blick in die Landschaft'},
+    {label:'Küche', image:'interior', title:'Der Mittelpunkt des Alltags.', text:'Eine offene Küche mit ruhigen Holzflächen verbindet Kochen, Essen und Zusammensein.', alt:'Offene Küche mit Kücheninsel aus hellem Stein und Holzschränken, daneben Wohnbereich mit raumhohen Fenstern'},
+    {label:'Terrasse', image:'tour-terrace', title:'Der Raum geht weiter.', text:'Unter dem Dachüberstand wird die Terrasse zum geschützten Wohnzimmer im Freien.', alt:'Überdachte Terrasse mit Loungemöbeln direkt am Pool, dahinter Sonnenuntergang'},
+    {label:'Außenansicht', image:'tour-aerial', title:'Alles fügt sich zusammen.', text:'Ein letzter Blick von oben auf Gebäude, Garten und die Beziehung der Räume zum Außenbereich.', alt:'Villa von oben in der Dämmerung mit beleuchteten Terrassen, Pool und Garten, im Hintergrund das Meer'}
   ] },
   services: [
     {name:'Projektentwicklung', short:'Potenziale erkennen. Perspektiven schaffen.', text:'Wir betrachten Grundstück, Nutzung und wirtschaftlichen Rahmen gemeinsam. Aus Ihren Zielen entsteht eine belastbare Grundlage für die nächsten Entscheidungen.', image:'villa', tags:'Grundstück · Nutzungskonzept · Machbarkeit'},

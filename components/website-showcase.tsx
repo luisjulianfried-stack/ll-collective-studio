@@ -32,12 +32,12 @@ function DemoModal({ project, onClose }: { project: ShowcaseProject; onClose: ()
       <div className="demo-modal-bar">
         <div className="demo-modal-title"><span>LL COLLECTIVE / KONZEPT-DEMO</span><strong id={titleId}>{project.title}</strong></div>
         <div className="demo-modal-actions">
-          <a href={project.demoUrl} target="_blank" rel="noopener">IN NEUEM TAB <ArrowUpRight size={16} strokeWidth={1.5}/></a>
-          <button ref={closeButton} type="button" onClick={onClose} aria-label="Demo schließen">CLOSE <X size={18} strokeWidth={1.5}/></button>
+          <a href={project.demoUrl} target="_blank" rel="noopener" aria-label={`In neuem Tab öffnen: ${project.title}`}>IN NEUEM TAB <ArrowUpRight size={16} strokeWidth={1.5} aria-hidden="true"/></a>
+          <button ref={closeButton} type="button" onClick={onClose} aria-label="Close – Demo schließen"><span lang="en">CLOSE</span> <X size={18} strokeWidth={1.5} aria-hidden="true"/></button>
         </div>
       </div>
       <div className="demo-modal-frame">
-        {!loaded && <div className="demo-modal-loading" aria-hidden="true"><span/>DEMO WIRD GELADEN</div>}
+        {!loaded && <div className="demo-modal-loading" role="status"><span/>DEMO WIRD GELADEN</div>}
         <iframe src={project.demoUrl} title={`${project.title} – interaktive Konzept-Demo`} onLoad={() => setLoaded(true)}/>
       </div>
       <p className="demo-modal-note">{project.note}</p>
@@ -75,7 +75,7 @@ export function WebsiteShowcase({ project, index, total }: { project: ShowcasePr
       >
         <Image src={project.preview} alt={project.previewAlt} fill unoptimized sizes="(max-width: 700px) 88vw, 820px" className="web-demo-image"/>
         <span className="web-demo-shade" aria-hidden="true"/>
-        <span className="web-demo-cta">LIVE-DEMO ÖFFNEN <ArrowUpRight size={16} strokeWidth={1.5}/></span>
+        <span className="web-demo-cta">LIVE-DEMO ÖFFNEN <ArrowUpRight size={16} strokeWidth={1.5} aria-hidden="true"/></span>
       </button>
       <div className="web-flow web-demo-flow"><span>INTERAKTIV</span>{project.features.map((f, i) => <Fragment key={f}>{i > 0 && <i>·</i>}<strong>{f}</strong></Fragment>)}</div>
     </div>

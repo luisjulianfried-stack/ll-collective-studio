@@ -48,14 +48,14 @@ export function Welcome() {
 
   if (phase === 'done') return null;
 
-  return <div className={`welcome-screen ${phase === 'leave' ? 'welcome-leaving' : ''}`} aria-label="Willkommen bei LL Collective Studio">
+  return <section className={`welcome-screen ${phase === 'leave' ? 'welcome-leaving' : ''}`} aria-label="Willkommen">
     <div className="welcome-inner">
-      <span className="welcome-eyebrow">WELCOME TO</span>
+      <span className="welcome-eyebrow" lang="en">WELCOME TO</span>
       <div className="welcome-emblem"><SystemMark/></div>
       <div className="welcome-rule" aria-hidden="true"/>
       <span className="welcome-name">COLLECTIVE STUDIO</span>
       <span className="welcome-detail">MARKETING · CONTENT · WEBDESIGN</span>
     </div>
     <button type="button" className="welcome-skip" onClick={finish}>ÜBERSPRINGEN <span aria-hidden="true">↗</span></button>
-  </div>;
+  </section>;
 }

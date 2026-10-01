@@ -4,7 +4,7 @@ export function BrandMark({ large = false }: { large?: boolean }) {
   return (
     <Image
       src="/brand/ll-chrome.png"
-      alt="LL Collective Studio"
+      alt=""
       className={`brand-symbol ${large ? 'brand-symbol-large' : ''}`}
       width={large ? 110 : 58}
       height={large ? 110 : 58}
