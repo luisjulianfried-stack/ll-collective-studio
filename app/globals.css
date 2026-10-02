@@ -782,3 +782,7 @@
 @media(max-width:1000px){.vx .vx-head{grid-template-columns:1fr}.vx .vx-grid{grid-template-columns:1fr}}
 @media(max-width:700px){.vx-inner{padding-top:90px}.vx .vx-card,.vx .vx-card:first-child{padding:30px 24px 28px}.vx .vx-card ul{grid-template-columns:1fr}.vx-kicker{margin-top:22px}}
 @media(prefers-reduced-motion:reduce){.vx .vx-card{transition:none}}
+
+/* Logo oben links und im Footer: flach, ohne Schatten, Schimmer oder Hover-Animation */
+.site-header .brand-symbol,.menu-top .brand-symbol,.footer-v2-brand .brand-symbol,.not-found .brand-symbol{filter:none;transition:none;animation:none}
+.brand:hover .brand-symbol,.footer-v2-brand:hover .brand-symbol{transform:none;filter:none}
