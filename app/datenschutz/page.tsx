@@ -16,7 +16,7 @@ export default function Datenschutz() {
       <div className="legal-content">
         <h2>1. Verantwortlicher</h2>
         <p>Verantwortlich für die Datenverarbeitung auf dieser Website im Sinne der Datenschutz-Grundverordnung (DSGVO) ist:</p>
-        <p>LL Collective Studio <span className="legal-todo">[RECHTSFORM]</span><br />
+        <p>LL Collective Studio<br />
           Luis Fried und Leander Ballhausen<br />
           Edelweißstraße 10, 82031 Grünwald, Deutschland<br />
           E-Mail: <a href={`mailto:${site.email}`}>{site.email}</a><br />
