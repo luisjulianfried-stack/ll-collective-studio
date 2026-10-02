@@ -801,9 +801,16 @@ main:focus{outline:none}
 /* Eröffnung: rein typografisch, ohne Logo */
 .welcome-eyebrow{position:absolute;top:clamp(28px,5vw,52px);left:5.5vw;font-size:10px;font-weight:600;letter-spacing:.24em;color:#bbae9d;animation:welcomeRise .6s .1s both}
 .welcome-words{height:1.12em;overflow:hidden;font-size:clamp(28px,8.4vw,140px);font-weight:500;letter-spacing:-.06em;line-height:1.12;padding:0 5.5vw;text-align:center}
-.welcome-track{display:flex;flex-direction:column;animation:welcomeWords 2.2s .25s cubic-bezier(.7,0,.2,1) both}
+.welcome-track{display:flex;flex-direction:column;animation:welcomeWords 2.75s .2s both}
 .welcome-track span{display:block;white-space:nowrap}
 .welcome-track em{color:var(--accent)}
-.welcome-progress{position:absolute;left:5.5vw;right:5.5vw;bottom:clamp(76px,9vw,110px);height:1px;background:#b5a38d;transform-origin:left;animation:welcomeProgress 2.3s .1s linear both}
-@keyframes welcomeWords{0%{transform:translateY(100%)}12%,26%{transform:translateY(0)}36%,50%{transform:translateY(-25%)}60%,74%{transform:translateY(-50%)}86%,100%{transform:translateY(-75%)}}
+.welcome-progress{position:absolute;left:5.5vw;right:5.5vw;bottom:clamp(76px,9vw,110px);height:1px;background:#b5a38d;transform-origin:left;animation:welcomeProgress 2.85s .1s cubic-bezier(.45,0,.2,1) both}
+@keyframes welcomeWords{0%{transform:translateY(100%);animation-timing-function:cubic-bezier(.3,1.5,.55,1)}9%,24%{transform:translateY(0);animation-timing-function:cubic-bezier(.3,1.5,.55,1)}33%,48%{transform:translateY(-25%);animation-timing-function:cubic-bezier(.3,1.5,.55,1)}57%,72%{transform:translateY(-50%);animation-timing-function:cubic-bezier(.3,1.6,.5,1)}82%,100%{transform:translateY(-75%)}}
 @keyframes welcomeProgress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.welcome-track em{position:relative;display:inline-block}
+.welcome-track em:after{content:'';position:absolute;left:.04em;right:.12em;bottom:.04em;height:.07em;background:var(--accent);transform:scaleX(0);transform-origin:left;animation:welcomeUnderline .5s 2.55s cubic-bezier(.7,0,.2,1) both}
+@property --welcome-n{syntax:'<integer>';inherits:false;initial-value:0}
+.welcome-count{position:absolute;left:5.5vw;bottom:clamp(30px,5vw,58px);font-size:10px;font-weight:600;letter-spacing:.24em;color:#bbae9d;font-variant-numeric:tabular-nums;--welcome-n:0;counter-reset:wn var(--welcome-n);animation:welcomeCount 2.85s .1s cubic-bezier(.45,0,.2,1) both}
+.welcome-count:after{content:counter(wn) ' %'}
+@keyframes welcomeUnderline{to{transform:scaleX(1)}}
+@keyframes welcomeCount{to{--welcome-n:100}}
