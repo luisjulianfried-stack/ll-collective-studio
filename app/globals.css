@@ -803,3 +803,17 @@
 .welcome-count:after{content:counter(wn) ' %'}
 @keyframes welcomeUnderline{to{transform:scaleX(1)}}
 @keyframes welcomeCount{to{--welcome-n:100}}
+
+/* Eröffnung, Schluss: Wörter weichen, das LL-Logo zeichnet sich und fliegt in den Header */
+.welcome-words{animation:welcomeWordsOut .35s 2.85s cubic-bezier(.7,0,.8,.3) forwards}
+.welcome-logo{position:absolute;top:50%;left:50%;width:clamp(96px,11vw,150px);aspect-ratio:1;margin:calc(clamp(96px,11vw,150px) / -2) 0 0 calc(clamp(96px,11vw,150px) / -2);transition:transform .8s cubic-bezier(.7,0,.2,1)}
+.welcome-logo svg{display:block;width:100%;height:100%}
+.welcome-logo path{stroke-dasharray:140;stroke-dashoffset:140;animation:welcomeDraw .55s 3s cubic-bezier(.6,0,.2,1) forwards}
+.welcome-logo .welcome-logo-inner{stroke-dasharray:100;stroke-dashoffset:100;animation-delay:3.15s}
+.welcome-screen{transition:background-color .55s .15s ease}
+.welcome-screen.welcome-leaving{animation:none;background-color:transparent;pointer-events:none}
+.welcome-leaving .welcome-logo{transform:translate(var(--fly-x,0),var(--fly-y,0)) scale(var(--fly-s,1))}
+.welcome-leaving>:not(.welcome-logo){animation:none;opacity:0;transition:opacity .3s ease}
+@keyframes welcomeWordsOut{to{opacity:0;transform:translateY(-.35em)}}
+@keyframes welcomeDraw{to{stroke-dashoffset:0}}
+body:has(.welcome-screen) .site-header .brand-symbol{opacity:0}
