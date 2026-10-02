@@ -23,8 +23,8 @@ export function Welcome() {
     }
 
     try { window.sessionStorage.setItem('ll-welcome-seen', '1'); } catch {}
-    const leave = window.setTimeout(() => setPhase('leave'), 2400);
-    const done = window.setTimeout(finish, 3250);
+    const leave = window.setTimeout(() => setPhase('leave'), 3000);
+    const done = window.setTimeout(finish, 3850);
     timers.current = [leave, done];
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') finish();
@@ -58,6 +58,7 @@ export function Welcome() {
       </div>
     </div>
     <div className="welcome-progress" aria-hidden="true"/>
+    <span className="welcome-count" aria-hidden="true"/>
     <button type="button" className="welcome-skip" onClick={finish}>ÜBERSPRINGEN <span aria-hidden="true">↗</span></button>
   </section>;
 }
