@@ -19,13 +19,18 @@ export default function Impressum() {
       <h1>Impressum<span>.</span></h1>
       <div className="legal-content">
         <h2>Angaben gemäß § 5 DDG</h2>
-        <p>LL Collective Studio<br />Luis Fried und Leander Ballhausen</p>
-        <p>Kontaktanschrift Luis Fried:<br />Edelweißstraße 10<br />82031 Grünwald<br />Deutschland</p>
+        <p>LL Collective Studio<br />
+          Edelweißstraße 10<br />82031 Grünwald<br />Deutschland</p>
+        <p>Vertreten durch die Gesellschafter:<br />Luis Fried<br />Leander Ballhausen</p>
         <h2>Kontakt</h2>
         <p>E-Mail: <a href={`mailto:${site.email}`}>{site.email}</a><br />
-          Luis Fried: <a href="tel:+4917631358964">+49 176 31358964</a><br />
-          Leander Ballhausen: <a href="tel:+491512695547">+49 151 2695547</a>
+          Telefon Luis Fried: <a href="tel:+4917631358964">+49 176 31358964</a><br />
+          Telefon Leander Ballhausen: <a href="tel:+491512695547">+49 151 2695547</a>
         </p>
+        <h2>Verbraucherstreitbeilegung</h2>
+        <p>Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+        <h2>Haftung für Links</h2>
+        <p>Diese Website enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Für diese Inhalte ist stets der jeweilige Anbieter oder Betreiber verantwortlich. Bei Bekanntwerden von Rechtsverletzungen entfernen wir derartige Links umgehend.</p>
       </div>
     </main>
     <Footer />

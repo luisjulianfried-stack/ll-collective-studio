@@ -1,7 +1,6 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { SystemMark } from '@/components/system-mark';
 
 export function Welcome() {
   const [phase, setPhase] = useState<'enter' | 'leave' | 'done'>('enter');
@@ -48,14 +47,17 @@ export function Welcome() {
 
   if (phase === 'done') return null;
 
-  return <div className={`welcome-screen ${phase === 'leave' ? 'welcome-leaving' : ''}`} aria-label="Willkommen bei LL Collective Studio">
-    <div className="welcome-inner">
-      <span className="welcome-eyebrow">WELCOME TO</span>
-      <div className="welcome-emblem"><SystemMark/></div>
-      <div className="welcome-rule" aria-hidden="true"/>
-      <span className="welcome-name">COLLECTIVE STUDIO</span>
-      <span className="welcome-detail">MARKETING · CONTENT · WEBDESIGN</span>
+  return <section className={`welcome-screen ${phase === 'leave' ? 'welcome-leaving' : ''}`} aria-label="Willkommen">
+    <span className="welcome-eyebrow">LL COLLECTIVE STUDIO <span aria-hidden="true">—</span> MÜNCHEN</span>
+    <div className="welcome-words" aria-hidden="true">
+      <div className="welcome-track">
+        <span>Strategie.</span>
+        <span>Content.</span>
+        <span>Webdesign.</span>
+        <span>Marketing, das <em>wirkt.</em></span>
+      </div>
     </div>
+    <div className="welcome-progress" aria-hidden="true"/>
     <button type="button" className="welcome-skip" onClick={finish}>ÜBERSPRINGEN <span aria-hidden="true">↗</span></button>
-  </div>;
+  </section>;
 }
