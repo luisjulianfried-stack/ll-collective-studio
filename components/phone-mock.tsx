@@ -7,7 +7,7 @@ const Pin = () => <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.1-7-11.5a7 7 0 0
 
 /* Drei Beispiel-Stories aus unseren Konzept-Demos (fiktive Marken) – je eine Branche. */
 const stories = [
-  { handle: 'atelier.strand', time: '2 Std.', img: '/showcase/atelier-strand/assets/blonde.webp', pos: '52% 28%', avatar: '/showcase/atelier-strand/assets/brunette.webp' },
+  { handle: 'cafe.still', time: '2 Std.', img: '/showcase/cafe-still/assets/coffee.webp', pos: '50% 40%', avatar: '/showcase/cafe-still/assets/interior.webp' },
   { handle: 'casa.oliva', time: '5 Std.', img: '/showcase/casa-oliva/assets/pasta.webp', pos: '42% 50%', avatar: '/showcase/casa-oliva/assets/interior.webp' },
   { handle: 'villa.serena', time: '1 Tag', img: '/showcase/architektur/assets/villa.webp', pos: '38% 50%', avatar: '/showcase/architektur/assets/house.webp' },
 ];
@@ -20,8 +20,8 @@ export function PhoneMock() {
         <div className="st-img"><Image src={story.img} alt="" fill priority={i === 0} unoptimized sizes="260px" style={{ objectPosition: story.pos }}/></div>
         <div className="st-head"><i className="st-av" style={{ backgroundImage: `url(${story.avatar})` }}/><b>{story.handle}</b><small>{story.time}</small><em>···</em></div>
         {i === 0 && <>
-          <p className="st-title" style={{ top: '118cqw' }}>Neue Looks</p>
-          <span className="st-link" style={{ top: '146cqw' }}><LinkIcon/>TERMIN BUCHEN</span>
+          <p className="st-title" style={{ top: '118cqw' }}>Neue Karte</p>
+          <span className="st-link" style={{ top: '146cqw' }}><LinkIcon/>KARTE ANSEHEN</span>
         </>}
         {i === 1 && <div className="st-poll" style={{ top: '104cqw' }}>
           <b>Pasta heute Abend?</b><span>JA, BITTE!</span><span>MORGEN</span>
