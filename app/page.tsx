@@ -10,6 +10,7 @@ import { site } from '@/lib/site';
 import { Motion } from '@/components/motion';
 import { Footer } from '@/components/footer';
 import { Welcome } from '@/components/welcome';
+import { HeroSilk } from '@/components/hero-silk';
 import { showcases } from '@/lib/showcases';
 
 const steps = [
@@ -22,6 +23,7 @@ export default function Home() {
   const front = showcases[0];
   return <><Welcome/><Navigation/><main>
     <section className="hx" id="top">
+      <HeroSilk/>
       <div className="hx-glow" aria-hidden="true"/>
       <div className="hx-grid">
         <div className="hx-copy">
