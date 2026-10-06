@@ -1,0 +1,930 @@
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LeMatcha — Matcha Limonade</title>
+<meta name="description" content="LeMatcha: ein Marken- und Website-Konzept für eine Matcha-Limonade von LL Collective Studio.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/svg+xml" href="lematcha-emblem.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Fredoka:wght@600;700&family=Jost:wght@300;400;500&family=Shippori+Mincho:wght@400;500&display=swap">
+<style>
+/* Layout: editorial luxury. Dark silk hero (live shader), bone-beige pages, one pinned pour scene (whisk, pour, serve) with drawn annotations, a three-column ingredient row, an index-style collection. Motion is slow, masked and eased; nothing bounces. */
+:root{
+  --bone:#EEE8DA;
+  --linen:#E3D9C4;
+  --forest:#16241C;
+  --moss:#3D5236;
+  --matcha:#6B8A3A;
+  --lemon:#EFCB3A;
+  --lemon-soft:#F3E08A;
+  --leaf:#A9BC85;
+  --champagne:#CDB25A;
+  --ink:#16241C;
+  --muted:#6B7062;
+  --hair:rgba(22,36,28,.18);
+  --hair-l:rgba(238,232,218,.22);
+  --f-serif:"Bodoni Moda","Didot","Bodoni 72","Playfair Display",Georgia,serif;
+  --f-sans:"Jost","Futura","Avenir Next","Century Gothic",system-ui,sans-serif;
+  --f-brand:"Fredoka","Baloo 2","Nunito","Arial Rounded MT Bold",system-ui,sans-serif;
+  --f-jp:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --gutter:clamp(18px,4vw,64px);
+  --ease:cubic-bezier(.16,1,.3,1);
+  --ease-io:cubic-bezier(.77,0,.18,1);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--bone);color:var(--ink);font-family:var(--f-sans);font-weight:300;font-size:17px;line-height:1.7;overflow-x:clip;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+::selection{background:var(--forest);color:var(--bone)}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:1px solid var(--champagne);outline-offset:4px}
+h1,h2,h3{font-family:var(--f-serif);font-weight:400;margin:0;line-height:1;letter-spacing:-.02em;text-wrap:balance}
+em{font-style:italic}
+p{margin:0}
+.wrap{padding-inline:var(--gutter);max-width:1440px;margin-inline:auto}
+.label{font-family:var(--f-sans);font-weight:400;font-size:11px;letter-spacing:.32em;text-transform:uppercase}
+.jp{font-family:var(--f-jp);font-weight:400}
+
+/* masked word reveal */
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.1em;margin-bottom:-.1em}
+.w>span{display:inline-block;transition:transform 1.5s var(--ease);transition-delay:calc(var(--i,0) * 45ms)}
+.split:not(.in) .w>span{transform:translateY(115%)}
+.fade{transition:opacity 1.4s var(--ease),transform 1.4s var(--ease);transition-delay:var(--d,0s)}
+.fade:not(.in){opacity:0;transform:translateY(24px)}
+.fizz circle{animation:fz 3.2s linear infinite;fill:rgba(255,255,255,.75)}
+@keyframes fz{from{transform:translateY(0);opacity:0}15%{opacity:1}to{transform:translateY(-290px);opacity:0}}
+.rule{height:1px;background:currentColor;opacity:.22;transform-origin:left;transition:transform 1.8s var(--ease);transition-delay:var(--d,0s)}
+.rule:not(.in){transform:scaleX(0)}
+
+/* preloader */
+.loader{position:fixed;inset:0;z-index:100;background:var(--bone);color:var(--matcha);display:grid;place-items:center;clip-path:inset(0 0 0 0);transition:clip-path 1.3s var(--ease-io)}
+.loader.out{clip-path:inset(0 0 100% 0)}
+.loader-in{display:grid;justify-items:center;gap:22px}
+.loader .mark{font-family:var(--f-brand);font-weight:700;font-size:clamp(40px,6vw,68px);letter-spacing:-.01em;line-height:1;overflow:hidden;padding-bottom:.1em}
+.loader .lem{width:clamp(120px,14vw,170px);height:auto;transform:scale(.6) translateY(20px);opacity:0;animation:pop 1.1s var(--ease) .05s forwards;overflow:visible}
+@keyframes pop{to{transform:none;opacity:1}}
+.loader .bar{background:var(--hair)}
+.loader .mark span{display:inline-block;transform:translateY(110%);animation:up 1.2s var(--ease) forwards;animation-delay:calc(var(--i)*70ms + .1s)}
+.loader .bar{width:160px;height:1px;background:var(--hair-l);position:relative;overflow:hidden}
+.loader .bar i{position:absolute;inset:0;background:var(--champagne);transform:scaleX(0);transform-origin:left;animation:grow 1.3s var(--ease-io) .2s forwards}
+@keyframes up{to{transform:none}}
+@keyframes grow{to{transform:scaleX(1)}}
+
+/* nav */
+.nav{position:fixed;inset:0 0 auto;z-index:50;padding-top:env(safe-area-inset-top,0px);color:var(--bone);transition:color .8s var(--ease),background .8s var(--ease)}
+.nav.ink{color:var(--ink)}
+.nav.ink.bg{background:rgba(238,232,218,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.nav-in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:76px;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--f-brand);font-weight:700;font-size:25px;letter-spacing:-.01em;line-height:1}
+.brand svg{width:38px;height:38px;overflow:visible;transition:transform 1s var(--ease)}
+.brand:hover svg{transform:rotate(-8deg) scale(1.06)}
+.nav.ink .brand .wm{color:var(--matcha)}
+.brand .wm{transition:color .8s var(--ease)}
+.nav-mid{display:flex;gap:40px}
+.nav a.u{position:relative;padding-block:6px}
+.nav a.u::after,.link::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .9s var(--ease),opacity .6s}
+.nav a.u:hover::after{transform:scaleX(1);transform-origin:left}
+.nav-r{justify-self:end}
+.link{position:relative;display:inline-flex;gap:14px;align-items:center;padding-bottom:6px}
+.link::after{transform:scaleX(1);transform-origin:left;opacity:.35}
+.link:hover::after{opacity:1}
+@media (max-width:820px){.nav-mid{display:none}.nav-in{grid-template-columns:1fr auto}}
+
+/* hero */
+.hero{position:relative;height:96vh;height:96svh;min-height:600px;color:var(--bone);overflow:hidden;background:var(--forest)}
+.hero-bg{position:absolute;inset:-6% 0 0;will-change:transform}
+#silk{width:100%;height:100%;display:block;background:radial-gradient(120% 90% at 70% 30%,#5d7440 0%,#2a3b2b 45%,var(--forest) 80%)}
+.hero-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,36,28,.35) 0%,rgba(22,36,28,0) 30%,rgba(22,36,28,.15) 65%,rgba(22,36,28,.7) 100%)}
+.hero-c{position:relative;height:100%;display:grid;grid-template-rows:1fr auto;padding-top:120px;padding-bottom:clamp(28px,4vw,48px)}
+.hero-title{align-self:center;display:grid;gap:clamp(18px,2.5vw,32px)}
+.hero h1{font-size:clamp(58px,11.5vw,196px);line-height:.92;letter-spacing:-.035em}
+.hero h1 em{display:block;color:var(--lemon-soft);padding-left:clamp(28px,12vw,220px)}
+.hero-foot{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;padding-top:24px}
+.hero-foot p{max-width:40ch;font-size:15px;color:rgba(238,232,218,.78)}
+.scroll-cue{display:flex;align-items:center;gap:16px}
+.scroll-cue i{display:block;width:1px;height:56px;background:rgba(238,232,218,.25);position:relative;overflow:hidden}
+.scroll-cue i::after{content:"";position:absolute;left:0;top:0;width:1px;height:100%;background:var(--bone);animation:cue 2.6s var(--ease-io) infinite}
+@keyframes cue{0%{transform:translateY(-100%)}55%{transform:translateY(0)}100%{transform:translateY(100%)}}
+.hero-em{position:absolute;right:clamp(40px,6vw,140px);top:48%;width:clamp(220px,25vw,400px);aspect-ratio:1;transform:translateY(-50%);pointer-events:none}
+.hero-em .glow{position:absolute;inset:-22%;border-radius:50%;background:radial-gradient(circle,rgba(243,224,138,.42) 0%,rgba(239,203,58,.14) 38%,rgba(239,203,58,0) 68%);mix-blend-mode:screen;animation:breathe 8s ease-in-out infinite}
+.hero-em .in{position:absolute;inset:0;will-change:transform}
+.hero-em svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 40px 50px rgba(5,12,8,.55));transition:opacity 1.8s var(--ease),transform 2.2s var(--ease),filter 1.8s var(--ease);animation:float 7s ease-in-out infinite}
+.hero-em:not(.in) svg{opacity:0;transform:translateY(60px) scale(.88);filter:blur(14px)}
+.hero-em .leafs{transform-origin:170px 90px}
+@keyframes breathe{50%{transform:scale(1.08);opacity:.8}}
+@keyframes float{50%{translate:0 -14px;rotate:-1.5deg}}
+.hero-jp{position:absolute;right:var(--gutter);top:50%;transform:translateY(-50%);writing-mode:vertical-rl;font-size:15px;letter-spacing:.6em;color:rgba(238,232,218,.6)}
+@media (max-width:900px){.hero-em{right:50%;top:calc(84px + env(safe-area-inset-top,0px));transform:translateX(50%);width:min(44vw,210px)}.hero-em .glow{inset:-30%}}
+@media (max-width:700px){.hero-jp{display:none}.hero-foot{grid-template-columns:1fr}.scroll-cue{display:none}}
+
+/* manifesto */
+.manifest{padding-block:clamp(110px,16vw,240px)}
+.manifest-grid{display:grid;grid-template-columns:minmax(140px,1fr) 4fr;gap:clamp(24px,5vw,80px)}
+.manifest .big{font-family:var(--f-serif);font-size:clamp(30px,4.4vw,70px);line-height:1.12;letter-spacing:-.02em;max-width:22ch;text-wrap:balance}
+.manifest .big em{color:var(--moss)}
+.manifest .sig{margin-top:clamp(36px,5vw,64px);display:flex;gap:28px;align-items:center;color:var(--muted)}
+.manifest .sig .rule{width:80px;flex:none}
+@media (max-width:760px){.manifest-grid{grid-template-columns:1fr}}
+
+/* product moment */
+.product{position:relative;background:var(--linen)}
+.product-track{height:170vh;position:relative}
+.product-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:grid;place-items:center}
+.ghost-word{position:absolute;top:50%;left:0;white-space:nowrap;font-family:var(--f-brand);font-weight:700;font-size:clamp(160px,30vw,520px);line-height:1;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px rgba(22,36,28,.16);transform:translateY(-50%);will-change:transform;pointer-events:none}
+.pstage{position:relative;width:min(1180px,100% - 2*var(--gutter));aspect-ratio:12/8;max-height:86vh}
+.pbottle{position:absolute;left:50%;top:50%;height:100%;transform:translate(-50%,-50%)}
+.pbottle svg{height:100%;width:auto;display:block;overflow:visible}
+.plines{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.plines path{fill:none;stroke:var(--ink);stroke-opacity:.5;stroke-width:1;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:1}
+.plines circle{fill:var(--ink);opacity:0;transition:opacity .6s}
+.plines circle.on{opacity:.8}
+.anno{position:absolute;width:min(250px,26%);display:grid;gap:8px;transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.anno:not(.on){opacity:0;transform:translateY(12px)}
+.anno .label{color:var(--muted)}
+.anno h3{font-size:clamp(20px,1.9vw,28px);line-height:1.15}
+.anno p{font-size:14px;color:var(--muted);line-height:1.6}
+.a1{left:0;top:28%}.a2{right:0;top:37%;text-align:right}.a3{left:0;top:55%}.a4{right:0;top:77%;text-align:right}
+.pour-steps{position:absolute;left:0;top:6%;display:grid;gap:10px;width:min(330px,32%);transition:opacity .8s var(--ease)}
+.pour-steps ol{list-style:none;margin:0;padding:0;display:flex;gap:14px;flex-wrap:nowrap}
+.pour-steps li{white-space:nowrap;font-family:var(--f-serif);font-style:italic;font-size:14px;color:var(--muted);opacity:.45;transition:opacity .6s var(--ease),color .6s}
+.pour-steps li.on{opacity:1;color:var(--ink)}
+.pour-steps .bar{height:1px;background:var(--hair);position:relative}
+.pour-steps .bar i{position:absolute;left:0;top:0;height:1px;width:100%;background:var(--ink);transform-origin:left;transform:scaleX(0)}
+.pour-steps h3{font-size:clamp(24px,2.3vw,34px);line-height:1.1}
+.pour-steps p{font-size:14px;color:var(--muted);line-height:1.6;min-height:3.2em}
+.replay{position:absolute;left:0;bottom:4%;justify-self:start;background:none;border:0;padding:6px 0;font:400 11px var(--f-sans);letter-spacing:.28em;text-transform:uppercase;color:var(--ink);cursor:pointer;border-bottom:1px solid var(--hair);transition:border-color .6s,opacity .6s}
+.replay:hover{border-color:var(--ink)}
+.replay[hidden]{display:none!important}
+.pcap{position:absolute;left:50%;bottom:0;transform:translateX(-50%);color:var(--muted);white-space:nowrap}
+@media (max-width:820px){
+  .product-track{height:auto}
+  .product-sticky{position:relative;height:auto;padding-block:96px 72px;display:block}
+  .pstage{aspect-ratio:auto;max-height:none;width:100%;margin:0;padding-inline:var(--gutter);display:grid;gap:28px}
+  .pbottle{position:relative;left:auto;top:auto;transform:none!important;height:auto;width:100%;justify-self:center}
+  .pbottle svg{width:100%;height:auto;max-height:70vh}
+  .plines,.pcap{display:none}
+  .pour-steps{position:relative;width:auto;top:auto}
+  .replay{position:relative;bottom:auto}
+  .anno{position:relative;width:auto;left:auto!important;right:auto!important;top:auto!important;text-align:left!important;padding-top:20px;border-top:1px solid var(--hair)}
+  .ghost-word{top:120px}
+}
+
+/* ingredients */
+.ingr{background:var(--forest);color:var(--bone);position:relative;padding-block:clamp(100px,12vw,180px)}
+.ingr-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:clamp(48px,6vw,88px)}
+.ingr-head h2{font-size:clamp(40px,5.4vw,88px)}
+.ingr-head .label{color:var(--champagne)}
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--hair-l)}
+.panel{display:grid;align-content:start;gap:22px;padding:clamp(32px,4vw,56px) clamp(20px,2.6vw,44px) 8px;border-left:1px solid var(--hair-l);min-width:0;transition:opacity 1.4s var(--ease),transform 1.4s var(--ease),background .8s var(--ease);transition-delay:var(--d,0s)}
+.panel:first-child{border-left:0;padding-left:0}
+.panel:last-child{padding-right:0}
+.panel:not(.in){opacity:0;transform:translateY(36px)}
+.plate{position:relative;width:clamp(130px,12vw,176px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#24372a,#132019 70%);display:grid;place-items:center;margin-bottom:10px}
+.plate::after{content:"";position:absolute;inset:7%;border-radius:50%;border:1px solid rgba(205,178,90,.35);transition:inset 1.2s var(--ease),border-color 1.2s var(--ease)}
+.panel:hover .plate::after{inset:4%;border-color:rgba(205,178,90,.7)}
+.plate svg{width:64%;height:auto;overflow:visible;transition:transform 1.4s var(--ease)}
+.panel:hover .plate svg{transform:scale(1.06) rotate(-4deg)}
+.plate svg *{fill:none;stroke:var(--champagne);stroke-width:1.1;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
+.plate .draw{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.4s var(--ease-io);transition-delay:calc(var(--d,0s) + var(--pd,0s) + .3s)}
+.panel.in .draw{stroke-dashoffset:0}
+.ptext{display:grid;gap:14px;min-width:0}
+.ptext .num{font-family:var(--f-serif);font-style:italic;font-size:20px;color:var(--champagne)}
+.ptext h3{font-size:clamp(34px,3.4vw,54px)}
+.ptext p{color:rgba(238,232,218,.72);max-width:36ch;font-size:15.5px}
+.specs{display:grid;grid-template-columns:auto 1fr;gap:8px 20px;padding-top:18px;margin:10px 0 0;border-top:1px solid var(--hair-l);font-size:13px}
+.specs dt{color:rgba(238,232,218,.5);letter-spacing:.2em;text-transform:uppercase;font-size:10.5px;padding-top:3px}
+.specs dd{margin:0}
+@media (max-width:900px){
+  .trio{grid-template-columns:1fr}
+  .panel,.panel:first-child,.panel:last-child{border-left:0;border-bottom:1px solid var(--hair-l);padding:36px 0;grid-template-columns:auto minmax(0,1fr);gap:24px;align-items:start;transition-delay:0s}
+  .plate{width:clamp(96px,26vw,150px);margin:0}
+  .ptext h3{font-size:34px}
+}
+
+/* collection */
+.coll{padding-block:clamp(110px,14vw,200px)}
+.coll-head{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:end;margin-bottom:clamp(48px,6vw,88px)}
+.coll-head h2{font-size:clamp(48px,7.4vw,124px)}
+.coll-head p{max-width:36ch;justify-self:end;color:var(--muted)}
+.rows{list-style:none;margin:0;padding:0}
+.rowi{position:relative}
+.rowi a{display:grid;grid-template-columns:90px minmax(0,1.5fr) minmax(0,1fr) auto;gap:24px;align-items:baseline;padding-block:clamp(26px,3.4vw,44px);transition:color .6s var(--ease)}
+.rowi .no{font-family:var(--f-serif);font-style:italic;font-size:18px;color:var(--muted)}
+.rowi h3{font-size:clamp(34px,5vw,76px);transition:transform 1s var(--ease)}
+.rowi .notes{color:var(--muted);font-size:15px}
+.rowi .pr{font-size:15px;letter-spacing:.06em;font-variant-numeric:tabular-nums}
+.rowi a:hover h3{transform:translateX(18px)}
+.rows:hover .rowi a{color:rgba(22,36,28,.35)}
+.rows:hover .rowi a:hover{color:var(--ink)}
+.peek{position:fixed;left:0;top:0;width:220px;height:300px;pointer-events:none;z-index:40;overflow:hidden;background:var(--linen);clip-path:inset(50% 50% 50% 50%);transition:clip-path .9s var(--ease),background .6s;display:grid;place-items:center}
+.peek.on{clip-path:inset(0 0 0 0)}
+.peek svg{height:86%;width:auto}
+@media (max-width:820px){
+  .coll-head{grid-template-columns:1fr}.coll-head p{justify-self:start}
+  .rowi a{grid-template-columns:44px 1fr auto;gap:12px}
+  .rowi .notes{grid-column:2/-1;grid-row:2}
+  .peek{display:none}
+}
+
+/* figures */
+.figs{border-top:1px solid var(--hair)}
+.figs-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.fig{padding:clamp(32px,4vw,56px) clamp(16px,2vw,32px) clamp(32px,4vw,56px) 0;display:grid;gap:10px;border-right:1px solid var(--hair);min-width:0}
+.fig:last-child{border-right:0}
+.fig+.fig{padding-left:clamp(16px,2vw,32px)}
+.fig b{font-family:var(--f-serif);font-weight:400;font-size:clamp(48px,6vw,96px);line-height:1;letter-spacing:-.03em;font-variant-numeric:lining-nums tabular-nums}
+.fig b small{font-size:.3em;letter-spacing:.04em;margin-left:6px;font-family:var(--f-sans);font-weight:300}
+.fig span{color:var(--muted);font-size:14px}
+@media (max-width:820px){.figs-grid{grid-template-columns:1fr 1fr}.fig{border-right:0;border-bottom:1px solid var(--hair);padding-left:0!important}}
+
+/* reserve */
+.reserve{background:var(--forest);color:var(--bone);padding-block:clamp(110px,14vw,200px) 40px;overflow:hidden;position:relative}
+.reserve-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(32px,6vw,96px);align-items:end}
+.reserve h2{font-size:clamp(46px,7vw,116px);line-height:.98}
+.reserve h2 em{color:var(--lemon-soft)}
+.reserve .lead{color:rgba(238,232,218,.72);max-width:38ch;margin-bottom:32px}
+.reserve .lead b{font-weight:400;color:var(--bone)}
+.field{display:flex;align-items:end;gap:16px;border-bottom:1px solid rgba(238,232,218,.35);transition:border-color .6s}
+.field:focus-within{border-color:var(--champagne)}
+.field input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:var(--bone);font:300 20px var(--f-sans);padding:14px 0}
+.field input::placeholder{color:rgba(238,232,218,.4)}
+.field button{background:none;border:0;color:var(--bone);font:400 11px var(--f-sans);letter-spacing:.32em;text-transform:uppercase;padding:14px 0;cursor:pointer;display:flex;gap:12px;align-items:center}
+.field button .arr{transition:transform .8s var(--ease)}
+.field button:hover .arr{transform:translateX(8px)}
+.reserve label{display:block;margin-bottom:6px;color:var(--champagne)}
+.msg{min-height:1.7em;margin-top:14px;font-size:14px;color:rgba(238,232,218,.8)}
+.wordmark{margin-top:clamp(90px,12vw,180px);display:grid;justify-items:center;gap:0}
+.wordmark .wm-em{width:clamp(110px,16vw,230px);height:auto;overflow:visible;margin-bottom:-2%;transition:transform 1.8s var(--ease),opacity 1.4s var(--ease);position:relative;z-index:1}
+.wordmark:not(.in) .wm-em{transform:translateY(40%) scale(.85);opacity:0}
+.wordmark .wm-t{font-family:var(--f-brand);font-weight:700;font-size:clamp(68px,17vw,300px);line-height:.85;letter-spacing:-.02em;white-space:nowrap;color:var(--lemon-soft)}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:18px;padding-top:36px;margin-top:36px;border-top:1px solid var(--hair-l);font-size:13px;color:rgba(238,232,218,.6)}
+.concept-note{margin-top:22px;max-width:52ch;font-size:13px;line-height:1.6;color:rgba(238,232,218,.6)}
+.foot nav{display:flex;gap:28px;flex-wrap:wrap}
+.foot a:hover{color:var(--bone)}
+@media (max-width:820px){.reserve-grid{grid-template-columns:1fr}}
+
+/* cursor */
+.cursor{position:fixed;left:0;top:0;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#fff;mix-blend-mode:difference;pointer-events:none;z-index:90;transition:width .6s var(--ease),height .6s var(--ease),margin .6s var(--ease),opacity .4s;opacity:0}
+.cursor.big{width:56px;height:56px;margin:-28px 0 0 -28px;background:transparent;box-shadow:inset 0 0 0 1px #fff}
+@media (pointer:coarse){.cursor{display:none}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0s!important}
+  .loader{display:none}
+}
+</style>
+</head><body style="margin:0">
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-in">
+    <svg class="lem" viewBox="0 -10 240 240"><use href="#emblem"/></svg>
+    <div class="mark"><span style="--i:3">L</span><span style="--i:4">e</span><span style="--i:5">M</span><span style="--i:6">a</span><span style="--i:7">t</span><span style="--i:8">c</span><span style="--i:9">h</span><span style="--i:10">a</span></div>
+    <div class="bar"><i></i></div>
+  </div>
+</div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+<symbol id="emblem" viewBox="0 -10 240 240">
+  <g class="em-leaves" transform="translate(16 -6)">
+    <path d="M150 92 C138 70 136 46 150 26 C168 44 168 70 150 92 Z" fill="#A9BC85"/>
+    <path d="M150 90 C150 70 150 50 150 30" stroke="#E4EBD3" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    <path d="M154 94 C162 70 182 52 206 50 C202 76 182 94 154 94 Z" fill="#A9BC85"/>
+    <path d="M156 92 C170 78 184 64 202 54" stroke="#E4EBD3" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  </g>
+  <ellipse cx="120" cy="118" rx="94" ry="34" fill="#F6E27A"/><ellipse cx="120" cy="118" rx="94" ry="34" fill="none" stroke="#EFCB3A" stroke-width="5"/>
+  <path d="M120 118 L36 110 M120 118 L70 92 M120 118 L130 85 M120 118 L186 92 M120 118 L210 116" stroke="#EFCB3A" stroke-width="3" opacity=".7"/>
+  <g class="em-panda">
+    <circle cx="70" cy="50" r="13" fill="#5E7A3A"/>
+    <circle cx="124" cy="46" r="13" fill="#5E7A3A"/>
+    <path d="M52 112 C40 98 44 76 58 70 C66 80 66 98 64 112 Z" fill="#5E7A3A"/>
+    <ellipse cx="132" cy="114" rx="50" ry="28" fill="#F6F1E2"/>
+    <circle cx="97" cy="76" r="36" fill="#F6F1E2"/>
+    <ellipse cx="82" cy="80" rx="12" ry="9.5" fill="#5E7A3A" transform="rotate(-18 82 80)"/>
+    <ellipse cx="112" cy="78" rx="12" ry="9.5" fill="#5E7A3A" transform="rotate(18 112 78)"/>
+    <path d="M76 81 Q82 76 88 81" stroke="#F6F1E2" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+    <path d="M106 79 Q112 74 118 79" stroke="#F6F1E2" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+    <ellipse cx="97" cy="90" rx="3.4" ry="2.4" fill="#5E7A3A"/>
+    <path d="M90 95 Q93.5 99 97 95 Q100.5 99 104 95" stroke="#5E7A3A" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    <path d="M100 112 C112 98 132 98 140 108 C130 116 112 118 100 112 Z" fill="#5E7A3A"/>
+    <ellipse cx="160" cy="100" rx="15" ry="19" fill="#5E7A3A" transform="rotate(-25 160 100)"/>
+    <ellipse cx="190" cy="92" rx="15" ry="19" fill="#5E7A3A" transform="rotate(20 190 92)"/>
+    <ellipse cx="160" cy="98" rx="6" ry="7" fill="#D6D85A" transform="rotate(-25 160 98)"/>
+    <circle cx="153" cy="88" r="2.6" fill="#D6D85A"/><circle cx="159" cy="85" r="2.6" fill="#D6D85A"/><circle cx="165" cy="86" r="2.6" fill="#D6D85A"/>
+    <ellipse cx="190" cy="90" rx="6" ry="7" fill="#D6D85A" transform="rotate(20 190 90)"/>
+    <circle cx="184" cy="79" r="2.6" fill="#D6D85A"/><circle cx="190" cy="77" r="2.6" fill="#D6D85A"/><circle cx="196" cy="79" r="2.6" fill="#D6D85A"/>
+  </g>
+  <path d="M26 118 A94 34 0 0 0 214 118 C214 176 172 214 120 214 C68 214 26 176 26 118 Z" fill="#EFCB3A"/>
+  <path d="M40 140 C48 170 70 192 96 202" stroke="#F8E58A" stroke-width="7" fill="none" stroke-linecap="round" opacity=".8"/>
+  <circle cx="44" cy="128" r="5" fill="#F8E58A" opacity=".8"/>
+  <path d="M110 212 Q120 224 130 212 Z" fill="#E0B92C"/>
+</symbol>
+
+<filter id="gBlur6" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+<filter id="gBlur2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2"/></filter>
+<filter id="cloud" x="-20%" y="-30%" width="140%" height="160%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.014 0.032" numOctaves="3" seed="4" result="t">
+    <animate attributeName="baseFrequency" values="0.014 0.032;0.019 0.026;0.014 0.032" dur="16s" repeatCount="indefinite"/>
+  </feTurbulence>
+  <feDisplacementMap in="SourceGraphic" in2="t" scale="34" xChannelSelector="R" yChannelSelector="G" result="d"/>
+  <feGaussianBlur in="d" stdDeviation="2.2"/>
+</filter>
+<filter id="etch"><feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .42 0"/></filter>
+<linearGradient id="gLem" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F1E7A6"/><stop offset="1" stop-color="#E2D578"/></linearGradient>
+<linearGradient id="gDepthV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".12"/><stop offset=".45" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#0c1a08" stop-opacity=".12"/></linearGradient>
+<linearGradient id="gEdges" x1="0" x2="1"><stop offset="0" stop-color="#0b1608" stop-opacity=".55"/><stop offset=".14" stop-color="#0b1608" stop-opacity="0"/><stop offset=".8" stop-color="#0b1608" stop-opacity="0"/><stop offset="1" stop-color="#0b1608" stop-opacity=".6"/></linearGradient>
+<linearGradient id="gHiL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset=".5" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity=".2"/></linearGradient>
+<linearGradient id="gBase" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7d9a45" stop-opacity=".55"/><stop offset=".55" stop-color="#e8f0d0" stop-opacity=".35"/><stop offset="1" stop-color="#ffffff" stop-opacity=".55"/></linearGradient>
+<linearGradient id="gIce" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".75"/><stop offset=".45" stop-color="#fff" stop-opacity=".18"/><stop offset="1" stop-color="#fff" stop-opacity=".45"/></linearGradient>
+<radialGradient id="gCaustic" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#E9DC6A" stop-opacity=".75"/><stop offset=".45" stop-color="#A9BC55" stop-opacity=".35"/><stop offset="1" stop-color="#A9BC55" stop-opacity="0"/></radialGradient>
+<linearGradient id="gFadeG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<mask id="fadeDown" maskContentUnits="userSpaceOnUse"><rect x="40" y="270" width="220" height="140" fill="url(#gFadeG)"/></mask>
+<linearGradient id="gMatFade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6B8A3A"/><stop offset="1" stop-color="#6B8A3A" stop-opacity="0"/></linearGradient>
+<linearGradient id="gBamboo" x1="0" x2="1"><stop offset="0" stop-color="#B99A5C"/><stop offset=".4" stop-color="#EBD7A4"/><stop offset="1" stop-color="#A88A50"/></linearGradient>
+<linearGradient id="gBowl" x1="0" x2="1"><stop offset="0" stop-color="#3b3d35"/><stop offset=".35" stop-color="#25261f"/><stop offset="1" stop-color="#121310"/></linearGradient>
+<linearGradient id="gStream" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5E7A2E"/><stop offset="1" stop-color="#86A84A"/></linearGradient>
+<linearGradient id="gAlu" x1="0" x2="1"><stop offset="0" stop-color="#8b908e"/><stop offset=".3" stop-color="#eef0ee"/><stop offset=".5" stop-color="#c3c7c5"/><stop offset=".75" stop-color="#f4f5f3"/><stop offset="1" stop-color="#7a807e"/></linearGradient>
+<linearGradient id="gAlu2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9ebe9"/><stop offset=".6" stop-color="#bfc3c1"/><stop offset="1" stop-color="#9ea3a1"/></linearGradient>
+<clipPath id="cavity"><path d="M84 46 L216 46 C221 52 226 60 226 68 L226 484 Q226 496 214 497 L86 497 Q74 496 74 484 L74 68 C74 60 79 52 84 46 Z"/></clipPath>
+<symbol id="glass" viewBox="0 0 300 560">
+  <ellipse cx="150" cy="508" rx="96" ry="10" fill="#16241C" opacity=".32" filter="url(#gBlur6)"/>
+  <ellipse cx="196" cy="514" rx="96" ry="15" fill="url(#gCaustic)" filter="url(#gBlur2)"/>
+  <ellipse cx="190" cy="513" rx="26" ry="3.2" fill="#F6E9A0" opacity=".8" filter="url(#gBlur2)"/>
+  <path d="M80 40 L220 40 C226 48 230 56 230 66 L230 486 Q230 500 216 502 L84 502 Q70 500 70 486 L70 66 C70 56 74 48 80 40 Z" fill="#ffffff" fill-opacity=".16"/>
+  <g clip-path="url(#cavity)">
+    <rect x="40" y="290" width="220" height="220" style="fill:var(--liq2,url(#gLem))"/>
+    <rect x="40" y="150" width="220" height="122" style="fill:var(--liq,#6B8A3A)"/>
+    <rect x="40" y="270" width="220" height="140" style="fill:var(--liq,#6B8A3A)" mask="url(#fadeDown)"/>
+    <g filter="url(#cloud)" opacity=".32">
+      <ellipse cx="120" cy="352" rx="38" ry="16" style="fill:var(--liq,#6B8A3A)"/>
+      <ellipse cx="184" cy="372" rx="20" ry="26" style="fill:var(--liq,#6B8A3A)"/>
+      <ellipse cx="150" cy="300" rx="70" ry="22" style="fill:var(--liq,#6B8A3A)"/>
+    </g>
+    <rect x="40" y="150" width="220" height="350" fill="url(#gDepthV)"/>
+    <ellipse cx="150" cy="151" rx="84" ry="7" fill="#9DB561"/>
+    <ellipse cx="146" cy="150" rx="66" ry="4" fill="#D5DEA6" opacity=".65"/>
+    <g class="fizz">
+      <circle cx="96" cy="440" r="1.6" style="animation-delay:0s"/><circle cx="132" cy="446" r="1.1" style="animation-delay:.8s"/>
+      <circle cx="168" cy="440" r="1.4" style="animation-delay:1.6s"/><circle cx="204" cy="444" r="1" style="animation-delay:2.2s"/>
+      <circle cx="114" cy="450" r="1.2" style="animation-delay:2.9s"/><circle cx="186" cy="452" r="1.6" style="animation-delay:.4s"/>
+    </g>
+    <g>
+      <rect x="86" y="118" width="58" height="56" rx="9" fill="url(#gIce)" stroke="#fff" stroke-opacity=".7" stroke-width=".9" transform="rotate(-11 115 146)"/>
+      <path d="M94 128 L130 122" stroke="#fff" stroke-opacity=".8" stroke-width="1.6" stroke-linecap="round" transform="rotate(-11 115 146)"/>
+      <rect x="150" y="112" width="56" height="54" rx="9" fill="url(#gIce)" stroke="#fff" stroke-opacity=".7" stroke-width=".9" transform="rotate(14 178 139)"/>
+      <path d="M158 122 L192 120" stroke="#fff" stroke-opacity=".8" stroke-width="1.6" stroke-linecap="round" transform="rotate(14 178 139)"/>
+      <rect x="122" y="168" width="50" height="46" rx="8" fill="#fff" fill-opacity=".16" stroke="#fff" stroke-opacity=".35" stroke-width=".8" transform="rotate(6 147 191)"/>
+    </g>
+    <rect x="40" y="30" width="220" height="480" fill="url(#gEdges)"/>
+  </g>
+  <g class="can-print">
+    <use href="#emblem" x="116" y="252" width="68" height="68"/>
+    <text x="150" y="346" text-anchor="middle" font-family="Fredoka, Nunito, sans-serif" font-weight="700" font-size="26" fill="#F7F2E4" stroke="#3d5236" stroke-opacity=".25" stroke-width=".6">LeMatcha</text>
+    <text x="150" y="364" text-anchor="middle" font-family="Jost, Futura, sans-serif" font-size="6.6" letter-spacing="2.4" fill="#F7F2E4" fill-opacity=".9">MATCHA LIMONADE</text>
+    <line x1="132" y1="372" x2="168" y2="372" stroke="#F7F2E4" stroke-opacity=".7" stroke-width=".6"/>
+    <text x="150" y="384" text-anchor="middle" font-family="Jost, Futura, sans-serif" font-size="5.6" letter-spacing="2" fill="#F7F2E4" fill-opacity=".8">330 ML · UJI · SICILIA</text>
+  </g>
+  <ellipse cx="150" cy="490" rx="74" ry="8" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1"/>
+  <ellipse cx="150" cy="486" rx="44" ry="4" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="1"/>
+  <path d="M74 74 L83 74 L83 484 L75 484 Z" fill="url(#gHiL)"/>
+  <path d="M88 76 L91 76 L91 470 L88 470 Z" fill="#fff" opacity=".3"/>
+  <path d="M200 80 L210 80 L210 460 L200 460 Z" fill="#fff" opacity=".16" filter="url(#gBlur2)"/>
+  <path d="M220 72 L227 72 L227 486 L220 486 Z" fill="#0b1608" opacity=".14"/>
+  <path d="M229.5 70 L229.5 486" stroke="#fff" stroke-opacity=".6" stroke-width="1"/>
+  <path d="M71 84 Q150 94 229 84" stroke="#fff" stroke-opacity=".35" stroke-width="1" fill="none"/>
+  <g id="drops"></g>
+  <path d="M80 40 L220 40 C226 48 230 56 230 66 L230 486 Q230 500 216 502 L84 502 Q70 500 70 486 L70 66 C70 56 74 48 80 40 Z" fill="none" stroke="#16241C" stroke-opacity=".24" stroke-width=".8"/>
+  <ellipse cx="150" cy="41" rx="70" ry="8" fill="none" stroke="#fff" stroke-opacity=".85" stroke-width="1.4"/>
+  <g>
+    <path d="M79 40 L221 40 L221 47 Q150 57 79 47 Z" fill="url(#gAlu)"/>
+    <ellipse cx="150" cy="40" rx="71" ry="9" fill="url(#gAlu)"/>
+    <ellipse cx="150" cy="40.5" rx="62" ry="7.2" fill="none" stroke="#7f8583" stroke-width=".9"/>
+    <ellipse cx="150" cy="41" rx="57" ry="6.2" fill="url(#gAlu2)"/>
+    <path d="M134 38.5 Q150 32 168 38.5 Q170 44.5 152 45.5 Q136 45.5 134 38.5 Z" fill="#d2d5d3" stroke="#858b89" stroke-width=".8"/>
+    <ellipse cx="160" cy="39.5" rx="4.5" ry="2" fill="#9a9f9d"/>
+    <circle cx="146" cy="40" r="1.8" fill="#a5aaa8" stroke="#7f8583" stroke-width=".5"/>
+    <path d="M86 38 Q150 30 214 38" stroke="#fff" stroke-opacity=".7" stroke-width="1" fill="none"/>
+  </g>
+</symbol>
+
+    <linearGradient id="glassSheen" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity=".28"/>
+      <stop offset=".18" stop-color="#fff" stop-opacity=".0"/>
+      <stop offset=".28" stop-color="#fff" stop-opacity=".38"/>
+      <stop offset=".34" stop-color="#fff" stop-opacity="0"/>
+      <stop offset=".8" stop-color="#000" stop-opacity=".05"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".32"/>
+    </linearGradient>
+    <linearGradient id="brass" x1="0" x2="1">
+      <stop offset="0" stop-color="#7d6b43"/><stop offset=".35" stop-color="#d9c79b"/><stop offset=".55" stop-color="#a8956a"/><stop offset="1" stop-color="#5f5132"/>
+    </linearGradient>
+    <linearGradient id="depth" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".18"/><stop offset=".5" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".35"/>
+    </linearGradient>
+    <clipPath id="bodyClip"><path d="M92 92 L128 92 L128 150 C128 176 172 186 172 232 L172 520 C172 536 160 546 144 546 L76 546 C60 546 48 536 48 520 L48 232 C48 186 92 176 92 150 Z"/></clipPath>
+  </defs>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="LeMatcha Startseite"><svg viewBox="0 -10 240 240" aria-hidden="true"><use href="#emblem"/></svg><span class="wm">LeMatcha</span></a>
+    <nav class="nav-mid label" aria-label="Hauptnavigation">
+      <a class="u" href="#flasche">Die Dose</a>
+      <a class="u" href="#herkunft">Herkunft</a>
+      <a class="u" href="#kollektion">Kollektion</a>
+    </nav>
+    <div class="nav-r"><a class="link label" href="#reservieren">Reservieren</a></div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" data-dark>
+    <div class="hero-bg" id="heroBg"><canvas id="silk" aria-hidden="true"></canvas></div>
+    <div class="hero-veil"></div>
+    <div class="hero-em" id="heroEm" data-hero aria-hidden="true"><div class="glow"></div><div class="in" id="heroEmIn"><svg viewBox="0 -10 240 240"><use href="#emblem"/></svg></div></div>
+    <div class="wrap hero-c">
+      <div class="hero-title">
+        <p class="label fade" data-hero style="--d:.5s">LeMatcha · Edition N°1</p>
+        <h1 class="split" data-hero>Die Ruhe <em>des Grüns.</em></h1>
+      </div>
+      <div class="hero-foot">
+        <p class="fade" data-hero style="--d:.9s">Steingemahlener Matcha aus Uji, kaltgepresste Zitronen aus Sizilien und eine feine Perlage. Eine Limonade, die man langsam trinkt.</p>
+        <div class="scroll-cue label fade" data-hero style="--d:1.1s"><i></i>Entdecken</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="manifest wrap">
+    <div class="manifest-grid">
+      <p class="label fade" style="color:var(--muted)">Philosophie</p>
+      <div>
+        <p class="big split">Wir haben dem Matcha nichts hinzugefügt, was er nicht braucht. Nur Zitrone, ein wenig Agave und Kälte. Was bleibt, ist <em>Klarheit.</em></p>
+        <div class="sig fade" style="--d:.4s"><div class="rule" style="--d:.5s"></div><span class="label">Abgefüllt in kleinen Chargen</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="product" id="flasche">
+    <div class="product-track" id="pTrack">
+      <div class="product-sticky">
+        <div class="ghost-word" id="ghost" aria-hidden="true">LeMatcha · 抹茶 · LeMatcha</div>
+        <div class="pstage" id="pStage">
+          <svg class="plines" viewBox="0 0 1200 800" preserveAspectRatio="none" aria-hidden="true">
+            <path pathLength="1" d="M260 272 L520 272 L536 280"/><circle r="3" cx="536" cy="280"/>
+            <path pathLength="1" d="M940 344 L760 344 L650 379"/><circle r="3" cx="650" cy="379"/>
+            <path pathLength="1" d="M260 488 L470 488 L548 470"/><circle r="3" cx="548" cy="470"/>
+            <path pathLength="1" d="M940 664 L760 664 L672 690"/><circle r="3" cx="672" cy="690"/>
+          </svg>
+          <div class="pbottle" id="pBottle"><svg id="scene" viewBox="-170 -240 640 800" role="img" aria-label="Matcha wird in einer Schale aufgeschlagen, in eine durchsichtige Dose mit Zitronenlimonade gegossen und mit einem Aluminiumdeckel verschlossen">
+  <ellipse cx="150" cy="508" rx="96" ry="10" fill="#16241C" opacity=".32" filter="url(#gBlur6)"/>
+  <ellipse cx="196" cy="514" rx="96" ry="15" fill="url(#gCaustic)" filter="url(#gBlur2)"/>
+  <ellipse cx="190" cy="513" rx="26" ry="3.2" fill="#F6E9A0" opacity=".8" filter="url(#gBlur2)"/>
+  <path d="M80 40 L220 40 C226 48 230 56 230 66 L230 486 Q230 500 216 502 L84 502 Q70 500 70 486 L70 66 C70 56 74 48 80 40 Z" fill="#ffffff" fill-opacity=".16"/>
+  <g clip-path="url(#cavity)">
+    <rect id="sLem" x="40" y="200" width="220" height="310" fill="url(#gLem)"/>
+    <rect id="sMat" x="40" y="151" width="220" height="0" fill="#6B8A3A"/>
+    <rect id="sFade" x="40" y="151" width="220" height="0" fill="url(#gMatFade)"/>
+    <g id="sCloud" opacity="0"><g filter="url(#cloud)">
+      <ellipse cx="120" cy="352" rx="38" ry="16" fill="#6B8A3A"/>
+      <ellipse cx="184" cy="372" rx="20" ry="26" fill="#6B8A3A"/>
+      <ellipse cx="150" cy="300" rx="70" ry="22" fill="#6B8A3A"/>
+    </g></g>
+    <rect x="40" y="150" width="220" height="350" fill="url(#gDepthV)"/>
+    <g id="sSurf" transform="translate(0 200)">
+      <ellipse cx="150" cy="1" rx="84" ry="7" fill="#F2EAB8"/>
+      <g id="sSurfM" opacity="0"><ellipse cx="150" cy="1" rx="84" ry="7" fill="#9DB561"/><ellipse cx="146" cy="0" rx="66" ry="4" fill="#D5DEA6" opacity=".65"/></g>
+      <g id="splash" opacity="0" fill="none" stroke="#fff" stroke-opacity=".7"><ellipse id="spl1" cx="104" cy="1" rx="10" ry="2.5"/><ellipse id="spl2" cx="104" cy="1" rx="20" ry="4"/></g>
+    </g>
+    <g class="fizz">
+      <circle cx="96" cy="440" r="1.6" style="animation-delay:0s"/><circle cx="132" cy="446" r="1.1" style="animation-delay:.8s"/>
+      <circle cx="168" cy="440" r="1.4" style="animation-delay:1.6s"/><circle cx="204" cy="444" r="1" style="animation-delay:2.2s"/>
+      <circle cx="114" cy="450" r="1.2" style="animation-delay:2.9s"/><circle cx="186" cy="452" r="1.6" style="animation-delay:.4s"/>
+    </g>
+    <g id="sIce" transform="translate(0 49)">
+      <rect x="86" y="118" width="58" height="56" rx="9" fill="url(#gIce)" stroke="#fff" stroke-opacity=".7" stroke-width=".9" transform="rotate(-11 115 146)"/>
+      <path d="M94 128 L130 122" stroke="#fff" stroke-opacity=".8" stroke-width="1.6" stroke-linecap="round" transform="rotate(-11 115 146)"/>
+      <rect x="150" y="112" width="56" height="54" rx="9" fill="url(#gIce)" stroke="#fff" stroke-opacity=".7" stroke-width=".9" transform="rotate(14 178 139)"/>
+      <path d="M158 122 L192 120" stroke="#fff" stroke-opacity=".8" stroke-width="1.6" stroke-linecap="round" transform="rotate(14 178 139)"/>
+      <rect x="122" y="168" width="50" height="46" rx="8" fill="#fff" fill-opacity=".16" stroke="#fff" stroke-opacity=".35" stroke-width=".8" transform="rotate(6 147 191)"/>
+    </g>
+    <rect x="40" y="30" width="220" height="480" fill="url(#gEdges)"/>
+  </g>
+  <g class="can-print">
+    <use href="#emblem" x="116" y="252" width="68" height="68"/>
+    <text x="150" y="346" text-anchor="middle" font-family="Fredoka, Nunito, sans-serif" font-weight="700" font-size="26" fill="#F7F2E4" stroke="#3d5236" stroke-opacity=".25" stroke-width=".6">LeMatcha</text>
+    <text x="150" y="364" text-anchor="middle" font-family="Jost, Futura, sans-serif" font-size="6.6" letter-spacing="2.4" fill="#F7F2E4" fill-opacity=".9">MATCHA LIMONADE</text>
+    <line x1="132" y1="372" x2="168" y2="372" stroke="#F7F2E4" stroke-opacity=".7" stroke-width=".6"/>
+    <text x="150" y="384" text-anchor="middle" font-family="Jost, Futura, sans-serif" font-size="5.6" letter-spacing="2" fill="#F7F2E4" fill-opacity=".8">330 ML · UJI · SICILIA</text>
+  </g>
+  <ellipse cx="150" cy="490" rx="74" ry="8" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1"/>
+  <ellipse cx="150" cy="486" rx="44" ry="4" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="1"/>
+  <path d="M74 74 L83 74 L83 484 L75 484 Z" fill="url(#gHiL)"/>
+  <path d="M88 76 L91 76 L91 470 L88 470 Z" fill="#fff" opacity=".3"/>
+  <path d="M200 80 L210 80 L210 460 L200 460 Z" fill="#fff" opacity=".16" filter="url(#gBlur2)"/>
+  <path d="M220 72 L227 72 L227 486 L220 486 Z" fill="#0b1608" opacity=".14"/>
+  <path d="M229.5 70 L229.5 486" stroke="#fff" stroke-opacity=".6" stroke-width="1"/>
+  <path d="M71 84 Q150 94 229 84" stroke="#fff" stroke-opacity=".35" stroke-width="1" fill="none"/>
+  <g id="drops2"></g>
+  <path d="M80 40 L220 40 C226 48 230 56 230 66 L230 486 Q230 500 216 502 L84 502 Q70 500 70 486 L70 66 C70 56 74 48 80 40 Z" fill="none" stroke="#16241C" stroke-opacity=".24" stroke-width=".8"/>
+  <ellipse cx="150" cy="41" rx="70" ry="8" fill="none" stroke="#fff" stroke-opacity=".85" stroke-width="1.4"/>
+  <g id="sLid">
+    <path d="M79 40 L221 40 L221 47 Q150 57 79 47 Z" fill="url(#gAlu)"/>
+    <ellipse cx="150" cy="40" rx="71" ry="9" fill="url(#gAlu)"/>
+    <ellipse cx="150" cy="40.5" rx="62" ry="7.2" fill="none" stroke="#7f8583" stroke-width=".9"/>
+    <ellipse cx="150" cy="41" rx="57" ry="6.2" fill="url(#gAlu2)"/>
+    <path d="M134 38.5 Q150 32 168 38.5 Q170 44.5 152 45.5 Q136 45.5 134 38.5 Z" fill="#d2d5d3" stroke="#858b89" stroke-width=".8"/>
+    <ellipse cx="160" cy="39.5" rx="4.5" ry="2" fill="#9a9f9d"/>
+    <circle cx="146" cy="40" r="1.8" fill="#a5aaa8" stroke="#7f8583" stroke-width=".5"/>
+    <path d="M86 38 Q150 30 214 38" stroke="#fff" stroke-opacity=".7" stroke-width="1" fill="none"/>
+  </g>
+
+  <g id="bowl" transform="translate(-60 -70)">
+    <ellipse rx="78" ry="16" fill="#1c1d1a"/>
+    <g id="bLiq"><ellipse id="bSurf" cx="0" cy="3" rx="71" ry="12" fill="#43591f"/>
+    <g id="bFoam" opacity="0" fill="#B5CC79"><circle cx="-31.4" cy="3.8" r="1.8"/><circle cx="12.5" cy="5.3" r="1.1"/><circle cx="-58.4" cy="9.1" r="1.6"/><circle cx="-31.9" cy="11.9" r="2.0"/><circle cx="40.4" cy="2.6" r="2.4"/><circle cx="-41.9" cy="5.4" r="2.9"/><circle cx="2.8" cy="7.3" r="2.5"/><circle cx="-52.3" cy="7.6" r="2.3"/><circle cx="-23.8" cy="-5.4" r="2.9"/><circle cx="-3.3" cy="6.9" r="2.9"/><circle cx="25.7" cy="10.6" r="1.9"/><circle cx="36.1" cy="2.0" r="3.1"/><circle cx="45.5" cy="-4.2" r="1.3"/><circle cx="-34.0" cy="11.4" r="2.0"/><circle cx="15.2" cy="-0.6" r="2.1"/><circle cx="-13.7" cy="0.3" r="2.3"/><circle cx="10.1" cy="10.3" r="2.5"/><circle cx="51.5" cy="9.4" r="3.2"/><circle cx="20.6" cy="-3.1" r="2.9"/><circle cx="55.8" cy="10.3" r="2.3"/><circle cx="25.7" cy="-2.2" r="2.8"/><circle cx="8.8" cy="-0.9" r="1.1"/><circle cx="42.5" cy="11.8" r="1.2"/><circle cx="36.1" cy="1.4" r="1.3"/><circle cx="-24.7" cy="7.8" r="2.9"/><circle cx="-54.7" cy="5.1" r="1.1"/><circle cx="26.2" cy="-0.0" r="2.9"/><circle cx="57.7" cy="3.1" r="3.2"/><circle cx="-22.8" cy="-4.6" r="2.3"/><circle cx="-56.2" cy="-2.4" r="1.9"/><circle cx="13.3" cy="-3.2" r="1.1"/><circle cx="44.1" cy="-0.4" r="3.1"/><circle cx="47.6" cy="0.8" r="2.0"/><circle cx="2.4" cy="5.6" r="2.3"/><circle cx="7.1" cy="5.2" r="3.1"/><circle cx="0.8" cy="1.8" r="2.6"/><circle cx="-31.5" cy="-0.6" r="3.2"/><circle cx="2.5" cy="3.9" r="1.0"/><circle cx="-10.2" cy="4.4" r="1.0"/><circle cx="13.9" cy="5.4" r="1.1"/><circle cx="15.3" cy="2.4" r="2.5"/><circle cx="-17.7" cy="6.7" r="2.6"/><circle cx="-57.3" cy="-4.9" r="2.5"/><circle cx="55.6" cy="-1.5" r="2.0"/><circle cx="11.1" cy="-0.2" r="1.8"/><circle cx="-22.5" cy="0.6" r="2.3"/><circle cx="-24.0" cy="0.8" r="2.7"/><circle cx="-56.8" cy="4.2" r="2.6"/><circle cx="-22.8" cy="-2.0" r="2.8"/><circle cx="-31.4" cy="-2.6" r="2.0"/><circle cx="23.8" cy="-4.2" r="1.7"/><circle cx="-19.9" cy="9.0" r="2.0"/><circle cx="42.7" cy="-3.0" r="1.7"/><circle cx="18.0" cy="9.9" r="2.0"/><circle cx="-33.0" cy="-3.8" r="2.2"/><circle cx="-37.1" cy="8.5" r="2.8"/><circle cx="-38.0" cy="-1.0" r="2.8"/><circle cx="17.0" cy="8.5" r="1.8"/><circle cx="-44.4" cy="-0.7" r="2.7"/><circle cx="-27.5" cy="0.2" r="1.9"/></g></g>
+    <g id="whisk" opacity="0">
+      <rect x="-8" y="-176" width="16" height="86" rx="6" fill="url(#gBamboo)"/>
+      <path d="M-8 -138 L8 -138" stroke="#9c7f45" stroke-width="1.2"/>
+      <path d="M-8 -176 L8 -176" stroke="#9c7f45" stroke-width="1"/>
+      <path d="M-6.6 -92 C-7.9 -60 -34.8 -40 -34.8 -14 Q-34.8 2 -27.6 8 M-6.1 -92 C-7.3 -60 -31.9 -40 -31.9 -14 Q-31.9 2 -25.3 8 M-5.5 -92 C-6.6 -60 -29.0 -40 -29.0 -14 Q-29.0 2 -23.0 8 M-5.0 -92 C-5.9 -60 -26.1 -40 -26.1 -14 Q-26.1 2 -20.7 8 M-4.4 -92 C-5.3 -60 -23.2 -40 -23.2 -14 Q-23.2 2 -18.4 8 M-3.9 -92 C-4.6 -60 -20.3 -40 -20.3 -14 Q-20.3 2 -16.1 8 M-3.3 -92 C-4.0 -60 -17.4 -40 -17.4 -14 Q-17.4 2 -13.8 8 M-2.8 -92 C-3.3 -60 -14.5 -40 -14.5 -14 Q-14.5 2 -11.5 8 M-2.2 -92 C-2.6 -60 -11.6 -40 -11.6 -14 Q-11.6 2 -9.2 8 M-1.7 -92 C-2.0 -60 -8.7 -40 -8.7 -14 Q-8.7 2 -6.9 8 M-1.1 -92 C-1.3 -60 -5.8 -40 -5.8 -14 Q-5.8 2 -4.6 8 M-0.6 -92 C-0.7 -60 -2.9 -40 -2.9 -14 Q-2.9 2 -2.3 8 M0.0 -92 C0.0 -60 0.0 -40 0.0 -14 Q0.0 2 0.0 8 M0.6 -92 C0.7 -60 2.9 -40 2.9 -14 Q2.9 2 2.3 8 M1.1 -92 C1.3 -60 5.8 -40 5.8 -14 Q5.8 2 4.6 8 M1.7 -92 C2.0 -60 8.7 -40 8.7 -14 Q8.7 2 6.9 8 M2.2 -92 C2.6 -60 11.6 -40 11.6 -14 Q11.6 2 9.2 8 M2.8 -92 C3.3 -60 14.5 -40 14.5 -14 Q14.5 2 11.5 8 M3.3 -92 C4.0 -60 17.4 -40 17.4 -14 Q17.4 2 13.8 8 M3.9 -92 C4.6 -60 20.3 -40 20.3 -14 Q20.3 2 16.1 8 M4.4 -92 C5.3 -60 23.2 -40 23.2 -14 Q23.2 2 18.4 8 M5.0 -92 C5.9 -60 26.1 -40 26.1 -14 Q26.1 2 20.7 8 M5.5 -92 C6.6 -60 29.0 -40 29.0 -14 Q29.0 2 23.0 8 M6.1 -92 C7.3 -60 31.9 -40 31.9 -14 Q31.9 2 25.3 8 M6.6 -92 C7.9 -60 34.8 -40 34.8 -14 Q34.8 2 27.6 8" fill="none" stroke="#E6D3A2" stroke-width="1.1" stroke-linecap="round"/>
+      <path d="M-2.8 -90 C-4.2 -66 -11.2 -46 -12.3 -26 Q-14.6 -16 -6.7 -10 M-2.4 -90 C-3.6 -66 -9.6 -46 -10.6 -26 Q-12.5 -16 -5.8 -10 M-2.0 -90 C-3.0 -66 -8.0 -46 -8.8 -26 Q-10.4 -16 -4.8 -10 M-1.6 -90 C-2.4 -66 -6.4 -46 -7.0 -26 Q-8.3 -16 -3.8 -10 M-1.2 -90 C-1.8 -66 -4.8 -46 -5.3 -26 Q-6.2 -16 -2.9 -10 M-0.8 -90 C-1.2 -66 -3.2 -46 -3.5 -26 Q-4.2 -16 -1.9 -10 M-0.4 -90 C-0.6 -66 -1.6 -46 -1.8 -26 Q-2.1 -16 -1.0 -10 M0.0 -90 C0.0 -66 0.0 -46 0.0 -26 Q0.0 -16 0.0 -10 M0.4 -90 C0.6 -66 1.6 -46 1.8 -26 Q2.1 -16 1.0 -10 M0.8 -90 C1.2 -66 3.2 -46 3.5 -26 Q4.2 -16 1.9 -10 M1.2 -90 C1.8 -66 4.8 -46 5.3 -26 Q6.2 -16 2.9 -10 M1.6 -90 C2.4 -66 6.4 -46 7.0 -26 Q8.3 -16 3.8 -10 M2.0 -90 C3.0 -66 8.0 -46 8.8 -26 Q10.4 -16 4.8 -10 M2.4 -90 C3.6 -66 9.6 -46 10.6 -26 Q12.5 -16 5.8 -10 M2.8 -90 C4.2 -66 11.2 -46 12.3 -26 Q14.6 -16 6.7 -10" fill="none" stroke="#CDB57E" stroke-width="1" stroke-linecap="round"/>
+    </g>
+    <path d="M-78 0 C-78 58 -42 88 0 88 C42 88 78 58 78 0 C60 12 30 16 0 16 C-30 16 -60 12 -78 0 Z" fill="url(#gBowl)"/>
+    <path d="M-78 0 C-60 12 -30 16 0 16 C30 16 60 12 78 0" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="1.4"/>
+    <path d="M-34 15 L-28 30 L-36 44 L-27 62 L-30 80" fill="none" stroke="#D8BC63" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M-62 22 C-58 46 -44 66 -24 78" fill="none" stroke="#fff" stroke-opacity=".12" stroke-width="5" stroke-linecap="round"/>
+    <rect x="-26" y="84" width="52" height="10" rx="3" fill="#26261f"/>
+  </g>
+  <path id="stream" d="M0 0" fill="none" stroke="url(#gStream)" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+</svg></div>
+          <div class="pour-steps" id="pourSteps" aria-live="polite">
+            <ol><li class="on">I. Aufschlagen</li><li>II. Eingießen</li><li>III. Verschließen</li></ol>
+            <div class="bar"><i id="pourBar"></i></div>
+            <h3 id="stepTitle">Aufschlagen</h3>
+            <p id="stepText">2 g Matcha und 60 ml kaltes Wasser, mit dem Bambusbesen in schnellen Zügen schaumig geschlagen.</p>
+          </div>
+          <button class="replay" id="replay" type="button" hidden>↻ Noch einmal ansehen</button>
+          <div class="anno a1"><span class="label">Deckel</span><h3>Aluminium, frisch versiegelt</h3><p>Direkt nach dem Abfüllen verschlossen, damit die Perlage bleibt.</p></div>
+          <div class="anno a2"><span class="label">Eis</span><h3>Klareis, von Hand geschnitten</h3><p>Schmilzt langsam und verwässert nichts.</p></div>
+          <div class="anno a3"><span class="label">Matcha</span><h3>2 g Tencha aus Uji</h3><p>Sinkt langsam in die Limonade und färbt sie grün.</p></div>
+          <div class="anno a4"><span class="label">Dose</span><h3>Klar wie Glas, leicht wie Alu</h3><p>Durchsichtig, damit man sieht, was drin ist. Vollständig recycelbar.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ingr" id="herkunft" data-dark>
+    <div class="wrap">
+        <div class="ingr-head">
+          <h2 class="split">Drei Zutaten. <em>Keine weiteren.</em></h2>
+          <p class="label fade">Herkunft</p>
+        </div>
+        <div class="trio">
+          <article class="panel" style="--d:0s">
+            <div class="plate"><svg viewBox="0 0 200 200" aria-hidden="true">
+              <path class="draw" pathLength="1" d="M100 186 C100 140 100 90 104 22"/>
+              <path class="draw" pathLength="1" style="--pd:.3s" d="M102 70 C70 62 44 40 40 14 C70 18 96 40 102 70 Z"/>
+              <path class="draw" pathLength="1" style="--pd:.45s" d="M102 70 C82 50 58 40 40 14"/>
+              <path class="draw" pathLength="1" style="--pd:.5s" d="M101 112 C134 106 160 84 168 56 C136 58 108 82 101 112 Z"/>
+              <path class="draw" pathLength="1" style="--pd:.65s" d="M101 112 C124 92 146 76 168 56"/>
+              <path class="draw" pathLength="1" style="--pd:.7s" d="M100 150 C72 146 50 128 42 102 C72 104 94 124 100 150 Z"/>
+              <path class="draw" pathLength="1" style="--pd:.85s" d="M100 150 C82 132 62 116 42 102"/>
+            </svg></div>
+            <div class="ptext"><span class="num">I.</span><h3>Matcha</h3><p>Tencha-Blätter aus Uji bei Kyoto. Vor der Ernte werden die Sträucher zwanzig Tage beschattet. Das macht das Grün tiefer und den Geschmack weich.</p>
+              <dl class="specs"><dt>Herkunft</dt><dd>Uji, Präfektur Kyoto</dd><dt>Ernte</dt><dd>Erste Pflückung, Mai</dd><dt>Mahlung</dt><dd>Granitmühle, 40 g pro Stunde</dd></dl></div>
+          </article>
+          <article class="panel" style="--d:.15s">
+            <div class="plate"><svg viewBox="0 0 200 200" aria-hidden="true">
+              <circle class="draw" pathLength="1" cx="100" cy="100" r="78"/>
+              <circle class="draw" pathLength="1" style="--pd:.2s" cx="100" cy="100" r="68"/>
+              <path class="draw" pathLength="1" style="--pd:.5s" d="M100 100 L100 36 M100 100 L155 68 M100 100 L155 132 M100 100 L100 164 M100 100 L45 132 M100 100 L45 68"/>
+              <circle class="draw" pathLength="1" style="--pd:.9s" cx="100" cy="100" r="7"/>
+              <path class="draw" pathLength="1" style="--pd:1s" d="M118 58 C122 62 122 68 118 72 M138 98 C143 99 146 103 145 108 M78 134 C74 132 72 127 74 123"/>
+            </svg></div>
+            <div class="ptext"><span class="num">II.</span><h3>Zitrone</h3><p>Femminello-Zitronen von der Ostküste Siziliens. Dünne Schale, viel Saft, wenig Bitterkeit. Gepresst wird kalt und am Tag der Abfüllung.</p>
+              <dl class="specs"><dt>Herkunft</dt><dd>Siracusa, Sizilien</dd><dt>Sorte</dt><dd>Femminello Siracusano</dd><dt>Anteil</dt><dd>8 % frischer Saft</dd></dl></div>
+          </article>
+          <article class="panel" style="--d:.3s">
+            <div class="plate"><svg viewBox="0 0 200 200" aria-hidden="true">
+              <ellipse class="draw" pathLength="1" cx="100" cy="128" rx="20" ry="5"/>
+              <ellipse class="draw" pathLength="1" style="--pd:.25s" cx="100" cy="128" rx="44" ry="11"/>
+              <ellipse class="draw" pathLength="1" style="--pd:.5s" cx="100" cy="128" rx="70" ry="18"/>
+              <path class="draw" pathLength="1" style="--pd:.1s" d="M100 40 C112 60 120 72 120 84 C120 96 111 104 100 104 C89 104 80 96 80 84 C80 72 88 60 100 40 Z"/>
+            </svg></div>
+            <div class="ptext"><span class="num">III.</span><h3>Wasser</h3><p>Weiches Quellwasser mit wenig Mineralien, damit der Matcha klar bleibt. Es wird auf 4 °C gekühlt und erst danach mit Kohlensäure versetzt.</p>
+              <dl class="specs"><dt>Härte</dt><dd>Weich, 3 °dH</dd><dt>Temperatur</dt><dd>4 °C bei Abfüllung</dd><dt>Perlage</dt><dd>Fein, 4 g CO₂ pro Liter</dd></dl></div>
+          </article>
+        </div>
+    </div>
+  </section>
+
+  <section class="coll wrap" id="kollektion">
+    <div class="coll-head">
+      <h2 class="split">Die <em>Kollektion</em></h2>
+      <p class="fade">Jede Sorte beginnt mit demselben Matcha. Die Zitrusnote macht den Unterschied.</p>
+    </div>
+    <ul class="rows" id="rows">
+      <li class="rowi" data-liq="#6B8A3A" data-bg="#E3D9C4"><div class="rule"></div><a href="#reservieren"><span class="no">N°1</span><h3>Original</h3><span class="notes">Matcha · Zitrone · Agave</span><span class="pr">6,50 €</span></a></li>
+      <li class="rowi" data-liq="#D9BE3E" data-bg="#E8E0C2"><div class="rule" style="--d:.15s"></div><a href="#reservieren"><span class="no">N°2</span><h3>Yuzu</h3><span class="notes">Matcha · Yuzu aus Kōchi</span><span class="pr">7,50 €</span></a></li>
+      <li class="rowi" data-liq="#5E8467" data-bg="#DCE0CF"><div class="rule" style="--d:.3s"></div><a href="#reservieren"><span class="no">N°3</span><h3>Minze <em>&amp;</em> Gurke</h3><span class="notes">Matcha · Nanaminze · Gurke</span><span class="pr">7,00 €</span></a></li>
+      <li class="rowi"><div class="rule" style="--d:.45s"></div></li>
+    </ul>
+  </section>
+  <div class="peek" id="peek" aria-hidden="true"><svg viewBox="0 0 300 560"><use href="#glass"/></svg></div>
+
+  <section class="figs">
+    <div class="wrap figs-grid">
+      <div class="fig fade"><b data-n="32">32<small>mg</small></b><span>Koffein pro Dose</span></div>
+      <div class="fig fade" style="--d:.1s"><b data-n="24">24<small>mg</small></b><span>L-Theanin für ruhige Konzentration</span></div>
+      <div class="fig fade" style="--d:.2s"><b data-n="38">38<small>kcal</small></b><span>pro Dose, mit wenig Agave</span></div>
+      <div class="fig fade" style="--d:.3s"><b data-n="20">20<small>Tage</small></b><span>beschattet vor der Ernte</span></div>
+    </div>
+  </section>
+
+  <section class="reserve" id="reservieren" data-dark>
+    <div class="wrap">
+      <div class="reserve-grid">
+        <h2 class="split">Die erste Edition <em>reservieren.</em></h2>
+        <form id="form" class="fade" novalidate>
+          <p class="lead">Edition N°1 erscheint in <b>1.200 nummerierten Kisten</b> zu je sechs Dosen. Trag dich ein, und wir schreiben dir, bevor der Verkauf beginnt.</p>
+          <label class="label" for="email">E-Mail-Adresse</label>
+          <div class="field"><input id="email" type="email" placeholder="name@beispiel.de" autocomplete="email"><button type="submit">Eintragen <span class="arr">→</span></button></div>
+          <p class="msg" id="msg" aria-live="polite"></p>
+          <p class="concept-note">LeMatcha ist ein fiktives Marken- und Website-Konzept von LL Collective Studio. Es gibt kein reales Produkt und keinen Verkauf. Die Eintragung speichert und versendet nichts.</p>
+        </form>
+      </div>
+      <div class="wordmark" id="wordmark" aria-hidden="true"><svg class="wm-em" viewBox="0 -10 240 240"><use href="#emblem"/></svg><div class="wm-t split">LeMatcha</div></div>
+      <div class="foot"><span>LeMatcha · Matcha Limonade · Edition N°1 · Ein Konzept von <strong>LL Collective Studio</strong></span><nav aria-label="Footer"><a href="#flasche">Die Dose</a><a href="#herkunft">Herkunft</a><a href="#kollektion">Kollektion</a><a href="#top">Nach oben</a></nav></div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = matchMedia('(pointer:fine)').matches;
+  var $ = function(s,c){return (c||document).querySelector(s)}, $$ = function(s,c){return [].slice.call((c||document).querySelectorAll(s))};
+  var clamp = function(v,a,b){return Math.max(a===undefined?0:a,Math.min(b===undefined?1:b,v))};
+  var vh = innerHeight, vw = innerWidth;
+
+  /* condensation on the glass */
+  (function(){
+    var ns = 'http://www.w3.org/2000/svg', seed = 7;
+    var rnd = function(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+    ['drops','drops2'].forEach(function(id){ var g = document.getElementById(id); if (!g) return; seed = 7;
+    for (var i = 0; i < 70; i++){
+      var y = 170 + rnd()*280, t = 0, l = 80, r = 220, x = l + rnd()*(r - l), rr = .6 + rnd()*1.8;
+      var e = document.createElementNS(ns, 'ellipse'); e.setAttribute('cx', x); e.setAttribute('cy', y); e.setAttribute('rx', rr); e.setAttribute('ry', rr*1.25); e.setAttribute('fill', 'rgba(255,255,255,.38)'); g.appendChild(e);
+      var c = document.createElementNS(ns, 'circle'); c.setAttribute('cx', x - rr*.3); c.setAttribute('cy', y - rr*.4); c.setAttribute('r', rr*.35); c.setAttribute('fill', 'rgba(255,255,255,.9)'); g.appendChild(c);
+    }
+    });
+  })();
+
+  /* split text into masked words (keeps <em>) */
+  $$('.split').forEach(function(el){
+    var i = 0;
+    (function walk(node){
+      [].slice.call(node.childNodes).forEach(function(n){
+        if (n.nodeType === 3){
+          var frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(function(t){
+            if (!t) return;
+            if (/^\s+$/.test(t)){ frag.appendChild(document.createTextNode(' ')); return; }
+            var w = document.createElement('span'); w.className = 'w';
+            var s = document.createElement('span'); s.textContent = t; s.style.setProperty('--i', i++);
+            w.appendChild(s); frag.appendChild(w);
+          });
+          n.parentNode.replaceChild(frag, n);
+        } else if (n.nodeType === 1) walk(n);
+      });
+    })(el);
+  });
+
+  /* reveal on scroll */
+  var revealables = $$('.split:not([data-hero]), .fade:not([data-hero]), .rule, .panel, .wordmark');
+  if ('IntersectionObserver' in window && !reduce){
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {rootMargin:'0px 0px -10% 0px'});
+    revealables.forEach(function(el){ io.observe(el); });
+  } else revealables.forEach(function(el){ el.classList.add('in'); });
+
+  /* preloader, then hero */
+  var loader = $('#loader');
+  function startHero(){ $$('[data-hero]').forEach(function(el){ el.classList.add('in'); }); }
+  if (reduce){ loader.remove(); startHero(); }
+  else setTimeout(function(){ loader.classList.add('out'); setTimeout(startHero, 300); setTimeout(function(){ loader.remove(); }, 1400); }, 1500);
+
+  /* silk shader */
+  var cv = $('#silk'), gl = null, uRes, uT, uM, glReady = false;
+  try { gl = cv.getContext('webgl', {antialias:false, alpha:false, powerPreference:'low-power'}); } catch(e){}
+  if (gl){
+    var vs = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+    var fs = [
+      'precision mediump float;uniform vec2 r;uniform float t;uniform vec2 m;',
+      'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
+      'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}',
+      'float fbm(vec2 p){float v=0.,a=.5;mat2 R=mat2(.8,.6,-.6,.8);for(int i=0;i<5;i++){v+=a*n(p);p=R*p*2.03;a*=.5;}return v;}',
+      'void main(){vec2 uv=gl_FragCoord.xy/r;vec2 p=(gl_FragCoord.xy-.5*r)/r.y;p+=m*.12;float T=t*.035;',
+      'vec2 q=vec2(fbm(p*1.3+T),fbm(p*1.3+vec2(5.2,1.3)-T));',
+      'vec2 w=vec2(fbm(p*1.3+2.6*q+vec2(1.7,9.2)+T*1.4),fbm(p*1.3+2.6*q+vec2(8.3,2.8)-T));',
+      'float f=fbm(p*1.3+2.8*w);',
+      'vec3 deep=vec3(.07,.12,.09),moss=vec3(.20,.29,.18),matcha=vec3(.42,.54,.23),cream=vec3(.95,.87,.55);',
+      'vec3 c=mix(deep,moss,smoothstep(.25,.65,f));',
+      'c=mix(c,matcha,smoothstep(.5,.95,f*length(w)*1.25));',
+      'float sheen=pow(smoothstep(.55,1.,f*1.12),3.);c=mix(c,cream,sheen*.38);',
+      'c*=1.-.55*pow(length(uv-vec2(.55,.5)),1.6);',
+      'c+=(h(gl_FragCoord.xy+fract(t))-.5)*.03;',
+      'gl_FragColor=vec4(c,1.);}'
+    ].join('\n');
+    var sh = function(type, src){ var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null; };
+    var v = sh(gl.VERTEX_SHADER, vs), f = sh(gl.FRAGMENT_SHADER, fs);
+    if (v && f){
+      var pr = gl.createProgram(); gl.attachShader(pr, v); gl.attachShader(pr, f); gl.linkProgram(pr);
+      if (gl.getProgramParameter(pr, gl.LINK_STATUS)){
+        gl.useProgram(pr);
+        gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,3,-1,-1,3]), gl.STATIC_DRAW);
+        var loc = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+        uRes = gl.getUniformLocation(pr, 'r'); uT = gl.getUniformLocation(pr, 't'); uM = gl.getUniformLocation(pr, 'm');
+        glReady = true;
+      }
+    }
+  }
+  function sizeSilk(){
+    var s = Math.min(devicePixelRatio || 1, 1.25) * .75;
+    cv.width = Math.max(1, Math.round(cv.clientWidth * s)); cv.height = Math.max(1, Math.round(cv.clientHeight * s));
+    if (glReady) gl.viewport(0, 0, cv.width, cv.height);
+  }
+
+  /* pointer + cursor */
+  var mx = 0, my = 0, smx = 0, smy = 0, px = vw/2, py = vh/2, cx = px, cy = py;
+  var cursor = $('#cursor');
+  addEventListener('pointermove', function(e){ mx = e.clientX/vw - .5; my = e.clientY/vh - .5; px = e.clientX; py = e.clientY; if (fine) cursor.style.opacity = 1; });
+  $$('a,button').forEach(function(el){
+    el.addEventListener('mouseenter', function(){ cursor.classList.add('big'); });
+    el.addEventListener('mouseleave', function(){ cursor.classList.remove('big'); });
+  });
+
+  /* collection peek */
+  var peek = $('#peek'), peekX = px, peekY = py;
+  $$('.rowi[data-liq]').forEach(function(row){
+    var a = row.querySelector('a');
+    a.addEventListener('mouseenter', function(){ peek.style.setProperty('--liq', row.dataset.liq); peek.style.background = row.dataset.bg; peek.classList.add('on'); });
+    a.addEventListener('mouseleave', function(){ peek.classList.remove('on'); });
+  });
+
+  /* counters */
+  var counted = false, figs = $('.figs');
+  function countUp(){
+    counted = true;
+    $$('.fig b').forEach(function(b){
+      var n = +b.dataset.n, small = b.querySelector('small').outerHTML, t0 = performance.now();
+      (function step(t){ var k = clamp((t - t0)/2000); var e = 1 - Math.pow(1-k, 4); b.innerHTML = Math.round(n*e) + small; if (k < 1) requestAnimationFrame(step); })(t0);
+    });
+  }
+
+  /* scroll scenes */
+  var nav = $('#nav'), heroBg = $('#heroBg'), hero = $('.hero'), heroEmIn = $('#heroEmIn');
+  var pTrack = $('#pTrack'), pBottle = $('#pBottle'), ghost = $('#ghost'), lines = $$('.plines path'), dots = $$('.plines circle'), annos = $$('.anno');
+  var darks = $$('[data-dark]');
+  var narrow = false;
+
+  /* pour scene: whisk in the bowl, pour into the glass, serve */
+  var S = function(id){ return document.getElementById(id); };
+  var sc = { bowl:S('bowl'), whisk:S('whisk'), bSurf:S('bSurf'), bFoam:S('bFoam'), bLiq:S('bLiq'), stream:S('stream'),
+    lem:S('sLem'), mat:S('sMat'), fade:S('sFade'), cloud:S('sCloud'), surf:S('sSurf'), surfM:S('sSurfM'), ice:S('sIce'),
+    lid:S('sLid'), splash:S('splash'), spl1:S('spl1'), spl2:S('spl2'), steps:$$('#pourSteps li'), bar:S('pourBar'), title:S('stepTitle'), text:S('stepText') };
+  var stepCopy = [
+    ['Aufschlagen', '2 g Matcha und 60 ml kaltes Wasser, mit dem Bambusbesen in schnellen Zügen schaumig geschlagen.'],
+    ['Eingießen', 'Der Matcha fließt langsam über das Eis und legt sich als grüne Schicht auf die Limonade.'],
+    ['Verschließen', 'Der Aluminiumdeckel wird aufgesetzt und sofort versiegelt.']
+  ];
+  var curStep = -1, playT0 = null, DUR = 12000;
+  var stageEl = $('#pStage'), replayBtn = $('#replay');
+  if (reduce) playT0 = -1e9;
+  else if ('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting && playT0 === null) playT0 = performance.now(); }); }, {threshold:.35}).observe(stageEl);
+  } else playT0 = -1e9;
+  replayBtn.addEventListener('click', function(){ playT0 = performance.now(); replayBtn.hidden = true; });
+  function playProgress(now){
+    if (playT0 === null) return 0;
+    var p = clamp((now - playT0)/DUR);
+    if (p >= 1 && replayBtn.hidden && !reduce) replayBtn.hidden = false;
+    return p;
+  }
+  var ease = function(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3)/2; };
+  var seg = function(p, a, b){ return ease(clamp((p - a)/(b - a))); };
+  var mixc = function(a, b, t){ return 'rgb(' + a.map(function(v, i){ return Math.round(v + (b[i] - v)*t); }).join(',') + ')'; };
+  function scene(p, now){
+    var t = (now || 0)/1000;
+    /* whisk */
+    var wIn = seg(p, .02, .1), wOut = seg(p, .34, .42), w = clamp((p - .08)/.26);
+    var amp = reduce ? 0 : 24 * (1 - wOut) * wIn;
+    var wx = Math.sin(t*11) * amp, wr = Math.sin(t*11 + .6) * 7 * (amp/24);
+    sc.whisk.setAttribute('opacity', (wIn * (1 - wOut)).toFixed(3));
+    sc.whisk.setAttribute('transform', 'translate(' + wx.toFixed(1) + ' ' + ((1 - wIn)*-120 - wOut*190 + Math.abs(Math.cos(t*11))*3*(amp/24)).toFixed(1) + ') rotate(' + wr.toFixed(2) + ')');
+    sc.bFoam.setAttribute('opacity', ease(w).toFixed(3));
+    sc.bSurf.setAttribute('fill', mixc([67,89,31], [127,160,70], ease(w)));
+    /* move and tilt the bowl */
+    var mv = seg(p, .4, .5), back = seg(p, .7, .76), away = seg(p, .74, .82), fill = seg(p, .5, .68);
+    var tilt = 58*mv*(1 - back);
+    var bx = -60 + 110*mv + 40*away, by = -70 - 5*mv - 160*away;
+    sc.bowl.setAttribute('transform', 'translate(' + bx.toFixed(1) + ' ' + by.toFixed(1) + ') rotate(' + tilt.toFixed(2) + ')');
+    sc.bowl.setAttribute('opacity', (1 - away).toFixed(3));
+    sc.bLiq.setAttribute('transform', 'scale(' + (1 - .55*fill).toFixed(3) + ')');
+    /* stream: grows from the lip, then lets go of it */
+    var surfaceY = 200 - 49*fill;
+    var rad = tilt*Math.PI/180, lx = bx + 78*Math.cos(rad), ly = by + 78*Math.sin(rad);
+    var ix = 104, wob = reduce ? 0 : Math.sin(t*7)*2.5;
+    var grow = seg(p, .47, .52), let_ = seg(p, .67, .72);
+    sc.stream.setAttribute('d', 'M' + lx.toFixed(1) + ' ' + ly.toFixed(1) + ' Q' + (lx + 18 + wob).toFixed(1) + ' ' + (ly + 40).toFixed(1) + ' ' + ix + ' ' + surfaceY.toFixed(1));
+    sc.stream.setAttribute('stroke-dashoffset', (grow < 1 ? 1 - grow : -let_).toFixed(3));
+    sc.stream.setAttribute('stroke-width', (7 - 3*let_ + (reduce ? 0 : Math.sin(t*9)*.6)).toFixed(2));
+    sc.stream.style.opacity = (grow > 0 && let_ < 1) ? 1 : 0;
+    /* the glass fills */
+    var thick = 118*fill;
+    sc.surf.setAttribute('transform', 'translate(0 ' + surfaceY.toFixed(1) + ')');
+    sc.surfM.setAttribute('opacity', clamp(fill*4).toFixed(3));
+    sc.lem.setAttribute('y', (surfaceY + thick*.6).toFixed(1));
+    sc.mat.setAttribute('y', surfaceY.toFixed(1)); sc.mat.setAttribute('height', thick.toFixed(1));
+    sc.fade.setAttribute('y', (surfaceY + thick - 1).toFixed(1)); sc.fade.setAttribute('height', (140*fill).toFixed(1));
+    sc.cloud.setAttribute('opacity', (.34*fill).toFixed(3));
+    sc.cloud.setAttribute('transform', 'translate(0 ' + (40*(1 - fill)).toFixed(1) + ')');
+    sc.ice.setAttribute('transform', 'translate(0 ' + (surfaceY - 151).toFixed(1) + ')');
+    var pouring = grow > 0 && let_ < 1;
+    sc.splash.setAttribute('opacity', pouring ? .8 : 0);
+    if (pouring && !reduce){ var ph = (t*1.6) % 1; sc.spl1.setAttribute('rx', (8 + ph*26).toFixed(1)); sc.spl1.setAttribute('stroke-opacity', (1 - ph).toFixed(2)); var ph2 = (ph + .5) % 1; sc.spl2.setAttribute('rx', (8 + ph2*26).toFixed(1)); sc.spl2.setAttribute('stroke-opacity', (1 - ph2).toFixed(2)); }
+    /* the lid comes down and seals the can */
+    var ld = seg(p, .76, .84), press = seg(p, .84, .87) * (1 - seg(p, .87, .92));
+    sc.lid.setAttribute('transform', 'translate(0 ' + (-150*(1 - ld) + 2.5*press).toFixed(1) + ')');
+    sc.lid.setAttribute('opacity', clamp(ld*3).toFixed(3));
+    /* captions */
+    var step = p < .4 ? 0 : p < .78 ? 1 : 2;
+    sc.bar.style.transform = 'scaleX(' + clamp(p/.8).toFixed(4) + ')';
+    if (step !== curStep){
+      curStep = step;
+      sc.steps.forEach(function(li, i){ li.classList.toggle('on', i === step); });
+      sc.title.textContent = stepCopy[step][0]; sc.text.textContent = stepCopy[step][1];
+    }
+  }
+  function layout(){
+    vh = innerHeight; vw = innerWidth; narrow = vw <= 820;
+    sizeSilk();
+  }
+  layout();
+  addEventListener('resize', layout);
+
+  var ssy = scrollY;
+  function frame(now){
+    var sy = scrollY;
+    ssy += (sy - ssy) * (reduce ? 1 : .1);
+    smx += (mx - smx) * .04; smy += (my - smy) * .04;
+
+    var onDark = darks.some(function(d){ var r = d.getBoundingClientRect(); return r.top <= 38 && r.bottom >= 38; });
+    nav.classList.toggle('ink', !onDark);
+    nav.classList.toggle('bg', !onDark && sy > vh*.5);
+
+    var hr = hero.getBoundingClientRect();
+    if (hr.bottom > 0){
+      heroBg.style.transform = 'translate3d(0,' + (ssy*.35).toFixed(1) + 'px,0) scale(' + (1 + ssy/vh*.08).toFixed(4) + ')';
+      heroEmIn.style.transform = 'translate3d(' + (smx*-28).toFixed(1) + 'px,' + (smy*-22 - ssy*.18).toFixed(1) + 'px,0) rotate(' + (smx*-4).toFixed(2) + 'deg)';
+      if (glReady){ gl.uniform2f(uRes, cv.width, cv.height); gl.uniform1f(uT, reduce ? 12 : 8 + now/1000); gl.uniform2f(uM, smx, -smy); gl.drawArrays(gl.TRIANGLES, 0, 3); }
+    }
+
+    var pp = playProgress(now);
+    scene(pp, now);
+    if (!narrow){
+      var pr = pTrack.getBoundingClientRect();
+      var p = clamp(-pr.top / (pr.height - vh));
+      ghost.style.transform = 'translate3d(' + (-p * Math.max(0, ghost.scrollWidth - vw*.6)).toFixed(1) + 'px,-50%,0)';
+      lines.forEach(function(l, i){
+        var k = clamp((pp - (.8 + i*.035))/.05);
+        l.style.strokeDashoffset = (1 - k).toFixed(3);
+        dots[i].classList.toggle('on', k > .98);
+        annos[i].classList.toggle('on', k > .55);
+      });
+    } else {
+      annos.forEach(function(a){ if (a.getBoundingClientRect().top < vh*.9) a.classList.add('on'); });
+      var gr = ghost.parentNode.getBoundingClientRect();
+      ghost.style.transform = 'translate3d(' + ((gr.top - vh)*.4).toFixed(1) + 'px,0,0)';
+    }
+
+
+    cx += (px - cx) * .18; cy += (py - cy) * .18;
+    cursor.style.transform = 'translate3d(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px,0)';
+    peekX += (px - peekX) * .09; peekY += (py - peekY) * .09;
+    peek.style.transform = 'translate3d(' + (peekX + 40).toFixed(1) + 'px,' + (peekY - 150).toFixed(1) + 'px,0) rotate(' + ((px - peekX)*.03).toFixed(2) + 'deg)';
+
+    if (!counted && figs.getBoundingClientRect().top < vh*.85) countUp();
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  $('#form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var em = $('#email'), msg = $('#msg');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value)){ msg.textContent = 'Bitte gib eine gültige E-Mail-Adresse ein, zum Beispiel name@beispiel.de.'; em.focus(); return; }
+    msg.textContent = 'Danke! Dies ist eine Konzept-Demo, deine Adresse wurde nicht gespeichert oder versendet.';
+    em.value = '';
+  });
+})();
+</script>
+<a class="ll-demo-badge" href="/#work" hidden>Konzept-Demo · <strong>LL Collective Studio</strong> <span aria-hidden="true">↗</span></a><style>.ll-demo-badge{position:fixed;left:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);z-index:260;display:inline-flex;align-items:center;gap:6px;padding:10px 14px;background:#111110e6;color:#efede7;font:500 12px/1.2 Arial,Helvetica,sans-serif;letter-spacing:.06em;text-decoration:none;border:1px solid #efede733;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}.ll-demo-badge:hover{background:#111110}.ll-demo-badge strong{font-weight:700}</style><script>try{if(window.self===window.top)document.querySelector(".ll-demo-badge").hidden=false}catch(e){}</script></body></html>
