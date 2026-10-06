@@ -617,7 +617,7 @@
 .pill-button.dark{background:#191918;color:#efede7;border-color:#191918}
 .pill-button.dark:hover{background:var(--accent);border-color:var(--accent);color:#151514}
 .hx{position:relative;min-height:100svh;display:flex;flex-direction:column;padding:130px 5.5vw 0;background:#10100f;overflow:hidden;isolation:isolate}
-.hx-glow{position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 55% 60% at 76% 45%,#4a3f3033,transparent 70%),radial-gradient(circle at 10% 100%,#b39f8614,transparent 40%)}
+.hx-silk{position:absolute;inset:0;z-index:-2;display:block;width:100%;height:100%;pointer-events:none;opacity:0;transition:opacity 1.6s ease}.hx-silk.is-live{opacity:1}.hx-glow{position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 55% 60% at 76% 45%,#4a3f3033,transparent 70%),radial-gradient(circle at 10% 100%,#b39f8614,transparent 40%)}
 .hx-grid{flex:1;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:4.5vw;align-items:center;padding:40px 0 70px}
 .hx-kicker{margin:0 0 30px;font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--accent)}
 .hx h1{margin:0 0 32px;font-size:clamp(52px,6.4vw,112px);font-weight:500;line-height:.92;letter-spacing:-.07em}
