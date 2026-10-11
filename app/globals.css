@@ -501,7 +501,7 @@
 .about-v2 .about-visual{background:radial-gradient(circle at var(--light-x,50%) var(--light-y,43%),#464039 0%,#24221f 45%,#111110 100%);transition:background-color .4s ease}
 .about-v2 .about-mark-stage{position:relative;z-index:2;width:min(73%,475px);aspect-ratio:1;display:grid;place-items:center;transform:translate3d(var(--mark-x,0px),var(--mark-y,0px),0);transition:transform .38s cubic-bezier(.2,.7,.2,1);filter:drop-shadow(0 24px 35px #000a)}
 .about-v2 .about-mark-stage .system-mark{width:100%;height:auto;max-height:none;object-fit:contain;filter:drop-shadow(0 8px 10px #0808079c)}
-.about-v2 .about-mark-stage:after{content:'';position:absolute;inset:0;z-index:3;background:url('/brand/ll-chrome.png') center/contain no-repeat;filter:brightness(1.75);opacity:.52;mask-image:radial-gradient(circle at var(--light-x,50%) var(--light-y,43%),#000 0%,transparent 38%);pointer-events:none}
+.about-v2 .about-mark-stage:after{content:'';position:absolute;inset:0;z-index:3;background:url('/brand/ll-logo.svg') center/contain no-repeat;opacity:.35;mask-image:radial-gradient(circle at var(--light-x,50%) var(--light-y,43%),#000 0%,transparent 38%);pointer-events:none}
 @media(max-width:700px){.about-v2 .about-mark-stage{width:76%}}
 @media(prefers-reduced-motion:reduce){.about-v2 .about-mark-stage{transform:none;transition:none}.about-v2 .about-mark-stage:after{display:none}}
 
@@ -509,7 +509,7 @@
 .site-header .menu-trigger,.menu-top .menu-trigger{border:1px solid #e9e0d244;border-radius:100px;padding:12px 17px;transition:color .3s,border-color .3s,background .3s}
 .site-header .menu-trigger:hover,.menu-top .menu-trigger:hover{background:#d5c7b018;border-color:#d4bea2;color:#f6eadb}
 .menu-overlay{isolation:isolate;background:radial-gradient(ellipse at 83% 52%,#3a322946 0%,transparent 44%),#111110}
-.menu-overlay:after{content:'';position:fixed;z-index:-1;right:2%;top:50%;width:min(42vw,580px);aspect-ratio:1;transform:translateY(-50%);background:url('/brand/ll-chrome.png') center/contain no-repeat;opacity:.14;filter:grayscale(.45) brightness(.83);pointer-events:none}
+.menu-overlay:after{content:'';position:fixed;z-index:-1;right:2%;top:50%;width:min(42vw,580px);aspect-ratio:1;transform:translateY(-50%);background:url('/brand/ll-logo.svg') center/contain no-repeat;opacity:.06;pointer-events:none}
 .menu-top{border-bottom:1px solid #ddd1be31}
 .menu-content{width:min(100%,920px);max-width:none;padding:clamp(25px,4vh,55px) 0}
 .menu-content .eyebrow{display:flex;align-items:center;gap:13px;color:#cbb9a1;letter-spacing:.24em}
@@ -806,14 +806,12 @@
 
 /* Eröffnung, Schluss: Wörter weichen, das LL-Logo zeichnet sich und fliegt in den Header */
 .welcome-words{animation:welcomeWordsOut .35s 2.85s cubic-bezier(.7,0,.8,.3) forwards}
-.welcome-logo{position:absolute;top:50%;left:50%;width:clamp(96px,11vw,150px);aspect-ratio:1;margin:calc(clamp(96px,11vw,150px) / -2) 0 0 calc(clamp(96px,11vw,150px) / -2);transition:transform .8s cubic-bezier(.7,0,.2,1)}
-.welcome-logo svg{display:block;width:100%;height:100%}
-.welcome-logo path{stroke-dasharray:140;stroke-dashoffset:140;animation:welcomeDraw .55s 3s cubic-bezier(.6,0,.2,1) forwards}
-.welcome-logo .welcome-logo-inner{stroke-dasharray:100;stroke-dashoffset:100;animation-delay:3.15s}
+.welcome-logo{position:absolute;top:50%;left:50%;width:clamp(96px,11vw,150px);aspect-ratio:1;display:flex;align-items:center;margin:calc(clamp(96px,11vw,150px) / -2) 0 0 calc(clamp(96px,11vw,150px) / -2);transition:transform .8s cubic-bezier(.7,0,.2,1)}
+.welcome-logo svg{display:block;width:100%;height:auto;clip-path:inset(0 100% 0 0);animation:welcomeReveal .7s 3s cubic-bezier(.6,0,.2,1) forwards}
 .welcome-screen{transition:background-color .55s .15s ease}
 .welcome-screen.welcome-leaving{animation:none;background-color:transparent;pointer-events:none}
 .welcome-leaving .welcome-logo{transform:translate(var(--fly-x,0),var(--fly-y,0)) scale(var(--fly-s,1))}
 .welcome-leaving>:not(.welcome-logo){animation:none;opacity:0;transition:opacity .3s ease}
 @keyframes welcomeWordsOut{to{opacity:0;transform:translateY(-.35em)}}
-@keyframes welcomeDraw{to{stroke-dashoffset:0}}
+@keyframes welcomeReveal{to{clip-path:inset(0 0 0 0)}}
 body:has(.welcome-screen) .site-header .brand-symbol{opacity:0}

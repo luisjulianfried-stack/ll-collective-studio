@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: { default: 'LL Collective Studio — Marketing-Agentur aus München', template: '%s | LL Collective Studio' },
   description: 'Marketing aus einer Hand: Strategie, Social Media, Content, Kampagnen und Webdesign. LL Collective Studio macht Marken sichtbar – aus München.',
-  openGraph: { title: 'LL Collective Studio — Marketing, das wirkt.', description: 'Strategie, Social Media, Kampagnen und Webdesign aus einer Hand – aus München.', type: 'website', locale: 'de_DE', images: ['/brand/ll-chrome.png'] },
+  openGraph: { title: 'LL Collective Studio — Marketing, das wirkt.', description: 'Strategie, Social Media, Kampagnen und Webdesign aus einer Hand – aus München.', type: 'website', locale: 'de_DE', images: ['/brand/og-image.png'] },
   robots: { index: true, follow: true },
 };
 
