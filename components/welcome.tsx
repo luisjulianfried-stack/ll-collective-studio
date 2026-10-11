@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { LOGO_PATH, LOGO_VIEWBOX } from '@/lib/logo';
 
 export function Welcome() {
   const [phase, setPhase] = useState<'enter' | 'leave' | 'done'>('enter');
@@ -69,9 +70,8 @@ export function Welcome() {
       </div>
     </div>
     <div className="welcome-logo" ref={logo} aria-hidden="true">
-      <svg viewBox="0 0 100 100" fill="none" strokeWidth="8" strokeLinecap="square">
-        <path className="welcome-logo-outer" d="M18 12V86H82" stroke="#efede7"/>
-        <path className="welcome-logo-inner" d="M38 12V66H82" stroke="#b39f86"/>
+      <svg viewBox={LOGO_VIEWBOX}>
+        <path d={LOGO_PATH} fill="#efede7" fillRule="evenodd"/>
       </svg>
     </div>
     <div className="welcome-progress" aria-hidden="true"/>

@@ -4,11 +4,11 @@ export function SystemMark({ active = 0 }: { active?: number }) {
   return (
     <Image
       key={active}
-      src="/brand/ll-chrome.png"
+      src="/brand/ll-logo.svg"
       alt="LL Collective Studio Monogram"
       className="system-mark"
-      width={512}
-      height={512}
+      width={815}
+      height={615}
       unoptimized
     />
   );
