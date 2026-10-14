@@ -7,138 +7,182 @@
 <style>
 @font-face{font-family:Serif;src:url(fonts/gelasio.woff2) format('woff2');font-style:normal;font-weight:400 700}
 @font-face{font-family:Serif;src:url(fonts/gelasio-italic.woff2) format('woff2');font-style:italic;font-weight:400 700}
-:root{--bg:#111110;--ink:#efede7;--muted:#a5a39e;--line:#45433f;--accent:#b39f86;--glow:#3a342b;--serif:Serif,Georgia,serif;--sans:'Liberation Sans',Arial,Helvetica,sans-serif}
+:root{--bg:#111110;--ink:#efede7;--sand:#d9d4c9;--accent:#b39f86;--serif:Serif,Georgia,serif;--sans:'Liberation Sans',Arial,sans-serif;--black:'Inter Display','Inter',Arial,sans-serif;--pop:cubic-bezier(.34,1.56,.64,1);--out:cubic-bezier(.16,1,.3,1)}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
 body{color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
-.slide{position:absolute;inset:0;overflow:hidden;display:none;background:var(--bg)}
+.slide{position:absolute;inset:0;overflow:hidden;display:none}
 .slide.on{display:block}
-em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.03em}
+em{font-family:var(--serif);font-style:italic;font-weight:400}
+.grain{position:absolute;inset:0;opacity:.14;pointer-events:none;z-index:20;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E")}
 
-/* Atmosphäre wie im Website-Hero: warmes Licht + Korn */
-.glow{position:absolute;width:1500px;height:1500px;border-radius:50%;left:50%;top:44%;margin:-750px 0 0 -750px;background:radial-gradient(circle,var(--glow) 0%,transparent 62%);opacity:.9;animation:drift 6s ease-in-out both}
-.grain{position:absolute;inset:0;opacity:.16;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E")}
-@keyframes drift{from{transform:translate(-40px,30px) scale(.94)}to{transform:translate(40px,-30px) scale(1.06)}}
-
-/* Kopf- und Fußzeile – unterhalb der Instagram-Leiste */
-.top{position:absolute;top:226px;left:84px;right:84px;display:flex;justify-content:space-between;align-items:center;font-size:21px;letter-spacing:.2em;color:var(--muted)}
-.top .brand{display:flex;align-items:center;gap:20px;color:var(--ink);font-weight:700;font-size:19px}
-.top .brand img{height:40px}
-.top b{color:var(--accent);font-weight:600}
-.foot{position:absolute;bottom:200px;left:84px;right:84px;display:flex;justify-content:space-between;font-size:20px;letter-spacing:.18em;color:var(--muted);border-top:1px solid #ffffff2e;padding-top:26px}
-
-.eyebrow{font-size:22px;letter-spacing:.22em;font-weight:700;color:var(--accent);text-transform:uppercase}
-.rise{animation:rise .9s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--d,0s)}
-@keyframes rise{from{opacity:0;transform:translateY(46px)}to{opacity:1;transform:none}}
-.fade{animation:fade 1s ease both;animation-delay:var(--d,0s)}
+/* Bausteine */
+.top{position:absolute;z-index:15;top:222px;left:72px;right:72px;display:flex;justify-content:space-between;align-items:center;font-size:20px;letter-spacing:.2em;font-weight:700}
+.top img{height:38px;vertical-align:middle;margin-right:16px}
+.mask{display:block;overflow:hidden;line-height:.86;padding:.16em 0 .04em;margin-top:-.16em}
+.mask>span{display:block;animation:slam .75s var(--out) both;animation-delay:var(--d,0s)}
+@keyframes slam{from{transform:translateY(105%) skewY(6deg)}to{transform:none}}
+.pop{animation:pop .7s var(--pop) both;animation-delay:var(--d,0s)}
+@keyframes pop{from{opacity:0;transform:scale(.3) rotate(var(--r0,-20deg))}to{opacity:1;transform:scale(1) rotate(var(--r,0deg))}}
+.fade{animation:fade .6s ease both;animation-delay:var(--d,0s)}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 
-/* 0 · Intro */
-.intro .logo{position:absolute;left:50%;top:520px;width:600px;margin-left:-300px;animation:logo 1.6s cubic-bezier(.2,.7,.2,1) both}
-@keyframes logo{from{opacity:0;transform:scale(.86);filter:blur(14px)}to{opacity:1;transform:none;filter:none}}
-.intro .copy{position:absolute;left:84px;right:84px;top:1060px}
-.intro h1{font-size:132px;line-height:.95;letter-spacing:-.065em;font-weight:500;margin:34px 0 44px}
-.intro h1 em{font-size:1.04em;color:#e6dccd}
-.intro p{font-size:36px;line-height:1.4;color:#d5d1ca;max-width:780px}
-.intro .tap{margin-top:56px;display:inline-flex;align-items:center;gap:22px;font-size:21px;letter-spacing:.2em;font-weight:700;border:1.5px solid var(--ink);border-radius:60px;padding:24px 34px}
+/* Laufband */
+.band{position:absolute;left:-120px;right:-120px;z-index:12;overflow:hidden;white-space:nowrap;transform:rotate(var(--r,-5deg));box-shadow:0 20px 50px #0006;animation:bandIn .7s var(--out) both;animation-delay:var(--d,0s)}
+@keyframes bandIn{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+.band .track{display:inline-block;padding:26px 0;font-family:var(--black);font-weight:900;font-size:50px;letter-spacing:-.01em;text-transform:uppercase;animation:run 6s linear infinite}
+.band.rev .track{animation-direction:reverse}
+@keyframes run{to{transform:translateX(-50%)}}
+
+/* Rotierender Sticker */
+.sticker{position:absolute;z-index:14;width:250px;height:250px;border-radius:50%;display:grid;place-items:center}
+.sticker svg{position:absolute;inset:0;animation:spin 9s linear infinite}
+.sticker text{font:700 19px var(--sans);letter-spacing:.24em}
+.sticker img{width:96px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* 0 · Hook */
+.hook{background:var(--sand);color:#121211}
+.hook .top{color:#121211}
+.hook .words{position:absolute;left:60px;right:40px;top:400px;font-family:var(--black);font-weight:900;font-size:228px;letter-spacing:-.065em;text-transform:uppercase}
+.hook .words em{font-family:var(--serif);font-weight:400;text-transform:none;font-size:250px;letter-spacing:-.06em;color:#7a6a55}
+.hook .flash{position:absolute;inset:0;background:#121211;z-index:30;animation:flash .5s ease both}
+@keyframes flash{0%{opacity:1}100%{opacity:0}}
+.hook .band{top:1230px;background:#121211;color:var(--sand)}
+.hook .band.b2{top:1370px;background:var(--accent);color:#121211;--r:4deg}
+.hook .sticker{right:70px;top:300px;background:#121211;color:var(--sand)}
+.hook .sub{position:absolute;left:72px;right:72px;top:1560px;display:flex;justify-content:space-between;align-items:flex-end;font-size:34px;line-height:1.3;font-weight:700}
+.hook .sub b{font-family:var(--black);font-weight:900;font-size:120px;letter-spacing:-.06em;line-height:.8}
+.arrow{display:inline-block;animation:nudge .8s ease-in-out infinite alternate}
+@keyframes nudge{to{transform:translateX(18px)}}
 
 /* 1–4 · Projekte */
-.project .head{position:absolute;top:330px;left:84px;right:84px}
-.project h2{font-size:92px;line-height:1;letter-spacing:-.05em;font-weight:500;margin-top:20px}
-.project h2 em{color:var(--tint)}
-.phone{position:absolute;left:50%;top:505px;width:476px;height:1006px;margin-left:-238px;border-radius:70px;padding:14px;background:linear-gradient(145deg,#3b3a37,#151514 45%,#2c2b28);box-shadow:0 0 0 2px #5a5853,0 70px 120px #000c,0 0 160px var(--glow);animation:phone 1.3s cubic-bezier(.2,.7,.2,1) both;animation-delay:.25s}
-@keyframes phone{from{opacity:0;transform:translateY(160px) rotate(3deg)}to{opacity:1;transform:none}}
-.screen{position:relative;width:100%;height:100%;border-radius:57px;overflow:hidden;background:#000}
-.screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.screen .s2{animation:swap 1s ease both;animation-delay:2.6s}
-@keyframes swap{from{opacity:0;transform:translateY(90px)}to{opacity:1;transform:none}}
-.chips{position:absolute;top:1572px;left:0;right:0;display:flex;justify-content:center;gap:14px}
-.chips span{font-size:21px;letter-spacing:.06em;padding:15px 24px;border:1px solid #ffffff42;border-radius:40px;color:#e2ded6;background:#ffffff0a}
-.tag{position:absolute;right:84px;top:440px;text-align:right;font-size:18px;letter-spacing:.18em;color:var(--muted);line-height:1.6}
+.project{background:var(--base)}
+.project .photo{position:absolute;inset:-40px;background:var(--img) center/cover;animation:kb 5s linear both;filter:var(--blur,none)}
+@keyframes kb{from{transform:scale(1.28) translateY(30px)}to{transform:scale(1.06)}}
+.project .shade{position:absolute;inset:0;background:linear-gradient(180deg,#000c 0%,#0005 30%,color-mix(in srgb,var(--base) 55%,transparent) 62%,var(--base) 92%)}
+.project .num{position:absolute;z-index:3;right:40px;top:250px;font-family:var(--black);font-weight:900;font-size:430px;letter-spacing:-.08em;line-height:.8;color:transparent;-webkit-text-stroke:3px color-mix(in srgb,var(--tint) 70%,transparent);animation:numIn 1s var(--out) both}
+@keyframes numIn{from{opacity:0;transform:translateX(160px)}to{opacity:1;transform:none}}
+.project .name{position:absolute;z-index:4;left:66px;top:330px}
+.project .name .w1{font-family:var(--black);font-weight:900;font-size:200px;letter-spacing:-.07em;text-transform:uppercase;color:#fff}
+.project .name .w2{font-family:var(--serif);font-style:italic;font-size:190px;letter-spacing:-.05em;color:var(--tint);margin-left:70px}
+.project .cat{position:absolute;z-index:4;left:72px;top:290px;font-size:21px;letter-spacing:.24em;font-weight:700;color:var(--tint)}
+.phone{position:absolute;z-index:8;width:430px;height:930px;border-radius:64px;padding:13px;background:linear-gradient(145deg,#4a4945,#161615 45%,#33322f);box-shadow:0 0 0 2px #6a6863,0 60px 110px #000d}
+.phone .screen{width:100%;height:100%;border-radius:52px;overflow:hidden;background:#000}
+.phone img{width:100%;height:100%;object-fit:cover;display:block}
+.phone.main{left:340px;top:740px;--r:-7deg;--r0:-30deg;animation:phoneIn .9s var(--pop) both;animation-delay:.35s}
+.phone.back{left:70px;top:860px;width:330px;height:714px;border-radius:50px;padding:10px;z-index:7;--r:9deg;animation:phoneIn .9s var(--pop) both;animation-delay:.6s}
+.phone.back .screen{border-radius:41px}
+@keyframes phoneIn{from{opacity:0;transform:translateY(500px) rotate(var(--r0,25deg)) scale(.8)}to{opacity:1;transform:rotate(var(--r))}}
+.project .float{animation:bob 2.4s ease-in-out infinite alternate;animation-delay:1.2s}
+@keyframes bob{to{transform:translateY(-18px)}}
+.project .sticker{left:610px;top:620px;background:var(--tint);color:#121211;--r:0deg;--d:1s}
+.project .band{top:1590px;background:var(--tint);color:#121211;--d:.8s}
+.project .top{color:#fff}
 
 /* 5 · Outro */
-.outro .logo{position:absolute;left:84px;top:330px;width:170px}
-.outro .copy{position:absolute;left:84px;right:84px;top:600px}
-.outro h2{font-size:140px;line-height:.95;letter-spacing:-.065em;font-weight:500;margin:34px 0 70px}
-.outro h2 em{color:#e6dccd}
-.list{border-top:1px solid var(--line)}
-.list div{display:grid;grid-template-columns:90px 1fr;align-items:center;border-bottom:1px solid var(--line);padding:24px 0;font-size:42px;letter-spacing:-.03em}
-.list div span{font-size:20px;color:var(--accent);letter-spacing:.1em}
-.cta{position:absolute;left:84px;right:84px;top:1500px;display:flex;align-items:center;justify-content:space-between;gap:20px;background:var(--ink);color:#171716;border-radius:80px;padding:0 44px;height:118px;font-size:24px;letter-spacing:.14em;font-weight:700}
-.cta svg{width:38px;height:38px}
+.outro{background:var(--accent);color:#121211}
+.outro .top{color:#121211}
+.outro .words{position:absolute;left:60px;right:40px;top:330px;font-family:var(--black);font-weight:900;font-size:250px;letter-spacing:-.07em;text-transform:uppercase}
+.outro .words em{display:block;font-family:var(--serif);text-transform:none;font-size:150px;letter-spacing:-.05em;line-height:1;color:#fff;margin-top:20px}
+.outro .band{top:1080px;background:#121211;color:var(--accent);--r:-4deg}
+.outro .band.b2{top:1200px;background:var(--ink);color:#121211;--r:3deg}
+.outro .cta{position:absolute;z-index:14;left:72px;right:72px;top:1420px;height:150px;border-radius:90px;background:#121211;color:var(--ink);display:flex;align-items:center;justify-content:space-between;padding:0 30px 0 56px;font-family:var(--black);font-weight:900;font-size:50px;letter-spacing:-.02em;text-transform:uppercase;--d:1.1s}
+.outro .cta i{width:100px;height:100px;border-radius:50%;background:var(--accent);display:grid;place-items:center;font-style:normal;color:#121211;animation:pulse 1s ease-in-out infinite alternate}
+@keyframes pulse{to{transform:scale(1.12) rotate(45deg)}}
+.outro .foot{position:absolute;left:72px;right:72px;top:1610px;display:flex;justify-content:space-between;font-size:22px;letter-spacing:.18em;font-weight:700}
+.outro .sticker{right:60px;top:300px;background:#121211;color:var(--accent)}
 </style>
 </head>
 <body>
 
-<!-- 0 · Intro -->
-<section class="slide intro">
-  <div class="glow"></div><div class="grain"></div>
-  <div class="top fade"><span class="brand">LL COLLECTIVE STUDIO</span><span>MÜNCHEN</span></div>
-  <img class="logo" src="../../../public/brand/ll-logo.svg" alt="">
-  <div class="copy">
-    <div class="eyebrow rise" style="--d:.7s">Portfolio · Webdesign &amp; Branding</div>
-    <h1 class="rise" style="--d:.85s">Ideas become <em>Identity.</em></h1>
-    <p class="rise" style="--d:1.05s">Vier Marken-Konzepte aus unserem Studio – von der Idee bis zur fertigen Website.</p>
-    <div class="tap rise" style="--d:1.3s">TIPPEN FÜR MEHR <span>→</span></div>
+<!-- 0 · Hook -->
+<section class="slide hook">
+  <div class="top fade"><span>LL COLLECTIVE STUDIO</span><span>PORTFOLIO</span></div>
+  <div class="words">
+    <span class="mask"><span style="--d:.15s">Ideas</span></span>
+    <span class="mask"><span style="--d:.3s">become</span></span>
+    <span class="mask"><span style="--d:.45s"><em>Identity.</em></span></span>
   </div>
+  <div class="sticker pop" style="--d:.9s"><svg viewBox="0 0 250 250"><defs><path id="c0" d="M125 125m-98 0a98 98 0 1 1 196 0a98 98 0 1 1-196 0"/></defs><text fill="currentColor"><textPath href="#c0">MÜNCHEN · WEBDESIGN · BRANDING · </textPath></text></svg><img src="../../../public/brand/ll-logo.svg" alt=""></div>
+  <div class="band" style="--d:.7s"><span class="track"></span></div>
+  <div class="band b2 rev" style="--d:.85s"><span class="track"></span></div>
+  <div class="sub"><span class="fade" style="--d:1.1s"><b>4</b><br>Marken-Konzepte.<br>Null Langeweile.</span><span class="fade" style="--d:1.3s">TIPPEN <span class="arrow">→</span></span></div>
+  <div class="flash"></div>
+  <div class="grain"></div>
 </section>
 
 <!-- 1–4 · Projekte (aus lib/showcases.ts) -->
 <template id="project">
   <section class="slide project">
-    <div class="glow"></div><div class="grain"></div>
-    <div class="top fade"><span class="brand"><img src="../../../public/brand/ll-logo.svg" alt="">LL COLLECTIVE STUDIO</span><span><b data-k="no"></b> / 04</span></div>
-    <div class="head">
-      <div class="eyebrow rise" style="--d:.15s" data-k="category"></div>
-      <h2 class="rise" style="--d:.3s" data-k="title"></h2>
+    <div class="photo"></div><div class="shade"></div>
+    <div class="top fade"><span><img src="../../../public/brand/ll-logo.svg" alt="">LL COLLECTIVE STUDIO</span><span data-k="count"></span></div>
+    <div class="num" data-k="no"></div>
+    <div class="cat fade" style="--d:.2s" data-k="category"></div>
+    <div class="name">
+      <span class="mask"><span class="w1" style="--d:.1s" data-k="w1"></span></span>
+      <span class="mask"><span class="w2" style="--d:.25s" data-k="w2"></span></span>
     </div>
-    <div class="phone"><div class="screen"><img class="s1" alt=""><img class="s2" alt=""></div></div>
-    <div class="chips rise" style="--d:1s"></div>
-    <div class="foot fade" style="--d:1.2s"><span>KONZEPT-DEMO · FIKTIVE MARKE</span><span>@LL_COLLECTIVE_STUDIO</span></div>
+    <div class="phone back"><div class="float"><div class="screen"><img class="s2" alt=""></div></div></div>
+    <div class="phone main"><div class="screen"><img class="s1" alt=""></div></div>
+    <div class="sticker pop"><svg viewBox="0 0 250 250"><defs><path id="cX" d="M125 125m-98 0a98 98 0 1 1 196 0a98 98 0 1 1-196 0"/></defs><text fill="currentColor"><textPath>KONZEPT-DEMO · FIKTIVE MARKE · </textPath></text></svg><img src="../../../public/brand/ll-logo-dark.svg" alt=""></div>
+    <div class="band"><span class="track"></span></div>
+    <div class="grain"></div>
   </section>
 </template>
 
 <!-- 5 · Outro -->
 <section class="slide outro">
-  <div class="glow"></div><div class="grain"></div>
-  <div class="top fade"><span class="brand">LL COLLECTIVE STUDIO</span><span>MÜNCHEN</span></div>
-  <img class="logo fade" src="../../../public/brand/ll-logo.svg" alt="">
-  <div class="copy">
-    <div class="eyebrow rise" style="--d:.2s">Marketing aus einer Hand</div>
-    <h2 class="rise" style="--d:.35s">Deine Marke ist <em>die nächste.</em></h2>
-    <div class="list">
-      <div class="rise" style="--d:.7s"><span>01</span>Strategie &amp; Branding</div>
-      <div class="rise" style="--d:.82s"><span>02</span>Social Media &amp; Content</div>
-      <div class="rise" style="--d:.94s"><span>03</span>Kampagnen</div>
-      <div class="rise" style="--d:1.06s"><span>04</span>Webdesign</div>
-    </div>
+  <div class="top fade"><span>LL COLLECTIVE STUDIO</span><span>MÜNCHEN</span></div>
+  <div class="words">
+    <span class="mask"><span style="--d:.1s">Deine</span></span>
+    <span class="mask"><span style="--d:.25s">Marke?</span></span>
+    <span class="mask"><span style="--d:.45s"><em>Ist die nächste.</em></span></span>
   </div>
-  <div class="cta rise" style="--d:1.4s">SCHREIB UNS EINE DM
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17 17 7M8 7h9v9"/></svg></div>
-  <div class="foot fade" style="--d:1.6s"><span>@LL_COLLECTIVE_STUDIO</span><span>LINK IN BIO</span></div>
+  <div class="sticker pop" style="--d:.9s"><svg viewBox="0 0 250 250"><defs><path id="c5" d="M125 125m-98 0a98 98 0 1 1 196 0a98 98 0 1 1-196 0"/></defs><text fill="currentColor"><textPath href="#c5">JETZT ANFRAGEN · JETZT ANFRAGEN · </textPath></text></svg><img src="../../../public/brand/ll-logo.svg" alt=""></div>
+  <div class="band" style="--d:.6s"><span class="track"></span></div>
+  <div class="band b2 rev" style="--d:.75s"><span class="track"></span></div>
+  <div class="cta pop">Schreib uns <i>↗</i></div>
+  <div class="foot fade" style="--d:1.4s"><span>@LL_COLLECTIVE_STUDIO</span><span>LINK IN BIO</span></div>
+  <div class="grain"></div>
 </section>
 
 <script>
 const projects = [
-  { slug: 'architektur', category: 'Webdesign & Architektur', title: 'Villa <em>Serena.</em>', chips: ['Hausführung', 'Grundriss', 'Materialien'], glow: '#5e5241', tint: '#d8c7a6' },
-  { slug: 'lematcha', category: 'Branding & Produkt', title: 'Le<em>Matcha.</em>', chips: ['Markenauftritt', 'Scroll-Animation', 'Mobil optimiert'], glow: '#2c5531', tint: '#e8d77a' },
-  { slug: 'cafe-still', category: 'Webdesign & Gastronomie', title: 'Café <em>Still.</em>', chips: ['Speisekarte', 'Bildwelt', 'Mobil optimiert'], glow: '#5a2731', tint: '#e2b9a8' },
-  { slug: 'casa-oliva', category: 'Webdesign & Gastronomie', title: 'Casa <em>Oliva.</em>', chips: ['Speisekarte', 'Atmosphäre', 'Mobil optimiert'], glow: '#55542c', tint: '#cfc287' },
+  { slug: 'architektur', w1: 'Villa', w2: 'Serena.', category: 'Webdesign · Architektur', chips: ['Hausführung', 'Grundriss', 'Materialien'], img: '../../../public/showcase/architektur/assets/villa.webp', base: '#1d1a14', tint: '#e3cfa6' },
+  { slug: 'lematcha', w1: 'Le', w2: 'Matcha.', category: 'Branding · Produkt', chips: ['Markenauftritt', 'Scroll-Animation', 'Limonade'], img: '../../../public/showcase/lematcha-preview.webp', blur: 22, base: '#132a17', tint: '#ecd96f' },
+  { slug: 'cafe-still', w1: 'Café', w2: 'Still.', category: 'Webdesign · Gastronomie', chips: ['Speisekarte', 'Bildwelt', 'Espresso'], img: '../../../public/showcase/cafe-still/assets/coffee.webp', base: '#2a1418', tint: '#f0b9a6' },
+  { slug: 'casa-oliva', w1: 'Casa', w2: 'Oliva.', category: 'Webdesign · Gastronomie', chips: ['Speisekarte', 'Atmosphäre', 'La cucina'], img: '../../../public/showcase/casa-oliva/assets/pasta.webp', base: '#1f1e10', tint: '#d6cb7e' },
 ];
+const loop = (items, n = 4) => Array(n).fill(items.map(t => `${t}&nbsp;✦&nbsp;`).join('')).join('');
+const fill = (band, items) => { band.querySelector('.track').innerHTML = loop(items); };
 const tpl = document.getElementById('project');
 const outro = document.querySelector('.outro');
 projects.forEach((p, i) => {
   const el = tpl.content.firstElementChild.cloneNode(true);
-  el.style.setProperty('--glow', p.glow);
+  el.style.setProperty('--base', p.base);
   el.style.setProperty('--tint', p.tint);
+  el.style.setProperty('--img', `url(${p.img})`);
+  if (p.blur) el.style.setProperty('--blur', `blur(${p.blur}px) saturate(1.2)`);
   el.querySelector('[data-k=no]').textContent = String(i + 1).padStart(2, '0');
-  el.querySelector('[data-k=category]').textContent = p.category;
-  el.querySelector('[data-k=title]').innerHTML = p.title;
+  el.querySelector('[data-k=count]').textContent = `${String(i + 1).padStart(2, '0')} / 04`;
+  el.querySelector('[data-k=category]').textContent = p.category.toUpperCase();
+  el.querySelector('[data-k=w1]').textContent = p.w1;
+  el.querySelector('[data-k=w2]').textContent = p.w2;
   el.querySelector('.s1').src = `shots/${p.slug}-1.jpg`;
   el.querySelector('.s2').src = `shots/${p.slug}-2.jpg`;
-  el.querySelector('.chips').innerHTML = p.chips.map(c => `<span>${c}</span>`).join('');
+  const id = `c${i + 1}`;
+  el.querySelector('path').id = id;
+  el.querySelector('textPath').setAttribute('href', `#${id}`);
+  fill(el.querySelector('.band'), [...p.chips, 'Mobil optimiert']);
   outro.before(el);
 });
+const [h1, h2] = document.querySelectorAll('.hook .band');
+fill(h1, ['Webdesign', 'Branding', 'Content', 'Kampagnen']);
+fill(h2, ['Villa Serena', 'LeMatcha', 'Café Still', 'Casa Oliva']);
+const [o1, o2] = document.querySelectorAll('.outro .band');
+fill(o1, ['Strategie', 'Social Media', 'Content', 'Kampagnen', 'Webdesign']);
+fill(o2, ['Ideas become Identity']);
 const n = +(new URLSearchParams(location.search).get('s') || 0);
 document.querySelectorAll('.slide')[n].classList.add('on');
 </script>

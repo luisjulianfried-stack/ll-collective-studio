@@ -6,7 +6,9 @@ const fs = require('fs');
 const path = require('path');
 
 const OUT = path.join(__dirname, '..');
-const SLIDES = 6, FPS = 30, SECONDS = [4.2, 5, 5, 5, 5, 5], FADE = 0.5;
+const SLIDES = 6, FPS = 30, SECONDS = [3.8, 4, 4, 4, 4, 4.6], FADE = 0.4;
+// Unterschiedliche Übergänge zwischen den Slides
+const TRANSITIONS = ['zoomin', 'slideleft', 'circleopen', 'slideup', 'wiperight'];
 const url = s => `file://${__dirname}/story.html?s=${s}`;
 const seek = (page, t) => page.evaluate(ms => { for (const a of document.getAnimations()) { a.pause(); a.currentTime = ms; } }, t);
 
@@ -18,9 +20,8 @@ const seek = (page, t) => page.evaluate(ms => { for (const a of document.getAnim
     await page.goto(url(s));
     await page.evaluate(() => document.fonts.ready);
     await page.waitForLoadState('networkidle');
-    // Standbild: Endzustand, im Handy die Startansicht der Website
-    await seek(page, 10000);
-    await page.addStyleTag({ content: '.screen .s2{display:none}' });
+    // Standbild: Endzustand aller Einblendungen
+    await seek(page, 3200);
     await page.screenshot({ path: `${OUT}/story-${s + 1}.png` });
     await page.reload(); await page.evaluate(() => document.fonts.ready);
     // Video-Segment Bild für Bild
@@ -45,7 +46,7 @@ const seek = (page, t) => page.evaluate(ms => { for (const a of document.getAnim
   for (let s = 1; s < SLIDES; s++) {
     offset += SECONDS[s - 1] - FADE;
     const out = s === SLIDES - 1 ? '[v]' : `[x${s}]`;
-    filters.push(`${last}[${s}:v]xfade=transition=fade:duration=${FADE}:offset=${offset.toFixed(2)}${out}`);
+    filters.push(`${last}[${s}:v]xfade=transition=${TRANSITIONS[s - 1]}:duration=${FADE}:offset=${offset.toFixed(2)}${out}`);
     last = out;
   }
   execFileSync('ffmpeg', ['-y', '-loglevel', 'error', ...inputs, '-filter_complex', filters.join(';'), '-map', '[v]', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '19', '-movflags', '+faststart', `${OUT}/story.mp4`]);

@@ -3,7 +3,7 @@
 Story (1080×1920) aus den Showcase-Projekten in `lib/showcases.ts`.
 
 - `story-1.png` … `story-6.png`: Einzelbilder (Intro, 4 Projekte, Kontakt)
-- `story.mp4`: animierte Version (~27 s, wird in Instagram automatisch in 15-s-Teile zerlegt)
+- `story.mp4`: animierte Version (~22 s, mit Laufbändern, Stickern und wechselnden Übergängen)
 
 ## Neu erzeugen
 
@@ -13,4 +13,4 @@ NODE_PATH=$(npm root -g) node marketing/instagram-story/src/shoot.cjs   # Handy-
 NODE_PATH=$(npm root -g) node marketing/instagram-story/src/render.cjs  # PNGs + MP4
 ```
 
-Texte und Farben stehen in `src/story.html`. Schrift: Gelasio (OFL, Georgia-kompatibel).
+Texte und Farben stehen in `src/story.html`. Schriften: Gelasio (liegt bei, OFL) und Inter Display Black (muss lokal installiert sein).
