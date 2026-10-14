@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>LL Collective Studio – Moodboard-Karussell</title>
+<!-- 1080×1350 Karussell-Slides (Feed 4:5). Aufruf: carousel.html?s=0 … ?s=7 (render-carousel.cjs macht PNGs daraus). -->
+<style>
+@font-face{font-family:Serif;src:url(fonts/gelasio.woff2) format('woff2');font-style:normal;font-weight:400 700}
+@font-face{font-family:Serif;src:url(fonts/gelasio-italic.woff2) format('woff2');font-style:italic;font-weight:400 700}
+:root{--bg:#111110;--panel:#1c1c1a;--ink:#efede7;--dark:#121211;--sand:#d9d4c9;--accent:#b39f86;--muted:#a5a39e;--line:#45433f;--serif:Serif,Georgia,serif;--sans:'Liberation Sans',Arial,sans-serif;--black:'Inter Display','Inter',Arial,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1350px;overflow:hidden;background:var(--bg)}
+body{color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+.slide{position:absolute;inset:0;overflow:hidden;display:none;padding:72px}
+.slide.on{display:block}
+em{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none}
+.grain{position:absolute;inset:0;opacity:.13;pointer-events:none;z-index:20;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E")}
+.bar{position:absolute;top:56px;left:72px;right:72px;display:flex;justify-content:space-between;align-items:center;font-size:18px;letter-spacing:.2em;font-weight:700;z-index:10}
+.bar img{height:34px;vertical-align:middle;margin-right:14px}
+.bar b{font-weight:700;opacity:.65}
+.big{font-family:var(--black);font-weight:900;text-transform:uppercase;letter-spacing:-.065em;line-height:.86;word-spacing:.14em}
+.h{position:absolute;left:72px;right:72px;top:130px}
+.h .k{font-size:20px;letter-spacing:.22em;font-weight:700;color:var(--accent);margin-bottom:22px}
+.h .big{font-size:120px}
+.h .big em{color:var(--accent);letter-spacing:-.04em}
+.band{position:absolute;left:-100px;right:-100px;white-space:nowrap;overflow:hidden;font-family:var(--black);font-weight:900;font-size:44px;text-transform:uppercase;padding:22px 0;transform:rotate(var(--r,-5deg));box-shadow:0 18px 40px #0005;z-index:5}
+.sticker{position:absolute;width:220px;height:220px;border-radius:50%;display:grid;place-items:center;z-index:8}
+.sticker svg{position:absolute;inset:0}
+.sticker text{font:700 17px var(--sans);letter-spacing:.24em}
+.swipe{position:absolute;right:72px;bottom:56px;font-size:20px;letter-spacing:.2em;font-weight:700;z-index:10}
+.foot{position:absolute;left:72px;bottom:56px;font-size:18px;letter-spacing:.2em;font-weight:700;color:var(--muted);z-index:10}
+
+/* 0 · Cover */
+.cover{background:var(--sand);color:var(--dark)}
+.cover .big{position:absolute;left:58px;top:250px;font-size:250px}
+.cover .big em{display:block;font-size:200px;color:#7a6a55;letter-spacing:-.05em;line-height:1;margin-top:10px}
+.cover .sub{position:absolute;left:72px;top:935px;max-width:560px;font-size:34px;line-height:1.3;font-weight:700}
+.cover .band{top:1110px;background:var(--dark);color:var(--sand)}
+.cover .sticker{right:64px;top:150px;background:var(--dark);color:var(--sand);transform:rotate(-14deg)}
+
+/* 1 · Bildwelt */
+.mood .grid{position:absolute;left:72px;right:72px;top:420px;bottom:130px;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(3,1fr);gap:16px}
+.mood figure{position:relative;border-radius:22px;overflow:hidden;background:#222}
+.mood figure img{width:100%;height:100%;object-fit:cover;display:block}
+.mood figcaption{position:absolute;left:14px;bottom:14px;font:900 15px var(--black);letter-spacing:.06em;color:var(--dark);padding:8px 14px;border-radius:30px;text-transform:uppercase}
+.mood .a{grid-column:1/5;grid-row:1/3}.mood .b{grid-column:5/7;grid-row:1/2}.mood .c{grid-column:5/7;grid-row:2/4}.mood .d{grid-column:1/3;grid-row:3/4}.mood .e{grid-column:3/5;grid-row:3/4}
+
+/* 2 · Farben */
+.colors{background:var(--bg)}
+.colors .stripes{position:absolute;left:72px;right:72px;top:420px;bottom:130px;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:1.15fr 1fr;gap:14px}
+.colors .sw{border-radius:22px;padding:22px;display:flex;flex-direction:column;justify-content:flex-end;font-weight:700;font-size:22px;color:var(--dark)}
+.colors .sw span{display:block;font-weight:400;font-size:18px;margin-top:4px;opacity:.75;letter-spacing:.06em}
+.colors .sw.dark{color:var(--ink);border:1.5px solid var(--line)}
+.colors .pj{position:relative;color:var(--ink)}
+.colors .pj i{position:absolute;left:14px;right:14px;top:14px;height:46%;border-radius:14px;background:var(--t)}
+
+/* 3 · Typografie */
+.type{background:var(--ink);color:var(--dark)}
+.type .h .k{color:#6d5d48}
+.type .spec{position:absolute;left:72px;right:72px;top:420px}
+.type .aa{font-family:var(--black);font-weight:900;font-size:300px;letter-spacing:-.075em;line-height:.8}
+.type .it{font-family:var(--serif);font-style:italic;font-size:200px;letter-spacing:-.045em;line-height:1;color:#6d5d48;margin-top:10px}
+.type .rows{position:absolute;left:72px;right:72px;bottom:130px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.type .rows div{border-top:2px solid var(--dark);padding-top:18px;font-size:21px;line-height:1.4}
+.type .rows b{display:block;font-size:17px;letter-spacing:.18em;margin-bottom:8px}
+
+/* 4 · Elemente */
+.el .band{top:470px;background:#ecd96f;color:var(--dark)}
+.el .band.b2{top:590px;background:#f0b9a6;--r:4deg}
+.el .sticker{left:110px;top:800px;background:#e3cfa6;color:var(--dark);transform:rotate(10deg)}
+.el .sticker span{font:400 70px var(--serif)}
+.el .num{position:absolute;right:80px;top:770px;font-family:var(--black);font-weight:900;font-size:330px;letter-spacing:-.08em;line-height:.8;color:transparent;-webkit-text-stroke:3px #d6cb7e}
+.el .legend{position:absolute;left:72px;right:72px;bottom:130px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.el .legend div{border-top:1.5px solid var(--line);padding-top:16px;font-size:21px;line-height:1.4;color:#d5d1ca}
+.el .legend b{display:block;color:var(--ink);font-size:17px;letter-spacing:.18em;margin-bottom:6px}
+
+/* 5 · Storyboard */
+.board .frames{position:absolute;left:72px;right:72px;top:400px;display:grid;grid-template-columns:repeat(3,236px);justify-content:space-between;gap:26px 0}
+.board .fr{position:relative}
+.board .fr img{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:18px;display:block}
+.board .fr span{position:absolute;left:10px;top:10px;font:900 16px var(--black);background:var(--t);color:var(--dark);padding:7px 12px;border-radius:30px;letter-spacing:.04em}
+
+/* 6 · Ablauf */
+.flow .list{position:absolute;left:72px;right:72px;top:430px}
+.flow .row{display:grid;grid-template-columns:90px 1fr auto;align-items:center;gap:20px;border-top:1.5px solid var(--line);padding:22px 0}
+.flow .row:last-child{border-bottom:1.5px solid var(--line)}
+.flow .row .n{font:900 46px var(--black);letter-spacing:-.05em;color:var(--t)}
+.flow .row .t{font:900 40px var(--black);letter-spacing:-.04em;text-transform:uppercase}
+.flow .row .t small{display:block;font:400 20px var(--sans);letter-spacing:0;text-transform:none;color:#d5d1ca;margin-top:6px}
+.flow .row .s{font-size:19px;letter-spacing:.12em;font-weight:700;color:var(--muted);text-align:right;line-height:1.5}
+.flow .tl{position:absolute;left:72px;right:72px;bottom:130px;height:46px;border-radius:30px;overflow:hidden;display:grid;grid-template-columns:3.8fr 3.6fr 3.6fr 3.6fr 3.6fr 4.2fr}
+
+/* 7 · CTA */
+.cta{background:var(--accent);color:var(--dark)}
+.cta .big{position:absolute;left:58px;top:240px;font-size:220px}
+.cta .big em{display:block;font-size:130px;color:#fff;letter-spacing:-.045em;line-height:1;margin-top:16px}
+.cta .band{top:790px;background:var(--dark);color:var(--accent)}
+.cta .btn{position:absolute;left:72px;right:72px;top:1010px;height:136px;border-radius:80px;background:var(--dark);color:var(--ink);display:flex;align-items:center;justify-content:space-between;padding:0 26px 0 50px;font:900 46px var(--black);text-transform:uppercase;letter-spacing:-.02em}
+.cta .btn i{width:92px;height:92px;border-radius:50%;background:var(--accent);color:var(--dark);display:grid;place-items:center;font-style:normal}
+.cta .sticker{right:60px;top:120px;background:var(--dark);color:var(--accent);transform:rotate(12deg)}
+</style>
+</head>
+<body>
+
+<section class="slide cover">
+  <div class="bar"><span><img src="../../../public/brand/ll-logo-dark.svg" alt="">LL COLLECTIVE STUDIO</span><b>01 / 08</b></div>
+  <div class="sticker"><svg viewBox="0 0 220 220"><defs><path id="p0" d="M110 110m-86 0a86 86 0 1 1 172 0a86 86 0 1 1-172 0"/></defs><text fill="currentColor"><textPath href="#p0">BEHIND THE STORY · SWIPE · </textPath></text></svg><img src="../../../public/brand/ll-logo.svg" alt="" style="width:86px"></div>
+  <div class="big">Mood<br>board<em>&amp; Story.</em></div>
+  <p class="sub">Wie aus vier Marken-Konzepten eine Story wird – Bildwelt, Farben, Schrift, Ablauf.</p>
+  <div class="band"><span>&nbsp;Behind the scenes ✦ Ideas become Identity ✦ Behind the scenes ✦ Ideas become Identity ✦</span></div>
+  <div class="swipe">SWIPE →</div>
+  <div class="grain"></div>
+</section>
+
+<section class="slide mood">
+  <div class="bar"><span><img src="../../../public/brand/ll-logo.svg" alt="">LL COLLECTIVE STUDIO</span><b>02 / 08</b></div>
+  <div class="h"><div class="k">01 · BILDWELT</div><div class="big">Warm. Laut. <em>Echt.</em></div></div>
+  <div class="grid">
+    <figure class="a"><img src="../../../public/showcase/architektur/assets/villa.webp" alt=""><figcaption style="background:#e3cfa6">Villa Serena</figcaption></figure>
+    <figure class="b"><img src="../../../public/showcase/lematcha-preview.webp" alt="" style="object-position:75% 50%"><figcaption style="background:#ecd96f">LeMatcha</figcaption></figure>
+    <figure class="c"><img src="../../../public/showcase/casa-oliva/assets/pasta.webp" alt=""><figcaption style="background:#d6cb7e">Casa Oliva</figcaption></figure>
+    <figure class="d"><img src="../../../public/showcase/cafe-still/assets/coffee.webp" alt=""><figcaption style="background:#f0b9a6">Café Still</figcaption></figure>
+    <figure class="e"><img src="../../../public/showcase/architektur/assets/tour-living.webp" alt=""></figure>
+  </div>
+  <div class="foot">ECHTE PROJEKTBILDER STATT STOCK</div><div class="swipe">→</div>
+  <div class="grain"></div>
+</section>
+
+<section class="slide colors">
+  <div class="bar"><span><img src="../../../public/brand/ll-logo.svg" alt="">LL COLLECTIVE STUDIO</span><b>03 / 08</b></div>
+  <div class="h"><div class="k">02 · FARBEN</div><div class="big">Eine Marke. <em>Vier Töne.</em></div></div>
+  <div class="stripes">
+    <div class="sw dark" style="background:#121211">Ink<span>#121211</span></div>
+    <div class="sw" style="background:#d9d4c9">Sand<span>#D9D4C9</span></div>
+    <div class="sw" style="background:#b39f86">Akzent<span>#B39F86</span></div>
+    <div class="sw" style="background:#efede7">Papier<span>#EFEDE7</span></div>
+    <div class="sw pj" style="background:#1d1a14;--t:#e3cfa6"><i></i>Villa<span>#E3CFA6</span></div>
+    <div class="sw pj" style="background:#132a17;--t:#ecd96f"><i></i>LeMatcha<span>#ECD96F</span></div>
+    <div class="sw pj" style="background:#2a1418;--t:#f0b9a6"><i></i>Café<span>#F0B9A6</span></div>
+    <div class="sw pj" style="background:#1f1e10;--t:#d6cb7e"><i></i>Casa<span>#D6CB7E</span></div>
+  </div>
+  <div class="foot">MARKE OBEN · PROJEKTFARBE AUF DUNKLEM GRUND UNTEN</div><div class="swipe">→</div>
+  <div class="grain"></div>
+</section>
+
+<section class="slide type">
+  <div class="bar"><span><img src="../../../public/brand/ll-logo-dark.svg" alt="">LL COLLECTIVE STUDIO</span><b>04 / 08</b></div>
+  <div class="h"><div class="k">03 · TYPOGRAFIE</div></div>
+  <div class="spec"><div class="aa">AaBb</div><div class="it">Identity.</div></div>
+  <div class="rows">
+    <div><b>DISPLAY</b>Fette Versalien, eng gesetzt. Für Namen, Hooks und Laufbänder.</div>
+    <div><b>AKZENT</b>Kursive Serife in der Projektfarbe. Bricht die Härte.</div>
+    <div><b>LABEL</b>Kleine Versalien, weit gesperrt. Für Kategorien und Zahlen.</div>
+  </div>
+  <div class="swipe" style="color:#121211">→</div>
+  <div class="grain"></div>
+</section>
+
+<section class="slide el">
+  <div class="bar"><span><img src="../../../public/brand/ll-logo.svg" alt="">LL COLLECTIVE STUDIO</span><b>05 / 08</b></div>
+  <div class="h"><div class="k">04 · ELEMENTE</div><div class="big">Bänder. Sticker. <em>Zahlen.</em></div></div>
+  <div class="band"><span>&nbsp;Markenauftritt ✦ Scroll-Animation ✦ Limonade ✦ Markenauftritt ✦ Scroll-Animation ✦</span></div>
+  <div class="band b2"><span>&nbsp;Speisekarte ✦ Bildwelt ✦ Espresso ✦ Speisekarte ✦ Bildwelt ✦ Espresso ✦</span></div>
+  <div class="sticker"><svg viewBox="0 0 220 220"><defs><path id="p4" d="M110 110m-86 0a86 86 0 1 1 172 0a86 86 0 1 1-172 0"/></defs><text fill="currentColor"><textPath href="#p4">KONZEPT-DEMO · FIKTIVE MARKE · </textPath></text></svg><span>LL</span></div>
+  <div class="num">01</div>
+  <div class="legend">
+    <div><b>LAUFBAND</b>Schräg, in Projektfarbe. Trägt die Features.</div>
+    <div><b>STICKER</b>Dreht sich und kennzeichnet jedes Konzept.</div>
+    <div><b>OUTLINE-ZAHL</b>Zählt die Projekte durch.</div>
+  </div>
+  <div class="grain"></div>
+</section>
+
+<section class="slide board">
+  <div class="bar"><span><img src="../../../public/brand/ll-logo.svg" alt="">LL COLLECTIVE STUDIO</span><b>06 / 08</b></div>
+  <div class="h"><div class="k">05 · STORYBOARD</div><div class="big">6 Frames. <em>Eine Story.</em></div></div>
+  <div class="frames">
+    <div class="fr" style="--t:#d9d4c9"><img src="../story-1.png" alt=""><span>01 HOOK</span></div>
+    <div class="fr" style="--t:#e3cfa6"><img src="../story-2.png" alt=""><span>02 VILLA</span></div>
+    <div class="fr" style="--t:#ecd96f"><img src="../story-3.png" alt=""><span>03 MATCHA</span></div>
+    <div class="fr" style="--t:#f0b9a6"><img src="../story-4.png" alt=""><span>04 CAFÉ</span></div>
+    <div class="fr" style="--t:#d6cb7e"><img src="../story-5.png" alt=""><span>05 CASA</span></div>
+    <div class="fr" style="--t:#b39f86"><img src="../story-6.png" alt=""><span>06 CTA</span></div>
+  </div>
+  <div class="grain"></div>
+</section>
+
+<section class="slide flow">
+  <div class="bar"><span><img src="../../../public/brand/ll-logo.svg" alt="">LL COLLECTIVE STUDIO</span><b>07 / 08</b></div>
+  <div class="h"><div class="k">06 · ABLAUF</div><div class="big">22 Sekunden. <em>Kein Leerlauf.</em></div></div>
+  <div class="list">
+    <div class="row" style="--t:#d9d4c9"><span class="n">01</span><span class="t">Hook<small>Wörter schießen ins Bild, Sticker ploppt auf</small></span><span class="s">0–4 S<br>ZOOM</span></div>
+    <div class="row" style="--t:#e3cfa6"><span class="n">02</span><span class="t">Villa Serena<small>Foto zoomt, zwei Handys fliegen schräg ein</small></span><span class="s">3–7 S<br>SLIDE</span></div>
+    <div class="row" style="--t:#ecd96f"><span class="n">03</span><span class="t">LeMatcha<small>Weiches Grün, Panda-Emblem im Handy</small></span><span class="s">7–11 S<br>KREIS</span></div>
+    <div class="row" style="--t:#f0b9a6"><span class="n">04</span><span class="t">Café Still<small>Croissant und Cappuccino füllen das Bild</small></span><span class="s">11–15 S<br>SLIDE</span></div>
+    <div class="row" style="--t:#d6cb7e"><span class="n">05</span><span class="t">Casa Oliva<small>Pasta in Großaufnahme, Oliv als Akzent</small></span><span class="s">14–18 S<br>WIPE</span></div>
+    <div class="row" style="--t:#b39f86"><span class="n">06</span><span class="t">Deine Marke?<small>Bänder mit Leistungen, Button pulsiert</small></span><span class="s">18–22 S<br>CTA</span></div>
+  </div>
+  <div class="tl"><i style="background:#d9d4c9"></i><i style="background:#e3cfa6"></i><i style="background:#ecd96f"></i><i style="background:#f0b9a6"></i><i style="background:#d6cb7e"></i><i style="background:#b39f86"></i></div>
+  <div class="grain"></div>
+</section>
+
+<section class="slide cta">
+  <div class="bar"><span><img src="../../../public/brand/ll-logo-dark.svg" alt="">LL COLLECTIVE STUDIO</span><b>08 / 08</b></div>
+  <div class="sticker"><svg viewBox="0 0 220 220"><defs><path id="p7" d="M110 110m-86 0a86 86 0 1 1 172 0a86 86 0 1 1-172 0"/></defs><text fill="currentColor"><textPath href="#p7">JETZT ANFRAGEN · JETZT ANFRAGEN · </textPath></text></svg><img src="../../../public/brand/ll-logo.svg" alt="" style="width:86px"></div>
+  <div class="big">Deine<br>Marke?<em>Ist die nächste.</em></div>
+  <div class="band"><span>&nbsp;Strategie ✦ Social Media ✦ Content ✦ Kampagnen ✦ Webdesign ✦ Strategie ✦ Social Media ✦</span></div>
+  <div class="btn">Schreib uns <i>↗</i></div>
+  <div class="foot" style="color:#121211">@LL_COLLECTIVE_STUDIO · LINK IN BIO</div>
+  <div class="grain"></div>
+</section>
+
+<script>
+const n = +(new URLSearchParams(location.search).get('s') || 0);
+document.querySelectorAll('.slide')[n].classList.add('on');
+</script>
+</body>
+</html>
