@@ -815,3 +815,30 @@
 @keyframes welcomeWordsOut{to{opacity:0;transform:translateY(-.35em)}}
 @keyframes welcomeReveal{to{clip-path:inset(0 0 0 0)}}
 body:has(.welcome-screen) .site-header .brand-symbol{opacity:0}
+/* Kontaktformular (Web3Forms) */
+.cx{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr);gap:50px 7vw;align-items:start}
+.cx h2{font-size:clamp(52px,6.2vw,110px)}
+.cx-actions{flex-direction:column;align-items:flex-start;gap:10px}
+.cx-actions>span{font-size:10px;font-weight:700;letter-spacing:.16em;color:#6f6558}
+.cx-form{padding-top:clamp(0px,3vw,46px)}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:0 28px}
+.cf label:not(.cf-check){display:flex;flex-direction:column;gap:8px;margin-bottom:26px;font-size:10px;font-weight:700;letter-spacing:.16em;color:#6f6558}
+.cf input:not([type=checkbox]),.cf select,.cf textarea{width:100%;border:0;border-bottom:1px solid #19191855;border-radius:0;background:transparent;color:#191918;padding:8px 0 12px;font-size:17px;font-weight:400;letter-spacing:0;outline:none;resize:vertical;transition:border-color .2s}
+.cf textarea::placeholder{color:#1919186b}
+.cf input:focus,.cf select:focus,.cf textarea:focus{border-bottom-color:#191918}
+.cf select{appearance:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%23191918'/%3E%3C/svg%3E") no-repeat right 4px center}
+.cf-trap{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.cf-check{display:flex;align-items:flex-start;gap:12px;margin:4px 0 32px;font-size:13px;line-height:1.55;color:#4a463f}
+.cf-check input{width:18px;height:18px;margin:2px 0 0;flex:none;accent-color:#191918}
+.cf-check a,.cf-status a{text-decoration:underline;text-underline-offset:3px}
+.cf-bottom{display:flex;flex-wrap:wrap;align-items:center;gap:16px 26px}
+.cf-bottom .pill-button{min-width:250px}
+.cf-bottom .pill-button:disabled{opacity:.6;cursor:wait}
+.cf-status{flex:1 1 220px;margin:0;font-size:14px;color:#8a2f1d}
+.cf-status:empty{display:none}
+.cf-done{border-top:1px solid #19191855;padding-top:30px}
+.cf-done strong{display:block;font-family:var(--serif);font-size:clamp(30px,3vw,44px);font-weight:400;line-height:1.1}
+.cf-done p{margin:16px 0 22px;font-size:17px;color:#4a463f;max-width:440px}
+.cf-link{padding:0;border:0;background:none;color:#191918;font-size:14px;text-decoration:underline;text-underline-offset:5px}
+@media(max-width:1000px){.cx{grid-template-columns:1fr}.cx-form{padding-top:0}}
+@media(max-width:700px){.cf-row{grid-template-columns:1fr}.cf-bottom .pill-button{width:100%;min-width:0}}
