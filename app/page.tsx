@@ -11,6 +11,7 @@ import { Motion } from '@/components/motion';
 import { Footer } from '@/components/footer';
 import { Welcome } from '@/components/welcome';
 import { HeroSilk } from '@/components/hero-silk';
+import { ContactForm } from '@/components/contact-form';
 import { showcases } from '@/lib/showcases';
 
 const steps = [
@@ -31,7 +32,7 @@ export default function Home() {
           <h1>MARKETING,<br/>DAS <em>wirkt.</em></h1>
           <p className="hx-lead">Strategie, Social Media, Kampagnen und Websites – wir machen Ihre Marke sichtbar und bringen Sie zu Ihren Kunden. Alles aus einer Hand.</p>
           <div className="hx-actions">
-            <a className="pill-button light" href={`mailto:${site.email}`}>PROJEKT ANFRAGEN <ArrowUpRight size={18}/></a>
+            <a className="pill-button light" href="#contact">PROJEKT ANFRAGEN <ArrowUpRight size={18}/></a>
             <a className="pill-button outline" href="#work">PROJEKTE ANSEHEN <ArrowDown size={18}/></a>
           </div>
         </div>
@@ -66,10 +67,11 @@ export default function Home() {
         <h2>BEREIT FÜR EINEN<br/><em>starken Auftritt?</em></h2>
         <p>Schreiben Sie uns kurz, worum es geht – wir melden uns mit einem ersten Vorschlag.</p>
         <div className="cx-actions">
-          <a className="pill-button dark" href={`mailto:${site.email}`}>PROJEKT ANFRAGEN <ArrowUpRight size={18}/></a>
+          <span>ODER DIREKT PER E-MAIL</span>
           <a className="cx-mail" href={`mailto:${site.email}`}>{site.email}</a>
         </div>
       </div>
+      <div className="cx-form reveal"><ContactForm/></div>
     </section>
   </main><Footer/><Motion/></>;
 }

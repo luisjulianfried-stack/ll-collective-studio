@@ -24,7 +24,7 @@ export default function Datenschutz() {
         <p>Ein Datenschutzbeauftragter ist nicht benannt, da hierzu keine gesetzliche Pflicht besteht.</p>
 
         <h2>2. Überblick</h2>
-        <p>Diese Website ist eine statische Informationsseite. Sie verwendet keine Cookies, keine Analyse- oder Marketingdienste, keine Social-Media-Plugins und kein Kontaktformular. Schriften, Bilder, Videos und die gezeigten Konzept-Demos werden vom selben Server ausgeliefert wie die Website selbst; Inhalte von Drittanbietern werden nicht nachgeladen.</p>
+        <p>Diese Website ist eine statische Informationsseite. Sie verwendet keine Cookies, keine Analyse- oder Marketingdienste, und keine Social-Media-Plugins. Schriften, Bilder, Videos und die gezeigten Konzept-Demos werden vom selben Server ausgeliefert wie die Website selbst; Inhalte von Drittanbietern werden nicht nachgeladen. Nur wenn Sie unser Kontaktformular absenden, werden Ihre Angaben an den Formulardienst Web3Forms übermittelt (siehe Abschnitt 7).</p>
 
         <h2>3. Hosting und Server-Logdateien</h2>
         <p>Die Website wird über GitHub Pages bereitgestellt. Anbieter ist die GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA. Zur Auslieferung setzt GitHub ein Content Delivery Network ein.</p>
@@ -45,15 +45,20 @@ export default function Datenschutz() {
         <p>Für unser E-Mail-Postfach nutzen wir Gmail. Anbieter ist die Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Dabei kann eine Übermittlung an die Google LLC in den USA erfolgen, die nach dem EU-US Data Privacy Framework zertifiziert ist (Art. 45 DSGVO).</p>
         <p>Wir löschen Ihre Anfrage, sobald sie abschließend bearbeitet ist und keine gesetzlichen Aufbewahrungspflichten entgegenstehen. Für Geschäftsbriefe gelten insbesondere die Aufbewahrungsfristen nach § 257 HGB und § 147 AO.</p>
 
-        <h2>7. Links zu sozialen Netzwerken</h2>
+        <h2>7. Kontaktformular (Web3Forms)</h2>
+        <p>Wenn Sie uns über das Kontaktformular schreiben, verarbeiten wir Ihre Angaben aus dem Formular (Name, E-Mail-Adresse, optional Unternehmen und Anliegen sowie Ihre Nachricht), um Ihre Anfrage zu bearbeiten. Pflichtfelder sind mit * gekennzeichnet.</p>
+        <p>Für den Versand nutzen wir den Dienst Web3Forms, betrieben von Web3Creative mit Sitz in Indien. Beim Absenden werden Ihre Angaben zusammen mit technischen Verbindungsdaten (insbesondere Ihrer IP-Adresse) an Web3Forms übertragen und von dort als E-Mail an unser Postfach weitergeleitet. Web3Forms setzt dafür eigene Dienstleister ein (unter anderem Amazon Web Services, Hetzner und Cloudflare) und speichert die übermittelten Formulardaten nach eigenen Angaben bis zu drei Jahre. Dabei werden Daten in Länder außerhalb der EU übermittelt, für die kein Angemessenheitsbeschluss besteht; die Übermittlung erfolgt auf Grundlage der Standardvertragsklauseln der EU-Kommission (Art. 46 Abs. 2 lit. c DSGVO), die Bestandteil des Auftragsverarbeitungsvertrags von Web3Forms sind. Näheres finden Sie in der <a href="https://web3forms.com/privacy" target="_blank" rel="noreferrer">Datenschutzerklärung</a> und im <a href="https://web3forms.com/dpa" target="_blank" rel="noreferrer">Auftragsverarbeitungsvertrag</a> von Web3Forms.</p>
+        <p>Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit Ihre Anfrage mit einem Vertrag oder der Anbahnung eines Vertrags zusammenhängt, im Übrigen Art. 6 Abs. 1 lit. f DSGVO (unser berechtigtes Interesse an der Beantwortung von Anfragen). Für die weitere Bearbeitung und Löschung gilt Abschnitt 6 entsprechend. Wenn Sie den Weg über Web3Forms nicht nutzen möchten, können Sie uns jederzeit direkt per E-Mail schreiben.</p>
+
+        <h2>8. Links zu sozialen Netzwerken</h2>
         <p>Auf unser Instagram-Profil verweisen wir lediglich mit einem einfachen Link. Beim Aufruf unserer Website werden dadurch keine Daten an Instagram übermittelt. Erst wenn Sie den Link anklicken, gelangen Sie zum Angebot der Meta Platforms Ireland Limited, Merrion Road, Dublin 4, D04 X2K5, Irland. Dort gilt deren Datenschutzerklärung.</p>
 
-        <h2>8. Ihre Rechte</h2>
+        <h2>9. Ihre Rechte</h2>
         <p>Sie haben nach Maßgabe der gesetzlichen Voraussetzungen das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16 DSGVO), Löschung (Art. 17 DSGVO), Einschränkung der Verarbeitung (Art. 18 DSGVO) und Datenübertragbarkeit (Art. 20 DSGVO). Wenden Sie sich dazu einfach an die oben genannte Kontaktadresse.</p>
         <p><strong>Widerspruchsrecht (Art. 21 DSGVO):</strong> Soweit wir Ihre Daten auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO verarbeiten, können Sie aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit Widerspruch gegen diese Verarbeitung einlegen.</p>
         <p>Außerdem haben Sie das Recht, sich bei einer Datenschutzaufsichtsbehörde zu beschweren (Art. 77 DSGVO). Für uns zuständig ist das Bayerische Landesamt für Datenschutzaufsicht, Promenade 18, 91522 Ansbach, <a href="https://www.lda.bayern.de" target="_blank" rel="noreferrer">www.lda.bayern.de</a>.</p>
 
-        <h2>9. Pflicht zur Bereitstellung und automatisierte Entscheidungen</h2>
+        <h2>10. Pflicht zur Bereitstellung und automatisierte Entscheidungen</h2>
         <p>Sie sind nicht verpflichtet, uns personenbezogene Daten bereitzustellen. Ohne die technisch übermittelten Verbindungsdaten kann die Website jedoch nicht angezeigt werden, und ohne Kontaktdaten können wir Ihre Anfrage nicht beantworten. Eine automatisierte Entscheidungsfindung einschließlich Profiling findet nicht statt.</p>
 
         <p className="legal-note">Stand: Oktober 2026</p>
