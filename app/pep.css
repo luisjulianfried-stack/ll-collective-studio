@@ -1,0 +1,36 @@
+/* Laufband */
+.mq{overflow:hidden;background:#b39f86;color:#111110;padding:26px 0;border-block:1px solid #111110}
+.mq-track{display:flex;width:max-content;will-change:transform}
+.mq-word{display:inline-flex;align-items:center;gap:.55em;padding-right:.55em;font-size:clamp(44px,6.4vw,104px);font-weight:500;letter-spacing:-.06em;line-height:1;text-transform:uppercase;white-space:nowrap}
+.mq-serif{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.04em}
+.mq-word i{font-style:normal;font-size:.42em;color:#111110}
+.mq-word:nth-child(3n) {color:transparent;-webkit-text-stroke:1.5px #111110}
+
+/* Kursiv-Akzente schimmern golden */
+.hx h1 em,main h2 em{background:linear-gradient(100deg,#e6dccd 0%,#e6dccd 35%,#f3d9a8 45%,#c79a5b 52%,#e6dccd 62%,#e6dccd 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:emShine 6s 1.2s ease-in-out infinite;padding-right:.08em}
+.vx h2 em,.cx h2 em{background-image:linear-gradient(100deg,#191918 0%,#191918 35%,#9a7340 45%,#c79a5b 52%,#191918 62%,#191918 100%)}
+@keyframes emShine{0%,55%{background-position:100% 0}85%,100%{background-position:0 0}}
+
+/* Überschriften zeilenweise */
+.ln{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+.ln-i{display:inline-block;transform:translateY(105%);transition:transform 1s cubic-bezier(.2,.75,.15,1)}
+.ln-in .ln-i{transform:none}
+
+/* Leistungskarten mit Spotlight */
+.vx-card{transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s;overflow:hidden}
+.vx-card:after{content:'';position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .4s;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),#c79a5b33,transparent 60%)}
+.vx-card:hover{transform:translateY(-6px);box-shadow:0 24px 50px -28px #19191866}
+.vx-card:hover:after{opacity:1}
+.vx-card:hover .vx-num{color:#9a7340}
+.vx-card:before{background:linear-gradient(90deg,#9a7340,#c79a5b)!important}
+
+/* Cursor */
+.cursor{display:none}
+.has-cursor .cursor{display:grid;place-items:center;position:fixed;top:0;left:0;z-index:2000;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:#c79a5b;pointer-events:none;mix-blend-mode:normal;transition:width .3s,height .3s,margin .3s,background .3s}
+.has-cursor .cursor.is-link{width:44px;height:44px;margin:-22px 0 0 -22px;background:#c79a5b55;backdrop-filter:blur(2px)}
+.has-cursor .cursor.is-label{width:92px;height:92px;margin:-46px 0 0 -46px;background:#c79a5b}
+.has-cursor .cursor:after{content:attr(data-label);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#111110;opacity:0;transition:opacity .2s}
+.has-cursor .cursor.is-label:after{opacity:1}
+.pill-button,.cx-form button[type=submit]{transition:background .25s,color .25s,transform .35s cubic-bezier(.2,.7,.2,1)}
+
+@media (prefers-reduced-motion:reduce){.hx h1 em,main h2 em{animation:none}.ln-i{transform:none;transition:none}}

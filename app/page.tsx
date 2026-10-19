@@ -13,6 +13,8 @@ import { Welcome } from '@/components/welcome';
 import { HeroSilk } from '@/components/hero-silk';
 import { ContactForm } from '@/components/contact-form';
 import { showcases } from '@/lib/showcases';
+import { Marquee } from '@/components/marquee';
+import { Pep } from '@/components/pep';
 
 const steps = [
   ['01', 'Gespräch', 'Wir klären Ziel, Umfang und Zeitplan.'],
@@ -43,6 +45,7 @@ export default function Home() {
       </div>
     </section>
 
+    <Marquee/>
     <Services/>
     <ProjectGallery/>
 
@@ -73,5 +76,5 @@ export default function Home() {
       </div>
       <div className="cx-form reveal"><ContactForm/></div>
     </section>
-  </main><Footer/><Motion/></>;
+  </main><Footer/><Motion/><Pep/></>;
 }
