@@ -1,0 +1,1380 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#050307">
+<title>ÉCLAT — Energy Drink</title>
+<meta name="description" content="ÉCLAT: ein fiktives Marken- und Website-Konzept für einen Energy Drink von LL Collective Studio.">
+<meta name="robots" content="noindex,nofollow">
+
+<!-- Schriften lokal: Anton (kondensierte Headlines) + Inter (Fließtext) -->
+<link href="vendor/fonts/fonts.css" rel="stylesheet">
+
+<style>
+/* ==========================================================================
+   1. DESIGN TOKENS
+   (Die JS-CONFIG weiter unten überschreibt die Farben beim Start –
+    diese Werte sind nur Fallbacks, damit nichts "blitzt".)
+   ========================================================================== */
+:root{
+  --pink:#ff2bd6;
+  --pink-soft:#ff7ae6;
+  --cyan:#6ef9ff;
+  --black:#050307;
+  --white:#ffffff;
+  --muted:rgba(255,255,255,.62);
+  --line:rgba(255,255,255,.14);
+
+  --font-display:'Anton','Bebas Neue',Impact,'Arial Narrow',sans-serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+
+  --gutter:clamp(20px,5vw,80px);
+  --nav-h:76px;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+
+/* ==========================================================================
+   2. BASE
+   ========================================================================== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--black);-webkit-text-size-adjust:100%}
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:var(--font-body);
+  font-size:15px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit;text-decoration:none}
+body.is-loading{overflow:hidden}
+
+/* Lenis (Smooth-Scroll) Basis-Styles */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+
+/* ==========================================================================
+   3. GLOBALE OVERLAYS: Grain + Vignette
+   ========================================================================== */
+.grain{
+  position:fixed;inset:-100%;width:300%;height:300%;
+  z-index:90;pointer-events:none;opacity:.075;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation:grain 1.2s steps(6) infinite;
+}
+@keyframes grain{
+  0%,100%{transform:translate(0,0)}
+  20%{transform:translate(-4%,3%)}
+  40%{transform:translate(3%,-5%)}
+  60%{transform:translate(-6%,-2%)}
+  80%{transform:translate(5%,4%)}
+}
+.vignette{
+  position:fixed;inset:0;z-index:89;pointer-events:none;
+  background:radial-gradient(ellipse 85% 80% at 50% 50%,transparent 50%,rgba(0,0,0,.72) 100%);
+}
+
+/* ==========================================================================
+   4. TOP-NAVIGATION
+   ========================================================================== */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:80;
+  height:var(--nav-h);
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:0 var(--gutter);
+  pointer-events:none;
+}
+.topbar > *{pointer-events:auto}
+.topbar .left{justify-self:start}
+.topbar .right{justify-self:end}
+.pill-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  height:40px;padding:0 16px;border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(10,6,12,.35);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  transition:border-color .3s,background .3s,transform .3s var(--ease-out);
+}
+.pill-btn:hover{border-color:var(--pink);background:rgba(255,43,214,.12)}
+.pill-btn:active{transform:scale(.96)}
+.pill-btn:focus-visible,.dot:focus-visible,.cta:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+.burger{display:grid;gap:4px;width:16px}
+.burger i{display:block;height:1.5px;background:currentColor;border-radius:2px;transition:transform .35s var(--ease-out)}
+.burger i:last-child{width:10px}
+body.menu-open .burger i:first-child{transform:translateY(2.75px) rotate(45deg)}
+body.menu-open .burger i:last-child{width:16px;transform:translateY(-2.75px) rotate(-45deg)}
+.badge{
+  display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 6px;border-radius:99px;
+  background:var(--pink);color:#0a0209;font-size:10px;letter-spacing:0;font-weight:700;
+  box-shadow:0 0 14px var(--pink);
+}
+.badge.bump{animation:bump .5s var(--ease-out)}
+@keyframes bump{0%{transform:scale(1)}35%{transform:scale(1.5)}100%{transform:scale(1)}}
+.logo{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-display);font-size:28px;letter-spacing:.06em;line-height:1;
+  text-shadow:0 0 22px rgba(255,43,214,.55);
+}
+.logo svg{width:16px;height:22px;fill:var(--pink);filter:drop-shadow(0 0 6px var(--pink))}
+
+/* ==========================================================================
+   5. MENÜ-OVERLAY
+   ========================================================================== */
+.menu{
+  position:fixed;inset:0;z-index:75;
+  display:flex;flex-direction:column;justify-content:center;gap:4px;
+  padding:calc(var(--nav-h) + 20px) var(--gutter) 40px;
+  background:rgba(5,3,7,.86);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  opacity:0;visibility:hidden;transition:opacity .45s var(--ease-out),visibility .45s;
+}
+body.menu-open .menu{opacity:1;visibility:visible}
+.menu a{
+  display:flex;align-items:baseline;gap:18px;
+  font-family:var(--font-display);text-transform:uppercase;
+  font-size:clamp(40px,8vw,96px);line-height:1.02;
+  color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.55);
+  transform:translateY(30px);opacity:0;
+  transition:color .3s,-webkit-text-stroke-color .3s,transform .6s var(--ease-out),opacity .6s;
+}
+.menu a small{font-family:var(--font-body);font-size:12px;letter-spacing:.2em;color:var(--pink);-webkit-text-stroke:0}
+.menu a:hover{color:var(--white);-webkit-text-stroke-color:var(--white)}
+body.menu-open .menu a{transform:none;opacity:1}
+
+/* ==========================================================================
+   6. STAGE (wird von ScrollTrigger gepinnt)
+   ========================================================================== */
+.stage{
+  position:relative;
+  width:100%;
+  height:100vh;height:100svh;
+  overflow:hidden;
+}
+/* Magenta-Glow hinter der Dose. Position + Farbe werden per JS gesteuert. */
+.glow{
+  --gx:50;--gy:50;--gh:311;--gl:56;--ga:.72;--gs:56;
+  position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(circle calc(var(--gs) * 1vmax) at calc(var(--gx) * 1%) calc(var(--gy) * 1%),
+      hsla(var(--gh),100%,calc(var(--gl) * 1%),var(--ga)) 0%,
+      hsla(calc(var(--gh) + 8),100%,calc(var(--gl) * .6%),calc(var(--ga) * .5)) 34%,
+      hsla(calc(var(--gh) + 14),100%,calc(var(--gl) * .3%),calc(var(--ga) * .18)) 58%,
+      transparent 78%),
+    radial-gradient(130% 70% at 50% 125%,hsla(var(--gh),100%,32%,.28),transparent 62%),
+    var(--black);
+}
+/* Riesige Outline-Wortmarke hinter der Dose */
+.wordmark{
+  position:absolute;inset:0;z-index:1;
+  display:flex;align-items:center;justify-content:center;padding-bottom:2vh;
+  font-family:var(--font-display);font-size:34vw;line-height:.8;letter-spacing:.02em;
+  color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.10);
+  white-space:nowrap;user-select:none;pointer-events:none;
+}
+#webgl{position:absolute;inset:0;width:100%;height:100%;z-index:2;display:block;pointer-events:none}
+
+/* ---------- Hero-UI ---------- */
+.hero{position:absolute;inset:0;z-index:3;pointer-events:none}
+.hero-eyebrow{
+  position:absolute;top:calc(var(--nav-h) + 14px);left:0;right:0;
+  display:flex;align-items:center;justify-content:center;gap:12px;white-space:nowrap;
+  font-size:11px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);
+}
+.hero-eyebrow::before,.hero-eyebrow::after{content:"";width:28px;height:1px;background:var(--pink)}
+.scroll-hint{
+  position:absolute;left:var(--gutter);bottom:36px;
+  display:flex;align-items:center;gap:14px;
+  font-size:10px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);
+}
+.scroll-hint .mouse{width:18px;height:28px;border:1.5px solid rgba(255,255,255,.5);border-radius:10px;position:relative}
+.scroll-hint .mouse::after{content:"";position:absolute;left:50%;top:6px;width:2px;height:6px;margin-left:-1px;border-radius:2px;background:var(--pink);animation:wheel 1.6s var(--ease-out) infinite}
+@keyframes wheel{0%{opacity:0;transform:translateY(-3px)}30%{opacity:1}100%{opacity:0;transform:translateY(8px)}}
+.hero-specs{
+  position:absolute;right:calc(var(--gutter) + 40px);bottom:36px;text-align:right;
+  font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);line-height:2;
+}
+.hero-specs b{color:var(--white);font-weight:600}
+
+/* ---------- Geschmacksname + Progress-Bar ---------- */
+.flavor-bar{
+  position:absolute;left:0;right:0;margin:0 auto;bottom:34px;z-index:4;
+  width:min(340px,70vw);text-align:center;pointer-events:none;
+  transition:opacity .5s var(--ease-out),transform .5s var(--ease-out);
+}
+.flavor-label{display:block;font-size:10px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--pink);margin-bottom:6px}
+.flavor-name{display:block;font-family:var(--font-display);font-size:clamp(26px,2.6vw,38px);letter-spacing:.04em;line-height:1;margin-bottom:14px}
+.progress-row{display:flex;align-items:center;gap:14px;font-size:10px;font-weight:600;letter-spacing:.18em;color:var(--muted)}
+.progress{flex:1;height:2px;background:rgba(255,255,255,.14);border-radius:2px;overflow:hidden}
+.progress span{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--pink-soft),var(--pink));box-shadow:0 0 12px var(--pink);transform-origin:left;transform:scaleX(0)}
+.progress-row b{color:var(--white);font-weight:600}
+
+/* ---------- Text-Block links ---------- */
+.copy{
+  position:absolute;z-index:4;
+  left:var(--gutter);top:50%;transform:translateY(-46%);
+  width:min(560px,44vw);
+}
+.line{display:block;overflow:hidden;padding-top:.1em;margin-top:-.1em}
+.inner{display:inline-block;position:relative;will-change:transform}
+.chip-line{margin-bottom:22px}
+.chip{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:7px 14px 7px 10px;border-radius:99px;
+  border:1px solid rgba(255,43,214,.45);background:rgba(255,43,214,.08);
+  font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
+}
+.chip i{width:7px;height:7px;border-radius:50%;background:var(--pink);box-shadow:0 0 10px var(--pink)}
+.headline{
+  font-family:var(--font-display);font-weight:400;text-transform:uppercase;
+  font-size:clamp(52px,7.2vw,124px);line-height:.92;letter-spacing:.005em;
+  margin-bottom:26px;
+}
+.headline.long{font-size:clamp(46px,5.6vw,96px)}
+.desc{max-width:400px;font-size:15px;font-weight:300;line-height:1.65;color:rgba(255,255,255,.78)}
+.desc .line{padding-top:0;margin-top:0}
+.cta-line{margin-top:34px;overflow:visible}
+.cta{
+  display:inline-flex;align-items:center;gap:14px;
+  height:56px;padding:0 10px 0 28px;border-radius:99px;
+  background:var(--pink);color:#0a0209;
+  font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  box-shadow:0 0 0 0 rgba(255,43,214,.6),0 10px 40px rgba(255,43,214,.45);
+  transition:transform .35s var(--ease-out),box-shadow .35s;
+  pointer-events:auto;
+}
+.cta:hover{transform:translateY(-2px);box-shadow:0 0 0 6px rgba(255,43,214,.18),0 16px 50px rgba(255,43,214,.6)}
+.cta span.arrow{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#0a0209;color:var(--pink)}
+.cta svg{width:14px;height:14px;transition:transform .35s var(--ease-out)}
+.cta:hover svg{transform:translateX(3px)}
+
+/* Glitch-Effekt (Pseudo-Elemente mit Farbversatz) */
+.glitch::before,.glitch::after{
+  content:attr(data-text);position:absolute;left:0;top:0;width:100%;
+  opacity:0;pointer-events:none;
+}
+.is-glitch .glitch::before{color:var(--pink);opacity:.9;animation:glitchA .55s steps(2,end) both}
+.is-glitch .glitch::after{color:var(--cyan);opacity:.75;animation:glitchB .55s steps(2,end) both}
+@keyframes glitchA{
+  0%{clip-path:inset(12% 0 62% 0);transform:translate(-7px,0)}
+  25%{clip-path:inset(55% 0 18% 0);transform:translate(6px,0)}
+  50%{clip-path:inset(30% 0 45% 0);transform:translate(-4px,0)}
+  75%{clip-path:inset(78% 0 4% 0);transform:translate(3px,0)}
+  100%{clip-path:inset(0 0 100% 0);transform:none;opacity:0}
+}
+@keyframes glitchB{
+  0%{clip-path:inset(65% 0 10% 0);transform:translate(6px,0)}
+  25%{clip-path:inset(8% 0 70% 0);transform:translate(-5px,0)}
+  50%{clip-path:inset(40% 0 38% 0);transform:translate(4px,0)}
+  75%{clip-path:inset(20% 0 66% 0);transform:translate(-3px,0)}
+  100%{clip-path:inset(0 0 100% 0);transform:none;opacity:0}
+}
+
+/* ==========================================================================
+   7. RECHTE PUNKT-NAVIGATION
+   ========================================================================== */
+.dots{
+  position:fixed;z-index:70;
+  right:calc(var(--gutter) * .55);top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:18px;
+  transition:opacity .5s;
+}
+.dots::before{content:"";position:absolute;top:6px;bottom:6px;left:50%;width:1px;background:var(--line);z-index:-1}
+.dot{
+  position:relative;width:14px;height:14px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.55);background:var(--black);
+  transition:transform .4s var(--ease-out),background .3s,border-color .3s,box-shadow .3s;
+}
+.dot:hover{border-color:var(--pink);transform:scale(1.2)}
+.dot.is-active{background:var(--pink);border-color:var(--pink);box-shadow:0 0 0 5px rgba(255,43,214,.18),0 0 18px var(--pink);transform:scale(1.15)}
+.dot-label{
+  position:absolute;right:26px;top:50%;transform:translate(8px,-50%);
+  white-space:nowrap;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  opacity:0;pointer-events:none;transition:opacity .3s,transform .4s var(--ease-out);
+}
+.dot:hover .dot-label,.dot.is-active .dot-label{opacity:1;transform:translate(0,-50%)}
+.dot.is-active .dot-label{color:var(--pink)}
+.dots.is-hidden{opacity:0;pointer-events:none}
+
+/* ==========================================================================
+   8. FOOTER / GAMME
+   ========================================================================== */
+.range{
+  position:relative;z-index:5;
+  padding:120px var(--gutter) 60px;
+  background:linear-gradient(180deg,var(--black),#0d0510 60%,#12051a);
+  border-top:1px solid var(--line);
+}
+.range h3{font-family:var(--font-display);font-weight:400;text-transform:uppercase;font-size:clamp(40px,6vw,88px);line-height:.95;max-width:12ch}
+.range h3 em{font-style:normal;color:var(--pink)}
+.range > p{margin:18px 0 56px;color:var(--muted);max-width:44ch}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{
+  position:relative;overflow:hidden;
+  border:1px solid var(--line);border-radius:22px;padding:26px;min-height:260px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  background:radial-gradient(90% 80% at 50% 0%,color-mix(in srgb,var(--c) 40%,transparent),transparent 70%),#0b060d;
+  transition:transform .5s var(--ease-out),border-color .3s;
+}
+.card:hover{transform:translateY(-6px);border-color:var(--c)}
+.card .mini-can{
+  position:absolute;top:26px;right:26px;width:54px;height:110px;border-radius:10px/8px;
+  background:linear-gradient(90deg,#1a0b1c 0%,var(--c) 30%,#fff5 42%,var(--c) 55%,#12060f 100%);
+  box-shadow:0 0 40px color-mix(in srgb,var(--c) 60%,transparent);
+}
+.card small{font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--c)}
+.card h4{font-family:var(--font-display);font-weight:400;font-size:34px;line-height:1;margin:8px 0 18px}
+.card button{
+  align-self:flex-start;height:40px;padding:0 18px;border-radius:99px;border:1px solid var(--line);
+  font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;transition:background .3s,border-color .3s,color .3s;
+}
+.card button:hover{background:var(--c);border-color:var(--c);color:#0a0209}
+.legal{
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;
+  margin-top:90px;padding-top:24px;border-top:1px solid var(--line);
+  font-size:11px;color:rgba(255,255,255,.45);letter-spacing:.04em;
+}
+
+/* ==========================================================================
+   9. LOADER
+   ========================================================================== */
+.loader{
+  position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:var(--black);
+  transition:opacity .8s var(--ease-out),visibility .8s;
+}
+.loader.is-done{opacity:0;visibility:hidden}
+.loader-inner{text-align:center}
+.loader-logo{font-family:var(--font-display);font-size:64px;letter-spacing:.06em;line-height:1;text-shadow:0 0 30px rgba(255,43,214,.6)}
+.loader-bar{width:160px;height:2px;margin:18px auto 10px;background:rgba(255,255,255,.12);overflow:hidden;border-radius:2px}
+.loader-bar span{display:block;height:100%;width:0;background:var(--pink);box-shadow:0 0 10px var(--pink);transition:width .3s}
+.loader-pct{font-size:10px;letter-spacing:.3em;color:var(--muted)}
+.no-webgl .wordmark{-webkit-text-stroke-color:rgba(255,43,214,.5)}
+
+/* ==========================================================================
+   10. RESPONSIVE (Mobile: Text unter der Dose, Navigation unten)
+   ========================================================================== */
+@media (max-width:900px){
+  .copy{width:min(520px,52vw)}
+  .hero-specs{display:none}
+}
+@media (max-width:767px), (max-aspect-ratio:4/5){
+  :root{--nav-h:64px}
+  .pill-btn{width:40px;padding:0;justify-content:center}
+  .pill-btn .label{display:none}
+  .pill-btn .badge{position:absolute;top:-4px;right:-6px}
+  .pill-btn{position:relative}
+  .logo{font-size:24px}
+
+  .copy{
+    left:20px;right:20px;width:auto;
+    top:auto;bottom:74px;transform:none;
+  }
+  .chip-line{margin-bottom:14px}
+  .headline,.headline.long{font-size:clamp(40px,12vw,64px);margin-bottom:14px}
+  .desc{font-size:13.5px;max-width:none}
+  .cta-line{margin-top:18px}
+  .cta{height:50px}
+
+  .dots{
+    top:auto;bottom:22px;right:50%;transform:translateX(50%);
+    flex-direction:row;gap:16px;
+  }
+  .dots::before{top:50%;bottom:auto;left:6px;right:6px;width:auto;height:1px}
+  .dot-label{display:none}
+
+  .flavor-bar{bottom:66px}
+  body:not(.is-hero) .flavor-bar{opacity:0;transform:translateY(12px)}
+  .scroll-hint{display:none}
+  .hero-eyebrow{font-size:9px;letter-spacing:.22em}
+  .wordmark{font-size:44vw;padding-bottom:22vh}
+
+  .cards{grid-template-columns:1fr}
+  .range{padding-top:80px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .grain{animation:none}
+  .scroll-hint .mouse::after{animation:none}
+}
+</style>
+</head>
+<body>
+<script>document.body.classList.add("is-loading","is-hero")</script>
+
+<!-- ============================ LOADER ============================ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-inner">
+    <div class="loader-logo" data-bind="brand">ÉCLAT</div>
+    <div class="loader-bar"><span id="loaderBar"></span></div>
+    <div class="loader-pct" id="loaderPct">0%</div>
+  </div>
+</div>
+
+<!-- ============================ OVERLAYS ============================ -->
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<!-- ============================ TOP-NAV ============================ -->
+<header class="topbar">
+  <button class="pill-btn left" id="menuBtn" aria-expanded="false" aria-controls="menu">
+    <span class="burger" aria-hidden="true"><i></i><i></i></span>
+    <span class="label" data-bind="ui.menu">Menu</span>
+  </button>
+  <a class="logo" href="#" id="logo" aria-label="Home">
+    <svg viewBox="0 0 16 22" aria-hidden="true"><path d="M10 0 0 13h6l-2 9L16 8h-6.5z"/></svg>
+    <span data-bind="brand">ÉCLAT</span>
+  </a>
+  <button class="pill-btn right" id="cartBtn" aria-label="Cart">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+    <span class="label" data-bind="ui.cart">Cart</span>
+    <span class="badge" id="cartCount">0</span>
+  </button>
+</header>
+
+<!-- ============================ MENÜ ============================ -->
+<nav class="menu" id="menu" aria-label="Sections"></nav>
+
+<!-- ============================ PUNKT-NAV ============================ -->
+<nav class="dots is-hidden" id="dots" aria-label="Progress"></nav>
+
+<!-- ============================ STAGE (pinned) ============================ -->
+<main class="stage" id="stage">
+  <div class="glow" id="glow"></div>
+  <div class="wordmark" id="wordmark" aria-hidden="true" data-bind="brand">ÉCLAT</div>
+  <canvas id="webgl" aria-label="3D can"></canvas>
+
+  <!-- Hero-UI (nur im Intro sichtbar) -->
+  <div class="hero" id="hero">
+    <div class="hero-eyebrow" data-bind="hero.eyebrow"></div>
+    <div class="scroll-hint"><span class="mouse"></span><span data-bind="ui.scrollHint"></span></div>
+    <div class="hero-specs" id="heroSpecs"></div>
+  </div>
+
+  <!-- Geschmacksname + Progress-Bar -->
+  <div class="flavor-bar" id="flavorBar">
+    <span class="flavor-label" data-bind="hero.flavorLabel"></span>
+    <span class="flavor-name" id="flavorName"></span>
+    <div class="progress-row">
+      <b id="counterCur">01</b>
+      <div class="progress"><span id="progressFill"></span></div>
+      <span id="counterTotal">05</span>
+    </div>
+  </div>
+
+  <!-- Wechselnder Text links (wird per JS gerendert) -->
+  <div class="copy" id="copy" aria-live="polite"></div>
+</main>
+
+<!-- ============================ GAMME / FOOTER ============================ -->
+<section class="range" id="decouvrir">
+  <h3 id="rangeTitle"></h3>
+  <p id="rangeText"></p>
+  <div class="cards" id="cards"></div>
+  <div class="legal">
+    <span id="legalText"></span>
+    <span id="copyright"></span>
+  </div>
+</section>
+
+<!-- ============================ LIBRARIES ============================ -->
+<script src="vendor/three.min.js"></script>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
+
+<script>
+(() => {
+'use strict';
+
+/* ==========================================================================
+   CONFIG — alle Texte, Farben, Posen und Einstellungen zentral an einer Stelle
+   ========================================================================== */
+const CONFIG = {
+  brand: 'ÉCLAT',
+
+  colors: {
+    pink:     '#ff2bd6',
+    pinkSoft: '#ff7ae6',
+    cyan:     '#6ef9ff',
+    black:    '#050307',
+    white:    '#ffffff',
+  },
+
+  // Etiketten der drei Dosen (Mitte = Hauptdose = Index 0)
+  flavors: [
+    { name: 'APPLE RHUBARB',  accent: '#ff2bd6', deep: '#3d0636' },
+    { name: 'RASPBERRY YUZU', accent: '#b04dff', deep: '#22093f' },
+    { name: 'BLACK CHERRY',   accent: '#ff3b6b', deep: '#3f0615' },
+  ],
+
+  label: {
+    topBand:  'ENERGY DRINK  •  250 ML  •  ',
+    claim:    '80 MG NATURAL CAFFEINE',
+    nutritionTitle: ['NUTRITION FACTS', 'PER 100 ML'],
+    nutrition: [['Energy', '19 kcal'], ['Carbohydrates', '4.7 g'], ['of which sugars', '4.5 g'], ['Caffeine', '32 mg'], ['Salt', '0.05 g']],
+  },
+
+  ui: {
+    menu: 'Menu',
+    cart: 'Cart',
+    scrollHint: 'Scroll to discover',
+  },
+
+  hero: {
+    eyebrow: 'New recipe — Neon edition',
+    flavorLabel: 'Flavor',
+    specs: ['<b>250 ml</b> — aluminium can', '<b>80 mg</b> natural caffeine'],
+  },
+
+  /* Abschnitte. pose = Dose (x/y in Welt-Einheiten, Rotation in Radiant, s = Scale)
+     glow = Hintergrund-Glow (h = Farbton, l = Helligkeit %, a = Deckkraft, size = Radius in vmax) */
+  sections: [
+    {
+      nav: 'Intro',
+      copy: null, // Intro nutzt die Hero-UI
+      pose: { x: 0,    y: 0.05,  rx: 0.10, ry: 0,       rz: -0.10, s: 0.80 },
+      glow: { h: 311, l: 56, a: 0.72, size: 56 },
+    },
+    {
+      nav: 'Sugar',
+      copy: {
+        chip: '01 — Recipe',
+        title: ['Less', 'sugar'],
+        text: ['Just 4.5 g of sugar per 100 ml —', '70% less than a regular energy drink,', 'with all of the kick.'],
+      },
+      pose: { x: 1.35, y: 0.00,  rx: 0.12, ry: Math.PI * 2,        rz: -0.22, s: 1.02 },
+      glow: { h: 318, l: 54, a: 0.66, size: 58 },
+    },
+    {
+      nav: 'Flavors',
+      copy: {
+        chip: '02 — Taste',
+        title: ['Natural', 'flavors'],
+        text: ['Crisp apple and tangy rhubarb.', 'No artificial flavors, no colorings —', 'just fruit, turned electric.'],
+      },
+      pose: { x: 1.55, y: 0.05,  rx: 0.26, ry: Math.PI * 3 + 0.35, rz: 0.30,  s: 1.08 },
+      glow: { h: 326, l: 57, a: 0.70, size: 62 },
+    },
+    {
+      nav: 'Caffeine',
+      copy: {
+        chip: '03 — Energy',
+        title: ['Caffeine from', 'coffee', 'beans'],
+        long: true,
+        text: ['80 mg of natural caffeine per can,', 'extracted from green coffee beans.', 'A clean boost, without the crash.'],
+      },
+      pose: { x: 1.10, y: -0.08, rx: 0.42, ry: Math.PI * 4 - 0.45, rz: -0.72, s: 1.24 },
+      glow: { h: 304, l: 62, a: 0.95, size: 76 },
+    },
+    {
+      nav: 'Stevia',
+      copy: {
+        chip: '04 — Sweetness',
+        title: ['Stevia'],
+        text: ['A touch of plant-based stevia', 'to round off the tartness —', 'zero artificial sweeteners.'],
+        cta: 'Discover now',
+      },
+      pose: { x: 1.30, y: 0.08,  rx: 0.04, ry: Math.PI * 4,        rz: 0,     s: 0.90 },
+      glow: { h: 320, l: 52, a: 0.70, size: 52 },
+    },
+  ],
+
+  range: {
+    title: 'Three flavors.<br><em>One spark.</em>',
+    text: 'The full ÉCLAT range: less sugar, natural flavors, caffeine from coffee beans.',
+    button: 'Add to cart',
+    tag: 'Neon edition',
+    legal: 'High caffeine content. Not recommended for children or pregnant or breastfeeding women.',
+    copyright: '© 2026 ÉCLAT — fictional brand · A concept by LL Collective Studio',
+  },
+
+  scroll: {
+    perSection: 1.15,  // Scroll-Länge pro Abschnitt in Viewport-Höhen
+    scrub: 1.1,        // Trägheit der Timeline (Sekunden)
+    lerp: 0.085,       // Lenis-Glättung
+    snap: false,       // true = rastet auf Abschnitte ein
+  },
+
+  render: {
+    maxPixelRatio: 2,
+    fov: 30,
+    exposure: 1.05,
+    particles: 140,
+  },
+
+  mobileBreakpoint: 768,
+};
+
+/* ==========================================================================
+   HELPERS
+   ========================================================================== */
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const pad = n => String(n).padStart(2, '0');
+const prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function hexToRgba(hex, a = 1) {
+  const n = parseInt(hex.replace('#', ''), 16);
+  return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
+}
+function getPath(obj, path) { return path.split('.').reduce((o, k) => (o ? o[k] : undefined), obj); }
+
+/* ==========================================================================
+   1. CONFIG → DOM (Farben als CSS-Variablen, statische Texte)
+   ========================================================================== */
+(function applyConfig() {
+  const root = document.documentElement.style;
+  root.setProperty('--pink', CONFIG.colors.pink);
+  root.setProperty('--pink-soft', CONFIG.colors.pinkSoft);
+  root.setProperty('--cyan', CONFIG.colors.cyan);
+  root.setProperty('--black', CONFIG.colors.black);
+  root.setProperty('--white', CONFIG.colors.white);
+
+  $$('[data-bind]').forEach(el => {
+    const key = el.dataset.bind;
+    el.textContent = key === 'brand' ? CONFIG.brand : getPath(CONFIG, key) ?? '';
+  });
+
+  $('#flavorName').textContent = CONFIG.flavors[0].name;
+  $('#counterTotal').textContent = pad(CONFIG.sections.length);
+  $('#heroSpecs').innerHTML = CONFIG.hero.specs.join('<br>');
+
+  // Footer / Gamme
+  $('#rangeTitle').innerHTML = CONFIG.range.title;
+  $('#rangeText').textContent = CONFIG.range.text;
+  $('#legalText').textContent = CONFIG.range.legal;
+  $('#copyright').textContent = CONFIG.range.copyright;
+  $('#cards').innerHTML = CONFIG.flavors.map(f => `
+    <article class="card" style="--c:${f.accent}">
+      <div class="mini-can" aria-hidden="true"></div>
+      <small>${CONFIG.range.tag}</small>
+      <h4>${f.name}</h4>
+      <button type="button" class="add-to-cart">${CONFIG.range.button}</button>
+    </article>`).join('');
+})();
+
+/* ==========================================================================
+   2. NAVIGATION (Punkte + Menü) aufbauen
+   ========================================================================== */
+const dotsEl = $('#dots');
+const menuEl = $('#menu');
+CONFIG.sections.forEach((s, i) => {
+  const b = document.createElement('button');
+  b.className = 'dot';
+  b.type = 'button';
+  b.setAttribute('aria-label', s.nav);
+  b.innerHTML = `<span class="dot-label">${s.nav}</span>`;
+  b.addEventListener('click', () => goToSection(i));
+  dotsEl.appendChild(b);
+
+  const a = document.createElement('a');
+  a.href = '#';
+  a.innerHTML = `<small>${pad(i + 1)}</small>${s.nav}`;
+  a.style.transitionDelay = `${0.05 + i * 0.05}s`;
+  a.addEventListener('click', e => { e.preventDefault(); toggleMenu(false); goToSection(i); });
+  menuEl.appendChild(a);
+});
+const dotEls = $$('.dot', dotsEl);
+
+function toggleMenu(force) {
+  const open = force ?? !document.body.classList.contains('menu-open');
+  document.body.classList.toggle('menu-open', open);
+  $('#menuBtn').setAttribute('aria-expanded', open);
+  if (lenis) open ? lenis.stop() : lenis.start();
+}
+$('#menuBtn').addEventListener('click', () => toggleMenu());
+addEventListener('keydown', e => { if (e.key === 'Escape') toggleMenu(false); });
+$('#logo').addEventListener('click', e => { e.preventDefault(); goToSection(0); });
+
+// Warenkorb-Zähler (Demo)
+let cart = 0;
+function addToCart() {
+  const badge = $('#cartCount');
+  badge.textContent = ++cart;
+  badge.classList.remove('bump'); void badge.offsetWidth; badge.classList.add('bump');
+}
+$$('.add-to-cart').forEach(b => b.addEventListener('click', addToCart));
+
+/* ==========================================================================
+   3. SMOOTH SCROLL (Lenis) + GSAP-Anbindung
+   ========================================================================== */
+gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({ ignoreMobileResize: true });
+
+let lenis = null;
+if (typeof Lenis !== 'undefined' && !prefersReducedMotion) {
+  lenis = new Lenis({ lerp: CONFIG.scroll.lerp, smoothWheel: true });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(time => lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+  lenis.stop(); // während des Loaders
+}
+function scrollToY(y, duration = 1.6) {
+  if (lenis) lenis.scrollTo(y, { duration, easing: t => (t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2) });
+  else window.scrollTo({ top: y, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+}
+
+/* ==========================================================================
+   4. THREE.JS — Szene, Kamera, Renderer
+   ========================================================================== */
+const stage = $('#stage');
+const canvas = $('#webgl');
+const glowEl = $('#glow');
+const N = CONFIG.sections.length;
+
+let renderer, scene, camera;
+let webglOK = true;
+try {
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+} catch (err) {
+  webglOK = false;
+  document.body.classList.add('no-webgl');
+  console.warn('WebGL nicht verfügbar:', err);
+}
+
+// Animierbare Zustände (werden von der GSAP-Timeline verändert und im Render-Loop gelesen)
+const P = { ...CONFIG.sections[0].pose };                         // Hauptdose
+const SIDE = { off: 2.45, y: 0, spin: 0, s: 0.68 };               // Seitendosen
+const G = { ...CONFIG.sections[0].glow };                          // Glow
+const INTRO = { y0: -7, y1: -7, y2: -7 };                          // Einflug nach Loader
+const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
+let layout = {};
+let mainCan, sideCans = [], particles;
+
+if (webglOK) {
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, CONFIG.render.maxPixelRatio));
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = CONFIG.render.exposure;
+  renderer.setClearColor(0x000000, 0);
+
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(CONFIG.render.fov, 1, 0.1, 100);
+  camera.position.set(0, 0, 10);
+}
+
+/* ---------- Environment-Map (HDRI-ähnlich, prozedural aus Leuchtflächen) ---------- */
+function buildEnvironment() {
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  const env = new THREE.Scene();
+  env.add(new THREE.Mesh(
+    new THREE.SphereGeometry(30, 32, 16),
+    new THREE.MeshBasicMaterial({ color: 0x08040b, side: THREE.BackSide })
+  ));
+  const panel = (w, h, color, intensity, pos) => {
+    const m = new THREE.Mesh(
+      new THREE.PlaneGeometry(w, h),
+      new THREE.MeshBasicMaterial({ color: new THREE.Color(color).multiplyScalar(intensity), side: THREE.DoubleSide })
+    );
+    m.position.set(...pos);
+    m.lookAt(0, 0, 0);
+    env.add(m);
+  };
+  panel(6, 12, '#ffffff', 3.2, [-8, 3, 7]);               // Key-Softbox links vorne
+  panel(2.5, 16, '#ffffff', 1.8, [9, 1, 5]);              // Streifenlicht rechts
+  panel(9, 12, CONFIG.colors.pink, 3.0, [7, 0, -8]);      // pinkes Rim hinten rechts
+  panel(8, 12, CONFIG.colors.pink, 1.6, [-9, -1, -6]);    // pinkes Rim hinten links
+  panel(18, 4, CONFIG.colors.pink, 1.2, [0, -10, 3]);     // Boden-Reflex
+  panel(12, 5, '#b8c6ff', 0.6, [0, 11, 0]);               // kühles Top-Light
+  const tex = pmrem.fromScene(env, 0.035).texture;
+  pmrem.dispose();
+  return tex;
+}
+
+/* ---------- Label-Textur (Canvas) ---------- */
+function makeLabelTexture(flavor) {
+  const W = 2048, H = 1024;
+  const c = document.createElement('canvas');
+  c.width = W; c.height = H;
+  const x = c.getContext('2d');
+  const brand = CONFIG.brand;
+  const panels = [512, 1536]; // Vorder- und Rückseite (u = 0.25 / 0.75)
+
+  // Grundverlauf
+  let g = x.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, '#0b050c');
+  g.addColorStop(0.5, '#060308');
+  g.addColorStop(1, flavor.deep);
+  x.fillStyle = g;
+  x.fillRect(0, 0, W, H);
+
+  panels.forEach(cx => {
+    // Neon-Glow hinter der Marke
+    const rg = x.createRadialGradient(cx, H * 0.6, 20, cx, H * 0.6, 520);
+    rg.addColorStop(0, hexToRgba(flavor.accent, 0.9));
+    rg.addColorStop(0.4, hexToRgba(flavor.accent, 0.3));
+    rg.addColorStop(1, hexToRgba(flavor.accent, 0));
+    x.fillStyle = rg;
+    x.fillRect(cx - 520, 0, 1040, H);
+
+    // Diagonale Speed-Streifen (auf das Panel beschnitten → keine Naht)
+    x.save();
+    x.beginPath(); x.rect(cx - 470, 84, 940, H - 184); x.clip();
+    x.translate(cx, H / 2); x.rotate(-0.38);
+    for (let i = 0; i < 7; i++) {
+      x.fillStyle = hexToRgba(flavor.accent, 0.08 + i * 0.05);
+      x.fillRect(-900, 60 + i * 44, 1800, 6 + i * 3);
+    }
+    x.restore();
+  });
+
+  // Feine Scanlines
+  x.fillStyle = 'rgba(255,255,255,0.03)';
+  for (let y = 0; y < H; y += 6) x.fillRect(0, y, W, 1);
+
+  // Nahtloser Text-Loop über die gesamte Breite
+  const loopText = (text, y, font, color) => {
+    x.font = font; x.fillStyle = color; x.textBaseline = 'middle'; x.textAlign = 'left';
+    const w = x.measureText(text).width;
+    const count = Math.max(1, Math.floor(W / w));
+    const step = W / count;
+    for (let i = 0; i < count; i++) x.fillText(text, i * step, y);
+  };
+
+  // Oberes Band
+  x.fillStyle = '#000'; x.fillRect(0, 0, W, 78);
+  x.fillStyle = flavor.accent; x.fillRect(0, 78, W, 5);
+  loopText(CONFIG.label.topBand, 41, '500 30px Inter, sans-serif', 'rgba(255,255,255,.85)');
+
+  // Unteres Band
+  x.fillStyle = flavor.accent; x.fillRect(0, H - 92, W, 92);
+  loopText(`${flavor.name}   ✦   `, H - 44, '400 46px Anton, Impact, sans-serif', '#0a0409');
+
+  // Markenpanels (vertikaler Schriftzug)
+  panels.forEach(cx => {
+    x.save();
+    x.translate(cx, H / 2 - 4);
+    x.rotate(-Math.PI / 2); // lokale x-Achse zeigt nach oben (entlang der Dose)
+    x.textAlign = 'center'; x.textBaseline = 'middle';
+
+    let size = 280;
+    x.font = `400 ${size}px Anton, Impact, sans-serif`;
+    const maxLen = 760;
+    const len = x.measureText(brand).width;
+    if (len > maxLen) { size *= maxLen / len; x.font = `400 ${size}px Anton, Impact, sans-serif`; }
+
+    // Outline-Echo rechts
+    x.lineWidth = 3;
+    x.strokeStyle = hexToRgba(flavor.accent, 0.95);
+    x.strokeText(brand, 0, size * 0.86);
+
+    // Leuchtender Hauptschriftzug
+    x.shadowColor = flavor.accent; x.shadowBlur = 60;
+    x.fillStyle = '#ffffff';
+    x.fillText(brand, 0, -8);
+    x.shadowBlur = 0;
+    x.fillText(brand, 0, -8);
+
+    // Sortenname links
+    x.font = '400 54px Anton, Impact, sans-serif';
+    x.fillStyle = flavor.accent;
+    x.fillText(flavor.name, 0, -size * 0.8);
+    x.restore();
+
+    // Claim unten
+    x.font = '600 24px Inter, sans-serif';
+    x.textAlign = 'center';
+    x.fillStyle = 'rgba(255,255,255,.8)';
+    x.fillText(CONFIG.label.claim, cx, H - 128);
+  });
+
+  // Seitenpanel (u = 0.5): Nährwerte + Barcode
+  const nx = 1024;
+  x.textAlign = 'center';
+  x.fillStyle = 'rgba(255,255,255,.9)';
+  x.font = '700 22px Inter, sans-serif';
+  CONFIG.label.nutritionTitle.forEach((t, i) => x.fillText(t, nx, 190 + i * 30));
+  x.fillStyle = hexToRgba(flavor.accent, 1);
+  x.fillRect(nx - 130, 240, 260, 3);
+  x.font = '400 21px Inter, sans-serif';
+  CONFIG.label.nutrition.forEach(([k, v], i) => {
+    const y = 280 + i * 38;
+    x.textAlign = 'left'; x.fillStyle = 'rgba(255,255,255,.7)'; x.fillText(k, nx - 130, y);
+    x.textAlign = 'right'; x.fillStyle = '#fff'; x.fillText(v, nx + 130, y);
+    x.fillStyle = 'rgba(255,255,255,.15)'; x.fillRect(nx - 130, y + 18, 260, 1);
+  });
+  // Barcode
+  x.fillStyle = '#fff'; x.fillRect(nx - 100, 520, 200, 130);
+  x.fillStyle = '#000';
+  let bx = nx - 88, seed = 7;
+  while (bx < nx + 88) {
+    seed = (seed * 9301 + 49297) % 233280;
+    const w = 2 + Math.floor((seed / 233280) * 5);
+    x.fillRect(bx, 532, w, 96);
+    bx += w + 2 + Math.floor((seed / 233280) * 4);
+  }
+  x.textAlign = 'center'; x.font = '500 14px Inter, sans-serif';
+  x.fillText('3 760123 456789', nx, 640);
+
+  const tex = new THREE.CanvasTexture(c);
+  tex.encoding = THREE.sRGBEncoding;
+  tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  return tex;
+}
+
+/* ---------- Dose (prozedural) ---------- */
+const CAN_R = 1, CAN_H = 3.2;
+let metalMat, darkMetalMat;
+
+function buildCan(flavor) {
+  const group = new THREE.Group();
+  group.rotation.order = 'XZY'; // erst um eigene Achse drehen, dann neigen
+
+  const labelTex = makeLabelTexture(flavor);
+  const labelMat = new THREE.MeshPhysicalMaterial({
+    map: labelTex,
+    metalness: 0.5,
+    roughness: 0.28,
+    clearcoat: 1,
+    clearcoatRoughness: 0.08,
+    envMapIntensity: 1.15,
+    emissive: 0xffffff,
+    emissiveMap: labelTex,
+    emissiveIntensity: 0.1,
+  });
+
+  // Körper: CylinderGeometry, thetaStart so gewählt, dass u = 0.25 zur Kamera zeigt
+  const body = new THREE.Mesh(
+    new THREE.CylinderGeometry(CAN_R, CAN_R, CAN_H, 128, 1, true, -Math.PI / 2, Math.PI * 2),
+    labelMat
+  );
+  group.add(body);
+
+  // Deckel mit Schulter, Bördelrand und vertieftem Lid (LatheGeometry)
+  const top = [
+    [1.000, 1.60], [0.996, 1.66], [0.975, 1.72], [0.935, 1.79], [0.890, 1.86], [0.868, 1.905],
+    [0.872, 1.94], [0.862, 1.965], [0.842, 1.972], [0.826, 1.958], [0.820, 1.93], [0.812, 1.90],
+    [0.795, 1.884], [0.60, 1.880], [0.30, 1.878], [0.0, 1.878],
+  ].map(([r, y]) => new THREE.Vector2(r, y));
+  group.add(new THREE.Mesh(new THREE.LatheGeometry(top, 128), metalMat));
+
+  // Boden mit Dom
+  const bottom = [
+    [1.000, -1.60], [0.992, -1.66], [0.962, -1.72], [0.905, -1.79], [0.845, -1.83], [0.790, -1.842],
+    [0.750, -1.832], [0.720, -1.80], [0.600, -1.745], [0.350, -1.705], [0.0, -1.695],
+  ].map(([r, y]) => new THREE.Vector2(r, y));
+  group.add(new THREE.Mesh(new THREE.LatheGeometry(bottom, 128), metalMat));
+
+  // Trinköffnung (dunkle, leicht vertiefte Form)
+  const open = new THREE.Shape();
+  open.moveTo(-0.26, 0); open.quadraticCurveTo(-0.28, 0.34, 0, 0.40);
+  open.quadraticCurveTo(0.28, 0.34, 0.26, 0); open.quadraticCurveTo(0, -0.06, -0.26, 0);
+  const openMesh = new THREE.Mesh(new THREE.ShapeGeometry(open, 24), darkMetalMat);
+  openMesh.rotation.x = -Math.PI / 2;
+  openMesh.position.set(0, 1.881, 0.18);
+  openMesh.scale.set(1, -1, 1);
+  group.add(openMesh);
+
+  // Zuglasche (Shape + Loch, extrudiert)
+  const tab = new THREE.Shape();
+  roundedRect(tab, -0.21, -0.14, 0.42, 0.66, 0.16);
+  const hole = new THREE.Path();
+  roundedRect(hole, -0.12, 0.2, 0.24, 0.22, 0.09);
+  tab.holes.push(hole);
+  const tabMesh = new THREE.Mesh(
+    new THREE.ExtrudeGeometry(tab, { depth: 0.02, bevelEnabled: true, bevelThickness: 0.008, bevelSize: 0.008, bevelSegments: 2, curveSegments: 16 }),
+    metalMat
+  );
+  tabMesh.rotation.x = -Math.PI / 2; // Shape-y → Welt −z (Lasche zeigt nach hinten)
+  tabMesh.position.set(0, 1.895, 0.02);
+  group.add(tabMesh);
+
+  // Niete
+  const rivet = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.06, 0.04, 20), metalMat);
+  rivet.position.set(0, 1.9, 0);
+  group.add(rivet);
+
+  return group;
+}
+function roundedRect(s, x, y, w, h, r) {
+  s.moveTo(x + r, y);
+  s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r);
+  s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r);
+  s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
+}
+
+/* ---------- Partikel (pinkes Bokeh im Hintergrund) ---------- */
+function buildParticles() {
+  const count = CONFIG.render.particles;
+  const pos = new Float32Array(count * 3);
+  const speed = new Float32Array(count);
+  for (let i = 0; i < count; i++) {
+    pos[i * 3] = (Math.random() - 0.5) * 18;
+    pos[i * 3 + 1] = (Math.random() - 0.5) * 12;
+    pos[i * 3 + 2] = -2 - Math.random() * 8;
+    speed[i] = 0.08 + Math.random() * 0.25;
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  geo.userData.speed = speed;
+
+  const sc = document.createElement('canvas');
+  sc.width = sc.height = 64;
+  const sx = sc.getContext('2d');
+  const rg = sx.createRadialGradient(32, 32, 0, 32, 32, 32);
+  rg.addColorStop(0, 'rgba(255,255,255,1)');
+  rg.addColorStop(0.35, 'rgba(255,255,255,.45)');
+  rg.addColorStop(1, 'rgba(255,255,255,0)');
+  sx.fillStyle = rg; sx.fillRect(0, 0, 64, 64);
+
+  const mat = new THREE.PointsMaterial({
+    size: 0.12, map: new THREE.CanvasTexture(sc), color: new THREE.Color(CONFIG.colors.pinkSoft),
+    transparent: true, opacity: 0.55, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true,
+  });
+  return new THREE.Points(geo, mat);
+}
+
+/* ---------- Szene zusammenbauen ---------- */
+function buildScene() {
+  scene.environment = buildEnvironment();
+
+  metalMat = new THREE.MeshStandardMaterial({ color: 0xdcd6e2, metalness: 1, roughness: 0.2, envMapIntensity: 1.25, side: THREE.DoubleSide });
+  darkMetalMat = new THREE.MeshStandardMaterial({ color: 0x3a3440, metalness: 1, roughness: 0.4, side: THREE.DoubleSide });
+
+  // Licht: weiches Key, pinke Rims, leichte Grundhelligkeit
+  scene.add(new THREE.AmbientLight(0xffffff, 0.18));
+  const key = new THREE.DirectionalLight(0xffffff, 1.6);
+  key.position.set(-5, 5, 7);
+  scene.add(key);
+  const rim = new THREE.DirectionalLight(new THREE.Color(CONFIG.colors.pink), 4.2);
+  rim.position.set(6, 2, -5);
+  scene.add(rim);
+  const rim2 = new THREE.DirectionalLight(new THREE.Color(CONFIG.colors.pinkSoft), 2.4);
+  rim2.position.set(-7, -1, -4);
+  scene.add(rim2);
+  const under = new THREE.PointLight(new THREE.Color(CONFIG.colors.pink), 2.2, 14);
+  under.position.set(0, -4, 3);
+  scene.add(under);
+
+  mainCan = buildCan(CONFIG.flavors[0]);
+  scene.add(mainCan);
+  sideCans = [buildCan(CONFIG.flavors[1]), buildCan(CONFIG.flavors[2])];
+  sideCans.forEach(c => scene.add(c));
+
+  particles = buildParticles();
+  scene.add(particles);
+}
+
+/* ---------- Layout / Resize ---------- */
+function computeLayout() {
+  const w = stage.clientWidth, h = stage.clientHeight;
+  const aspect = w / h;
+  const isMobile = w < CONFIG.mobileBreakpoint || aspect < 0.8;
+  const tan = Math.tan(THREE.MathUtils.degToRad(CONFIG.render.fov / 2));
+  const halfW = isMobile ? 2.3 : 4.4;               // benötigte halbe Sichtbreite in Welt-Einheiten
+  const halfH = Math.max(2.75, halfW / aspect);
+  camera.aspect = aspect;
+  camera.position.z = halfH / tan;
+  camera.updateProjectionMatrix();
+  camera.updateMatrixWorld(); // nötig für project() vor dem ersten Render
+
+  layout = {
+    isMobile,
+    halfH,
+    xFactor: isMobile ? 0.12 : 1,                   // Mobile: Dose zentriert
+    sideFactor: isMobile ? 0.64 : 1,
+    yOffset: isMobile ? halfH * 0.27 : 0,           // Mobile: Dose nach oben, Text darunter
+    scale: isMobile ? 0.9 : 1,
+  };
+}
+function onResize() {
+  if (!webglOK) return;
+  renderer.setSize(stage.clientWidth, stage.clientHeight, false);
+  computeLayout();
+}
+
+/* ---------- Render-Loop ---------- */
+const clock = webglOK ? new THREE.Clock() : null;
+const glowPos = { x: 50, y: 50 };
+const tmpV = webglOK ? new THREE.Vector3() : null;
+let lastGlow = '';
+
+function tick() {
+  requestAnimationFrame(tick);
+  const dt = Math.min(clock.getDelta(), 0.05);
+  const t = clock.elapsedTime;
+  const L = layout;
+  const idle = prefersReducedMotion ? 0 : 1;
+
+  pointer.x += (pointer.tx - pointer.x) * 0.05;
+  pointer.y += (pointer.ty - pointer.y) * 0.05;
+
+  // Hauptdose: Pose aus Timeline + Idle-Schweben + Maus-Parallax
+  mainCan.position.set(
+    P.x * L.xFactor,
+    P.y + L.yOffset + Math.sin(t * 1.1) * 0.09 * idle + INTRO.y1,
+    0
+  );
+  mainCan.rotation.set(
+    P.rx + pointer.y * 0.1 + Math.sin(t * 0.7) * 0.02 * idle,
+    P.ry + Math.sin(t * 0.45) * 0.14 * idle + pointer.x * 0.25,
+    P.rz + Math.sin(t * 0.9) * 0.03 * idle
+  );
+  mainCan.scale.setScalar(P.s * L.scale);
+
+  // Seitendosen
+  sideCans.forEach((c, i) => {
+    const dir = i === 0 ? -1 : 1;
+    const phase = i * 1.7 + 1;
+    c.position.set(
+      dir * SIDE.off * L.sideFactor,
+      SIDE.y + L.yOffset - 0.1 + Math.sin(t * 1.0 + phase) * 0.1 * idle + (i === 0 ? INTRO.y0 : INTRO.y2),
+      -0.8
+    );
+    c.rotation.set(
+      0.12 + pointer.y * 0.08,
+      Math.sin(t * 0.4 + phase) * 0.2 * idle + dir * 0.35 + SIDE.spin * dir,
+      dir * -0.2 + Math.sin(t * 0.8 + phase) * 0.03 * idle + SIDE.spin * 0.3 * dir
+    );
+    c.scale.setScalar(SIDE.s * L.scale);
+    c.visible = SIDE.off < 9;
+  });
+
+  // Partikel treiben langsam nach oben
+  const arr = particles.geometry.attributes.position.array;
+  const sp = particles.geometry.userData.speed;
+  for (let i = 0; i < sp.length; i++) {
+    arr[i * 3 + 1] += sp[i] * dt * idle;
+    if (arr[i * 3 + 1] > 6) arr[i * 3 + 1] = -6;
+  }
+  particles.geometry.attributes.position.needsUpdate = true;
+  particles.rotation.y = pointer.x * 0.05;
+
+  // Glow folgt der projizierten Dosen-Position
+  tmpV.copy(mainCan.position).project(camera);
+  if (Number.isFinite(tmpV.x) && Number.isFinite(tmpV.y)) {
+    const k = 1 - Math.exp(-dt * 5); // zeitbasiert, unabhängig von der Framerate
+    glowPos.x += ((tmpV.x * 0.5 + 0.5) * 100 - glowPos.x) * k;
+    glowPos.y += ((-tmpV.y * 0.5 + 0.5) * 100 - glowPos.y) * k;
+  }
+  const breathe = 1 + Math.sin(t * 1.3) * 0.04 * idle;
+  const g = `${glowPos.x.toFixed(2)}|${glowPos.y.toFixed(2)}|${G.h.toFixed(1)}|${G.l.toFixed(1)}|${(G.a * breathe).toFixed(3)}|${G.size.toFixed(1)}`;
+  if (g !== lastGlow) {
+    lastGlow = g;
+    const s = glowEl.style;
+    s.setProperty('--gx', glowPos.x.toFixed(2));
+    s.setProperty('--gy', glowPos.y.toFixed(2));
+    s.setProperty('--gh', G.h.toFixed(1));
+    s.setProperty('--gl', G.l.toFixed(1));
+    s.setProperty('--ga', (G.a * breathe).toFixed(3));
+    s.setProperty('--gs', G.size.toFixed(1));
+  }
+
+  renderer.render(scene, camera);
+}
+
+addEventListener('pointermove', e => {
+  pointer.tx = (e.clientX / innerWidth - 0.5) * 2;
+  pointer.ty = (e.clientY / innerHeight - 0.5) * 2;
+}, { passive: true });
+
+/* ==========================================================================
+   5. TEXT: Zeilen-Reveal + Scramble/Glitch
+   ========================================================================== */
+const copyEl = $('#copy');
+let currentSection = -1;
+let outTween = null, inTimeline = null, scrambleToken = 0;
+
+function renderCopy(i) {
+  const c = CONFIG.sections[i].copy;
+  if (!c) { copyEl.innerHTML = ''; return; }
+  const lines = arr => arr.map(l => `<span class="line"><span class="inner">${l}</span></span>`).join('');
+  copyEl.innerHTML = `
+    <div class="line chip-line"><span class="inner"><span class="chip"><i></i>${c.chip}</span></span></div>
+    <h2 class="headline${c.long ? ' long' : ''}">${c.title.map(l => `<span class="line"><span class="inner glitch" data-text="${l}">${l}</span></span>`).join('')}</h2>
+    <p class="desc">${lines(c.text)}</p>
+    ${c.cta ? `<div class="line cta-line"><span class="inner"><a class="cta" href="#decouvrir">${c.cta}<span class="arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a></span></div>` : ''}`;
+  const cta = $('.cta', copyEl);
+  if (cta) cta.addEventListener('click', e => {
+    e.preventDefault();
+    addToCart();
+    scrollToY(document.getElementById('decouvrir').getBoundingClientRect().top + window.scrollY, 1.4);
+  });
+}
+
+// Scramble: Buchstaben laufen durch Zufallszeichen und lösen sich von links nach rechts auf
+const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&*+=/<>!?ÉÈ0123456789';
+function scramble(el, finalText, duration = 700) {
+  if (prefersReducedMotion) return;
+  const token = scrambleToken;
+  const chars = [...finalText];
+  const reveal = chars.map((_, i) => (i / chars.length) * duration * 0.7 + Math.random() * duration * 0.3);
+  const start = performance.now();
+  (function frame(now) {
+    if (token !== scrambleToken) return;
+    const e = now - start;
+    let out = '';
+    chars.forEach((ch, i) => {
+      out += (ch === ' ' || e >= reveal[i]) ? ch : GLYPHS[(Math.random() * GLYPHS.length) | 0];
+    });
+    el.textContent = out;
+    el.dataset.text = out;
+    if (e < duration) requestAnimationFrame(frame);
+    else { el.textContent = finalText; el.dataset.text = finalText; }
+  })(start);
+}
+
+function animateIn(i) {
+  renderCopy(i);
+  const inners = $$('.inner', copyEl);
+  if (!inners.length) return;
+  const headline = $('.headline', copyEl);
+  scrambleToken++;
+  inTimeline = gsap.timeline();
+  inTimeline.fromTo(inners,
+    { yPercent: 115, opacity: 0 },
+    { yPercent: 0, opacity: 1, duration: 0.9, ease: 'expo.out', stagger: 0.07 });
+  $$('.headline .inner', copyEl).forEach((el, k) => {
+    inTimeline.call(() => scramble(el, el.dataset.text, 650), null, 0.08 + k * 0.08);
+  });
+  inTimeline.call(() => {
+    headline.classList.remove('is-glitch'); void headline.offsetWidth; headline.classList.add('is-glitch');
+  }, null, 0.12);
+}
+
+function setSection(i) {
+  if (i === currentSection) return;
+  currentSection = i;
+
+  // UI-Zustand
+  dotEls.forEach((d, k) => { d.classList.toggle('is-active', k === i); d.setAttribute('aria-current', k === i ? 'step' : 'false'); });
+  $('#counterCur').textContent = pad(i + 1);
+  document.body.classList.toggle('is-hero', i === 0);
+
+  // Text wechseln: alte Zeilen nach oben raus, neue von unten rein
+  if (outTween) outTween.kill();
+  if (inTimeline) inTimeline.kill();
+  scrambleToken++;
+  const olds = $$('.inner', copyEl);
+  if (olds.length) {
+    outTween = gsap.to(olds, {
+      yPercent: -115, opacity: 0, duration: 0.32, ease: 'power2.in', stagger: 0.025,
+      onComplete: () => animateIn(i),
+    });
+  } else {
+    animateIn(i);
+  }
+}
+
+/* ==========================================================================
+   6. SCROLL-CHOREOGRAFIE (GSAP Master-Timeline, per ScrollTrigger gescrubbt)
+   ========================================================================== */
+let st = null;
+const progressFill = $('#progressFill');
+
+function buildTimeline() {
+  const master = gsap.timeline({ paused: true });
+
+  // Pro Abschnittsübergang: Dose → nächste Pose, Glow → nächste Nuance
+  for (let i = 1; i < N; i++) {
+    const s = CONFIG.sections[i];
+    master.to(P, { ...s.pose, duration: 1, ease: 'power2.inOut' }, i - 1);
+    master.to(G, { ...s.glow, duration: 1, ease: 'sine.inOut' }, i - 1);
+  }
+
+  // Intro → Abschnitt 1: Seitendosen fahren raus, Hero-UI blendet aus
+  master.to(SIDE, { off: 9.5, y: -1.4, spin: 1.6, duration: 0.9, ease: 'power2.in' }, 0);
+  master.to('#hero', { autoAlpha: 0, y: -30, duration: 0.35, ease: 'power1.in' }, 0.02);
+  master.to('#wordmark', { scale: 1.25, autoAlpha: 0, duration: 0.8, ease: 'power1.in' }, 0);
+
+  // Timeline-Fortschritt → Text, Punkte, Progress-Bar
+  master.eventCallback('onUpdate', () => {
+    const p = master.progress();
+    progressFill.style.transform = `scaleX(${Math.max(p, 0.02)})`;
+    setSection(Math.min(N - 1, Math.round(p * (N - 1))));
+  });
+
+  st = ScrollTrigger.create({
+    trigger: stage,
+    start: 'top top',
+    end: () => '+=' + innerHeight * (N - 1) * CONFIG.scroll.perSection,
+    pin: true,
+    scrub: CONFIG.scroll.scrub,
+    animation: master,
+    snap: CONFIG.scroll.snap ? { snapTo: 1 / (N - 1), duration: { min: 0.4, max: 1 }, delay: 0.12, ease: 'power2.inOut' } : false,
+    invalidateOnRefresh: true,
+  });
+
+  // Punkt-Navigation ausblenden, sobald der Footer ins Bild kommt
+  ScrollTrigger.create({
+    trigger: '#decouvrir',
+    start: 'top 75%',
+    onToggle: self => dotsEl.classList.toggle('is-hidden', self.isActive),
+  });
+
+  // Initialzustand
+  master.progress(st.progress);
+  progressFill.style.transform = `scaleX(${Math.max(st.progress, 0.02)})`;
+  setSection(Math.min(N - 1, Math.round(st.progress * (N - 1))));
+}
+
+function goToSection(i) {
+  if (!st) return;
+  const y = st.start + (st.end - st.start) * (i / (N - 1));
+  scrollToY(y, 1.6);
+}
+
+/* ==========================================================================
+   7. INIT: Fonts laden → Szene bauen → Loader weg → Intro-Animation
+   ========================================================================== */
+async function init() {
+  const bar = $('#loaderBar'), pct = $('#loaderPct');
+  const setLoad = v => { bar.style.width = v + '%'; pct.textContent = Math.round(v) + '%'; };
+  setLoad(10);
+
+  // Fonts werden für die Canvas-Etiketten benötigt
+  try {
+    await Promise.race([
+      Promise.all([
+        document.fonts.load('400 100px Anton'),
+        document.fonts.load('500 30px Inter'),
+        document.fonts.load('700 22px Inter'),
+      ]),
+      new Promise(r => setTimeout(r, 3000)),
+    ]);
+  } catch (e) { /* Fallback-Fonts */ }
+  setLoad(45);
+
+  if (webglOK) {
+    buildScene();
+    setLoad(85);
+    onResize();
+    addEventListener('resize', onResize);
+    requestAnimationFrame(tick);
+  }
+
+  buildTimeline();
+  setLoad(100);
+
+  await new Promise(r => setTimeout(r, 350));
+  $('#loader').classList.add('is-done');
+  document.body.classList.remove('is-loading');
+  if (lenis) lenis.start();
+  ScrollTrigger.refresh();
+
+  // Intro: Dosen fliegen von unten ein, Hero-Texte erscheinen
+  const introTl = gsap.timeline({ delay: 0.15 });
+  introTl.to(INTRO, { y1: 0, duration: 1.8, ease: 'expo.out' }, 0)
+         .to(INTRO, { y0: 0, duration: 1.8, ease: 'expo.out' }, 0.12)
+         .to(INTRO, { y2: 0, duration: 1.8, ease: 'expo.out' }, 0.2)
+         .from('.hero-eyebrow, .scroll-hint, .hero-specs', { autoAlpha: 0, y: 20, duration: 1, ease: 'expo.out', stagger: 0.08, clearProps: 'transform' }, 0.4)
+         .from('#flavorBar', { autoAlpha: 0, y: 20, duration: 1, ease: 'expo.out', clearProps: 'all' }, 0.55)
+         .from('#wordmark', { autoAlpha: 0, scale: 0.92, duration: 1.6, ease: 'expo.out' }, 0.1);
+  if (st && st.progress > 0.01) introTl.progress(1);
+  const footerTop = $('#decouvrir').getBoundingClientRect().top;
+  dotsEl.classList.toggle('is-hidden', footerTop < innerHeight * 0.75);
+}
+
+init();
+})();
+</script>
+
+
+<a class="ll-demo-badge" href="/#work" hidden>Konzept-Demo · <strong>LL Collective Studio</strong> <span aria-hidden="true">↗</span></a><style>.ll-demo-badge{position:fixed;left:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);z-index:260;display:inline-flex;align-items:center;gap:6px;padding:10px 14px;background:#111110e6;color:#efede7;font:500 12px/1.2 Arial,Helvetica,sans-serif;letter-spacing:.06em;text-decoration:none;border:1px solid #efede733;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}.ll-demo-badge:hover{background:#111110}.ll-demo-badge strong{font-weight:700}@media(min-width:700px){.ll-demo-badge{bottom:auto;top:78px;left:64px}}</style><script>try{if(window.self===window.top)document.querySelector(".ll-demo-badge").hidden=false}catch(e){}</script>
+</body>
+</html>
