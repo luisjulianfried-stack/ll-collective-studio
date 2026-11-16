@@ -144,24 +144,25 @@ html:not(.js) .welcome-screen,.intro-skip .welcome-screen{display:none}
 @keyframes wlWord{from{opacity:0;transform:translateY(10px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
 
 /* ---------- Hero ---------- */
-.hx{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:calc(var(--header) + 48px) var(--pad) calc(clamp(40px,4vw,64px) + clamp(28px,4vh,48px));overflow:hidden;background:var(--paper);isolation:isolate}
+.hx{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--header) + 40px) var(--pad) calc(clamp(40px,4vw,64px) + clamp(28px,4vh,48px));overflow:hidden;background:var(--paper);isolation:isolate}
 .hx-media{position:absolute;inset:0;z-index:-1;transform:translateY(calc(var(--hero,0) * 18%))}
 .hx::after{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(244,239,231,.35) 0%,rgba(244,239,231,0) 30%,rgba(244,239,231,0) 62%,var(--cream) 100%)}
 .hx-silk{position:absolute;inset:0;display:block;width:100%;height:100%;opacity:0;transition:opacity 2.4s var(--ease)}
 .hx-silk.is-live{opacity:1}
-.hx-content{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,380px);align-items:end;gap:clamp(32px,5vw,96px);opacity:calc(1 - var(--hero,0) * 1.4);transform:translateY(calc(var(--hero,0) * -60px))}
-.hx-title{margin:0;font-size:clamp(64px,10.6vw,196px);line-height:.92;font-weight:350;letter-spacing:-.025em;color:var(--ink)}
-.hx-title .ln:nth-child(2){padding-left:clamp(48px,16vw,300px)}
+.hx-content{display:flex;flex-direction:column;align-items:center;text-align:center;opacity:calc(1 - var(--hero,0) * 1.4);transform:translateY(calc(var(--hero,0) * -60px))}
+.hx-eyebrow{margin-bottom:clamp(22px,2.4vw,34px)}
+.hx-title{margin:0;max-width:1240px;font-size:clamp(46px,6.6vw,120px);line-height:1.02;font-weight:350;letter-spacing:-.02em;color:var(--ink)}
+.hx-title .ln{display:block}
 .hx-title em{font-weight:380}
-.hx-copy{padding-bottom:clamp(6px,1.2vw,22px)}
-.hx-lead{margin:0 0 28px;font-size:clamp(15.5px,1.1vw,17px);line-height:1.75;color:var(--ink-soft)}
-.hx-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px}
+.hx-copy{display:flex;flex-direction:column;align-items:center;width:100%;margin-top:clamp(24px,2.6vw,38px)}
+.hx-lead{max-width:500px;margin:0 0 30px;font-size:clamp(15.5px,1.1vw,17px);line-height:1.75;color:var(--ink-soft)}
+.hx-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 28px}
 .btn-small{min-height:46px;padding:0 22px;font-size:10.5px;letter-spacing:.22em}
 .text-link{display:inline-flex;align-items:center;gap:10px;padding:4px 0;border-bottom:1px solid currentColor;font-size:10.5px;font-weight:450;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);transition:color .6s var(--ease)}
 .text-link:hover{color:var(--burgundy)}
 @keyframes scrollCue{0%{transform:translateY(-100%)}60%,100%{transform:translateY(100%)}}
 
-/* Bildreihe am Übergang: drei Einblicke, die in den Hero hineinragen */
+/* Übergang: feine Linie und laufendes Schriftband */
 .tx{position:relative;z-index:2}
 .tx-line{display:block;width:1px;height:clamp(56px,6vw,96px);margin:calc(clamp(40px,4vw,64px) * -1) auto clamp(18px,2vw,30px);background:linear-gradient(180deg,rgba(200,173,134,0),var(--gold) 35%,var(--burgundy));transform-origin:top}
 .tx-band{position:relative;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(18px,2.4vw,34px) 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
@@ -173,11 +174,8 @@ html:not(.js) .welcome-screen,.intro-skip .welcome-screen{display:none}
 .tx-word i{font-style:normal;font-size:.22em;color:var(--gold);translate:0 -.2em}
 @keyframes txMove{to{transform:translateX(-50%)}}
 
-/* ---------- Anspruch ---------- */
-.ix{text-align:center;display:flex;flex-direction:column;align-items:center;padding-top:clamp(56px,6vw,96px);padding-bottom:clamp(56px,6vw,96px)}
-.ix-statement{margin:30px 0 0;font-family:var(--serif);font-size:clamp(36px,5vw,82px);line-height:1.08;font-weight:350;letter-spacing:-.015em;max-width:1100px}
-.ix-text{max-width:470px;margin:34px auto 0;color:var(--muted)}
-.ix-pillars{list-style:none;padding:0;margin:clamp(64px,8vw,120px) 0 0;width:100%;max-width:1180px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+/* Drei Versprechen im Hero */
+.ix-pillars{list-style:none;padding:0;margin:clamp(40px,5vw,72px) 0 0;width:100%;max-width:1180px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .ix-pillars li{padding:30px 20px;font-family:var(--serif);font-size:clamp(22px,2vw,29px);line-height:1.22}
 .ix-pillars li+li{border-left:1px solid var(--line)}
 
@@ -350,6 +348,9 @@ html:not(.js) .welcome-screen,.intro-skip .welcome-screen{display:none}
   .js .hx-copy>*{opacity:0;translate:0 22px;transition:opacity 1.6s var(--ease),translate 1.8s var(--ease)}
   .js .hx-lead{transition-delay:.7s}
   .js .hx-actions{transition-delay:.85s}
+  .js .hx-copy .ix-pillars{transition-delay:1.05s}
+  .js .hx-eyebrow{opacity:0;transition:opacity 1.6s var(--ease) .2s}
+  .intro-done .hx-eyebrow{opacity:1}
   .intro-done .hx-media{opacity:1}
   .intro-done .hx-copy>*{opacity:1;translate:0 0}
   .intro-done .hx-title .ln>span{transform:none}
@@ -384,8 +385,6 @@ html:not(.js) .welcome-screen,.intro-skip .welcome-screen{display:none}
    Responsive
    ========================================================================== */
 @media (max-width:1100px){
-  .hx-content{grid-template-columns:1fr;gap:40px}
-  .hx-copy{max-width:520px}
   .vx{grid-template-columns:1fr}
   .vx-aside{position:static}
   .vx-media{max-width:640px}
@@ -403,12 +402,11 @@ html:not(.js) .welcome-screen,.intro-skip .welcome-screen{display:none}
 @media (max-width:700px){
   body{font-size:15.5px}
   .brand-name{display:none}
-  .hx-title{font-size:clamp(52px,16.5vw,84px)}
-  .hx-title .ln:nth-child(2){padding-left:13vw}
-  .hx-content{gap:30px}
+  .hx-content{align-items:flex-start;text-align:left}
+  .hx-copy{align-items:flex-start}
+  .hx-actions{justify-content:flex-start}
+  .hx-title{font-size:clamp(30px,8.2vw,44px);line-height:1.08;letter-spacing:-.015em}
   .hx{padding-bottom:84px}
-  .ix{text-align:left;align-items:flex-start}
-  .ix-text{margin-left:0}
   .ix-pillars{grid-template-columns:1fr}
   .ix-pillars li{padding:22px 0}
   .ix-pillars li+li{border-left:0;border-top:1px solid var(--line)}
