@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react';
 // Fließender Seiden-Hintergrund für den Hero, übernommen aus der LeMatcha-Demo
 // und auf die Studio-Farben (Burgunder, Braun, ein Hauch Olive, Creme) umgestellt.
 const vertex = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
-const fragment = [
+const fragmentFor = (light: boolean) => [
   'precision mediump float;uniform vec2 r;uniform float t;uniform vec2 m;',
   'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
   'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}',
@@ -14,19 +14,29 @@ const fragment = [
   'vec2 q=vec2(fbm(p*1.3+T),fbm(p*1.3+vec2(5.2,1.3)-T));',
   'vec2 w=vec2(fbm(p*1.3+2.6*q+vec2(1.7,9.2)+T*1.4),fbm(p*1.3+2.6*q+vec2(8.3,2.8)-T));',
   'float f=fbm(p*1.3+2.8*w);',
-  'vec3 deep=vec3(.12,.04,.05),wine=vec3(.31,.09,.12),olive=vec3(.26,.26,.15),umber=vec3(.47,.31,.22),cream=vec3(.96,.89,.80);',
-  'vec3 c=mix(deep,wine,smoothstep(.25,.68,f));',
-  'c=mix(c,olive,smoothstep(.55,.95,q.x)*.35);',
-  'c=mix(c,umber,smoothstep(.5,.95,f*length(w)*1.25));',
-  'float sheen=pow(smoothstep(.55,1.,f*1.12),3.);c=mix(c,cream,sheen*.34);',
-  // Links (Text) dunkler halten, rechts darf die Seide mehr leuchten.
-  'c*=mix(.7,1.,smoothstep(.0,.75,uv.x));',
-  'c*=1.-.55*pow(length(uv-vec2(.62,.5)),1.6);',
+  ...(light ? [
+    // Helle Variante: Creme- und Sandtöne mit einem Hauch Rosé und Olive.
+    'vec3 base=vec3(.925,.89,.84),sand=vec3(.84,.77,.69),rose=vec3(.74,.58,.55),olive=vec3(.70,.69,.58),pearl=vec3(.985,.97,.945);',
+    'vec3 c=mix(base,sand,smoothstep(.3,.75,f));',
+    'c=mix(c,olive,smoothstep(.55,.95,q.x)*.22);',
+    'c=mix(c,rose,smoothstep(.55,.98,f*length(w)*1.25)*.55);',
+    'float sheen=pow(smoothstep(.5,1.,f*1.1),2.);c=mix(c,pearl,sheen*.55);',
+    'c*=1.-.08*pow(length(uv-vec2(.5,.5)),1.6);',
+  ] : [
+    'vec3 deep=vec3(.12,.04,.05),wine=vec3(.31,.09,.12),olive=vec3(.26,.26,.15),umber=vec3(.47,.31,.22),cream=vec3(.96,.89,.80);',
+    'vec3 c=mix(deep,wine,smoothstep(.25,.68,f));',
+    'c=mix(c,olive,smoothstep(.55,.95,q.x)*.35);',
+    'c=mix(c,umber,smoothstep(.5,.95,f*length(w)*1.25));',
+    'float sheen=pow(smoothstep(.55,1.,f*1.12),3.);c=mix(c,cream,sheen*.34);',
+    // Links (Text) dunkler halten, rechts darf die Seide mehr leuchten.
+    'c*=mix(.7,1.,smoothstep(.0,.75,uv.x));',
+    'c*=1.-.55*pow(length(uv-vec2(.62,.5)),1.6);',
+  ]),
   'c+=(h(gl_FragCoord.xy+fract(t))-.5)*.025;',
   'gl_FragColor=vec4(c,1.);}',
 ].join('\n');
 
-export function HeroSilk() {
+export function HeroSilk({ tone = 'dark' }: { tone?: 'dark' | 'light' }) {
   const canvas = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -42,7 +52,7 @@ export function HeroSilk() {
       gl!.shaderSource(s, src); gl!.compileShader(s);
       return gl!.getShaderParameter(s, gl!.COMPILE_STATUS) ? s : null;
     };
-    const vs = compile(gl.VERTEX_SHADER, vertex), fs = compile(gl.FRAGMENT_SHADER, fragment);
+    const vs = compile(gl.VERTEX_SHADER, vertex), fs = compile(gl.FRAGMENT_SHADER, fragmentFor(tone === 'light'));
     const program = gl.createProgram();
     if (!vs || !fs || !program) return;
     gl.attachShader(program, vs); gl.attachShader(program, fs); gl.linkProgram(program);
@@ -100,7 +110,7 @@ export function HeroSilk() {
       document.removeEventListener('visibilitychange', start);
       window.removeEventListener('pointermove', onPointer);
     };
-  }, []);
+  }, [tone]);
 
   return <canvas ref={canvas} className="hx-silk" aria-hidden="true"/>;
 }
