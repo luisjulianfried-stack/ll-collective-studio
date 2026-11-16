@@ -266,6 +266,10 @@ html:not(.js) .welcome-screen,.intro-skip .welcome-screen{display:none}
 .sx-img img{object-fit:cover;object-position:50% 64%}
 .sx-media figcaption{position:absolute;left:clamp(20px,3vw,40px);bottom:clamp(20px,3vw,36px);font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--on-dark)}
 .sx-media::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(20,20,12,.55));pointer-events:none}
+.sx-seal{display:grid;place-items:center;background:radial-gradient(ellipse at 50% 44%,#3d4029 0%,#2a2c1c 48%,#1c1d13 100%)}
+.sx-seal::after{display:none}
+.sx-disc{position:relative;width:min(88%,700px);padding:9%;transform:translateY(var(--py,0))}
+.sx-disc img{display:block;width:100%;height:auto;border-radius:50%;filter:drop-shadow(0 34px 48px rgba(0,0,0,.5)) drop-shadow(0 6px 12px rgba(0,0,0,.3))}
 
 /* ---------- Ablauf ---------- */
 .px-head{display:flex;flex-direction:column;align-items:flex-start}
@@ -357,8 +361,11 @@ html:not(.js) .welcome-screen,.intro-skip .welcome-screen{display:none}
   /* Die Maske sitzt auf dem inneren Bild-Layer: ein selbst ausgeblendetes Ziel meldet der IntersectionObserver nie als sichtbar. */
   .js .img-reveal>div{clip-path:inset(100% 0 0 0);transition:clip-path 1.8s var(--ease-io)}
   .js .img-reveal img{scale:1.2;transition:scale 2.6s var(--ease)}
+  .js .sx-seal.img-reveal img{scale:1.06}
   .js .img-reveal.is-visible>div{clip-path:inset(0 0 0 0)}
   .js .img-reveal.is-visible img{scale:1}
+  .js .sx-seal.img-reveal.is-visible img{scale:1}
+  .js .sx-seal.img-reveal.is-visible>div{clip-path:inset(-40%)}
   .js .bx-item.img-reveal>div{clip-path:none}
   .js .bx-item.img-reveal .bx-img{clip-path:inset(100% 0 0 0);transition:clip-path 1.8s var(--ease-io) calc(var(--d,0) * .15s)}
   .js .bx-item.img-reveal.is-visible .bx-img{clip-path:inset(0 0 0 0)}
@@ -366,7 +373,7 @@ html:not(.js) .welcome-screen,.intro-skip .welcome-screen{display:none}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-  .hx-media,.hx-content,.vx-img,.sx-img{transform:none!important}
+  .hx-media,.hx-content,.vx-img,.sx-img,.sx-disc{transform:none!important}
   .hx-content{opacity:1!important}
 }
 
