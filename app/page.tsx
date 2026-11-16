@@ -19,11 +19,7 @@ const pillars = [
   ['Alles aus einer Hand,', 'aus München'],
 ];
 
-const moments = [
-  ['/possibilities/campaign-planning.webp', 'Kampagnen', 'Zwei Personen planen eine Kampagne an einer Wand mit Plakatentwürfen'],
-  ['/possibilities/content-production.webp', 'Content-Produktion', 'Video-Dreh für Social Media in einem hellen Studio'],
-  ['/possibilities/event-planning.webp', 'Events & Aktionen', 'Team bespricht Unterlagen für ein Event an einem festlich gedeckten Tisch'],
-];
+const fields = ['Strategie', 'Social Media', 'Content', 'Kampagnen', 'Webdesign', 'Branding'];
 
 const steps = [
   ['01', 'Gespräch', 'Wir klären Ziel, Umfang und Zeitplan.'],
@@ -50,11 +46,13 @@ export default function Home() {
       </div>
     </section>
 
-    <section className="bx" aria-label="Einblicke in unsere Arbeit">
-      {moments.map(([src, label, alt], i) => <figure className="bx-item img-reveal" style={{ ['--d' as string]: i }} key={src}>
-        <div className="bx-img" data-parallax={i === 1 ? '-0.05' : '0.04'}><Image src={src} alt={alt} fill unoptimized sizes="(max-width: 700px) 100vw, 33vw"/></div>
-        <figcaption><span>{String(i + 1).padStart(2, '0')}</span>{label}</figcaption>
-      </figure>)}
+    <section className="tx" aria-label="Strategie, Social Media, Content, Kampagnen, Webdesign und Branding">
+      <span className="tx-line" aria-hidden="true"/>
+      <div className="tx-band" aria-hidden="true">
+        <div className="tx-row" data-parallax-x="0.12">
+          <div className="tx-track">{[0, 1].map(k => <span className="tx-set" key={k}>{fields.map((f, i) => <span className="tx-word" key={f}>{i % 2 ? <em>{f}</em> : f}<i>✦</i></span>)}</span>)}</div>
+        </div>
+      </div>
     </section>
 
     <section className="ix section-pad" aria-label="Unser Anspruch">
