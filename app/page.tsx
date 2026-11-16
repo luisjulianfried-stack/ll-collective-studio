@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = { alternates: { canonical: '/' } };
 import Image from 'next/image';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
-import { PhoneMock } from '@/components/phone-mock';
 import { Navigation } from '@/components/navigation';
 import { ProjectGallery } from '@/components/project-gallery';
 import { Services } from '@/components/services';
@@ -13,7 +12,6 @@ import { Welcome } from '@/components/welcome';
 import { HeroSilk } from '@/components/hero-silk';
 import { ContactForm } from '@/components/contact-form';
 import { Lines } from '@/components/lines';
-import { showcases } from '@/lib/showcases';
 
 const pillars = [
   ['Klare Strategie,', 'spürbare Wirkung'],
@@ -28,17 +26,14 @@ const steps = [
 ];
 
 export default function Home() {
-  const front = showcases[0];
   return <><Welcome/><Navigation/><main>
     <section className="hx" id="top">
-      <div className="hx-top">
-        <div className="hx-head">
-          <p className="hx-kicker"><span>Marketing-Agentur</span><i aria-hidden="true"/><span>München</span></p>
-          <h1 className="hx-title">
-            <span className="ln"><span>Marketing,</span></span>{' '}
-            <span className="ln"><span>das <em>wirkt.</em></span></span>
-          </h1>
-        </div>
+      <div className="hx-media" aria-hidden="true"><HeroSilk tone="light"/></div>
+      <div className="hx-content">
+        <h1 className="hx-title">
+          <span className="ln"><span>Marketing,</span></span>{' '}
+          <span className="ln"><span>das <em>wirkt.</em></span></span>
+        </h1>
         <div className="hx-copy">
           <p className="hx-lead">Strategie, Social Media, Kampagnen und Websites – wir machen Ihre Marke sichtbar und bringen Sie zu Ihren Kunden. Alles aus einer Hand.</p>
           <div className="hx-actions">
@@ -47,14 +42,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="hx-panel">
-        <div className="hx-media"><HeroSilk tone="light"/></div>
-        {front && <a className="hx-stage" href="#work" aria-label="Projekte ansehen">
-          <figure className="hx-frame"><div className="hx-bar"><i/><i/><i/><span>{front.title}</span></div><div className="hx-shot"><Image src={front.preview} alt="" fill priority unoptimized sizes="(max-width: 1000px) 80vw, 620px"/></div></figure>
-          <PhoneMock/>
-        </a>}
-        <span className="hx-scroll" aria-hidden="true"><i/>Scroll</span>
-      </div>
+      <a className="hx-scroll" href="#services" aria-label="Weiter zu den Leistungen"><i aria-hidden="true"/></a>
     </section>
 
     <section className="ix section-pad" aria-label="Unser Anspruch">
