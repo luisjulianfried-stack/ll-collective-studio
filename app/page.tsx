@@ -77,9 +77,9 @@ export default function Home() {
         <p className="sx-text reveal">Wir sind zwei Marketing-Studenten aus München. Wir kennen die Kanäle, auf denen Ihre Kunden unterwegs sind – und setzen Ihr Projekt persönlich um, ohne Umwege über eine große Agentur.</p>
         <div className="sx-founders reveal"><div><span>Co-Founder</span><strong>Luis Fried</strong></div><div><span>Co-Founder</span><strong>Leander Ballhausen</strong></div></div>
       </div>
-      <figure className="sx-media img-reveal">
-        <div className="sx-img" data-parallax="-0.08"><Image src="/media/ll-campaign-poster.jpg" alt="Plakat von LL Collective Studio mit dem LL-Monogramm an einer Litfaßsäule in der Stadt" fill unoptimized sizes="(max-width: 1000px) 100vw, 45vw"/></div>
-        <figcaption>LL Collective Studio · Kampagnenmotiv</figcaption>
+      <figure className="sx-media sx-seal img-reveal">
+        <div className="sx-disc" data-parallax="-0.05"><Image src="/media/ll-silber.webp" alt="Silbernes Signet von LL Collective Studio mit eingeprägtem LL-Monogramm" width={866} height={866} unoptimized sizes="(max-width: 1000px) 80vw, 40vw"/></div>
+        <figcaption>LL Collective Studio · Signet</figcaption>
       </figure>
     </section>
 
