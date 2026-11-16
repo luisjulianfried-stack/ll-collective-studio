@@ -144,7 +144,7 @@ html:not(.js) .welcome-screen,.intro-skip .welcome-screen{display:none}
 @keyframes wlWord{from{opacity:0;transform:translateY(10px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
 
 /* ---------- Hero ---------- */
-.hx{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:calc(var(--header) + 48px) var(--pad) calc(clamp(48px,6vw,90px) + clamp(40px,6vh,76px));overflow:hidden;background:var(--paper);isolation:isolate}
+.hx{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:calc(var(--header) + 48px) var(--pad) calc(clamp(40px,4vw,64px) + clamp(28px,4vh,48px));overflow:hidden;background:var(--paper);isolation:isolate}
 .hx-media{position:absolute;inset:0;z-index:-1;transform:translateY(calc(var(--hero,0) * 18%))}
 .hx::after{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(244,239,231,.35) 0%,rgba(244,239,231,0) 30%,rgba(244,239,231,0) 62%,var(--cream) 100%)}
 .hx-silk{position:absolute;inset:0;display:block;width:100%;height:100%;opacity:0;transition:opacity 2.4s var(--ease)}
@@ -162,8 +162,8 @@ html:not(.js) .welcome-screen,.intro-skip .welcome-screen{display:none}
 @keyframes scrollCue{0%{transform:translateY(-100%)}60%,100%{transform:translateY(100%)}}
 
 /* Bildreihe am Übergang: drei Einblicke, die in den Hero hineinragen */
-.tx{position:relative;z-index:2;padding:0 0 clamp(8px,2vw,24px)}
-.tx-line{display:block;width:1px;height:clamp(80px,10vw,140px);margin:calc(clamp(48px,6vw,90px) * -1) auto clamp(30px,3.4vw,52px);background:linear-gradient(180deg,rgba(200,173,134,0),var(--gold) 35%,var(--burgundy));transform-origin:top}
+.tx{position:relative;z-index:2}
+.tx-line{display:block;width:1px;height:clamp(56px,6vw,96px);margin:calc(clamp(40px,4vw,64px) * -1) auto clamp(18px,2vw,30px);background:linear-gradient(180deg,rgba(200,173,134,0),var(--gold) 35%,var(--burgundy));transform-origin:top}
 .tx-band{position:relative;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(18px,2.4vw,34px) 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
 .tx-row{transform:translateX(var(--px,0))}
 .tx-track{display:flex;width:max-content;animation:txMove 70s linear infinite}
@@ -174,7 +174,7 @@ html:not(.js) .welcome-screen,.intro-skip .welcome-screen{display:none}
 @keyframes txMove{to{transform:translateX(-50%)}}
 
 /* ---------- Anspruch ---------- */
-.ix{text-align:center;display:flex;flex-direction:column;align-items:center}
+.ix{text-align:center;display:flex;flex-direction:column;align-items:center;padding-top:clamp(56px,6vw,96px)}
 .ix-statement{margin:30px 0 0;font-family:var(--serif);font-size:clamp(36px,5vw,82px);line-height:1.08;font-weight:350;letter-spacing:-.015em;max-width:1100px}
 .ix-text{max-width:470px;margin:34px auto 0;color:var(--muted)}
 .ix-pillars{list-style:none;padding:0;margin:clamp(64px,8vw,120px) 0 0;width:100%;max-width:1180px;display:grid;grid-template-columns:repeat(3,1fr)}
@@ -406,7 +406,7 @@ html:not(.js) .welcome-screen,.intro-skip .welcome-screen{display:none}
   .hx-title{font-size:clamp(52px,16.5vw,84px)}
   .hx-title .ln:nth-child(2){padding-left:13vw}
   .hx-content{gap:30px}
-  .hx{padding-bottom:112px}
+  .hx{padding-bottom:84px}
   .ix{text-align:left;align-items:flex-start}
   .ix-text{margin-left:0}
   .ix-pillars{grid-template-columns:1fr}
