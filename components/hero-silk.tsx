@@ -15,13 +15,13 @@ const fragmentFor = (light: boolean) => [
   'vec2 w=vec2(fbm(p*1.3+2.6*q+vec2(1.7,9.2)+T*1.4),fbm(p*1.3+2.6*q+vec2(8.3,2.8)-T));',
   'float f=fbm(p*1.3+2.8*w);',
   ...(light ? [
-    // Helle Variante: Creme- und Sandtöne mit einem Hauch Rosé und Olive.
-    'vec3 base=vec3(.925,.89,.84),sand=vec3(.84,.77,.69),rose=vec3(.74,.58,.55),olive=vec3(.70,.69,.58),pearl=vec3(.985,.97,.945);',
-    'vec3 c=mix(base,sand,smoothstep(.3,.8,f)*.85);',
-    'c=mix(c,olive,smoothstep(.55,.95,q.x)*.22);',
-    'c=mix(c,rose,smoothstep(.6,1.,f*length(w)*1.2)*.35);',
-    'float sheen=pow(smoothstep(.5,1.,f*1.1),2.);c=mix(c,pearl,sheen*.45);',
-    'c*=1.-.08*pow(length(uv-vec2(.5,.5)),1.6);',
+    // Helle Variante: Creme und Taupe mit tieferen Umbra-Falten und einem Hauch Burgunder.
+    'vec3 base=vec3(.91,.87,.81),taupe=vec3(.70,.61,.52),umber=vec3(.40,.29,.23),wine=vec3(.46,.19,.22),pearl=vec3(.99,.975,.95);',
+    'vec3 c=mix(base,taupe,smoothstep(.28,.78,f));',
+    'c=mix(c,umber,smoothstep(.55,.95,f*length(w)*1.2)*.8);',
+    'c=mix(c,wine,smoothstep(.6,1.,q.y)*smoothstep(.45,.85,f)*.32);',
+    'float sheen=pow(smoothstep(.45,1.,f*1.1),2.2);c=mix(c,pearl,sheen*.7);',
+    'c*=1.-.12*pow(length(uv-vec2(.5,.55)),1.6);',
   ] : [
     'vec3 deep=vec3(.12,.04,.05),wine=vec3(.31,.09,.12),olive=vec3(.26,.26,.15),umber=vec3(.47,.31,.22),cream=vec3(.96,.89,.80);',
     'vec3 c=mix(deep,wine,smoothstep(.25,.68,f));',
