@@ -19,8 +19,6 @@ const pillars = [
   ['Alles aus einer Hand,', 'aus München'],
 ];
 
-const fields = ['Strategie', 'Social Media', 'Content', 'Kampagnen', 'Webdesign', 'Branding'];
-
 const steps = [
   ['01', 'Gespräch', 'Wir klären Ziel, Umfang und Zeitplan.'],
   ['02', 'Umsetzung', 'Content, Kampagnen und Website aus einer Hand.'],
@@ -48,14 +46,9 @@ export default function Home() {
       </div>
     </section>
 
-    <section className="tx" aria-label="Strategie, Social Media, Content, Kampagnen, Webdesign und Branding">
-      <span className="tx-line" aria-hidden="true"/>
-      <div className="tx-band" aria-hidden="true">
-        <div className="tx-row" data-parallax-x="0.12">
-          <div className="tx-track">{[0, 1].map(k => <span className="tx-set" key={k}>{fields.map((f, i) => <span className="tx-word" key={f}>{i % 2 ? <em>{f}</em> : f}<i>✦</i></span>)}</span>)}</div>
-        </div>
-      </div>
-    </section>
+    <div className="tx" aria-hidden="true">
+      <span className="tx-line"/>
+    </div>
 
     <Services/>
     <ProjectGallery/>
