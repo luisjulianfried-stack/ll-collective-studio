@@ -12,12 +12,17 @@ import { Welcome } from '@/components/welcome';
 import { HeroSilk } from '@/components/hero-silk';
 import { ContactForm } from '@/components/contact-form';
 import { Lines } from '@/components/lines';
-import { SilverSeal } from '@/components/silver-seal';
 
 const pillars = [
   ['Klare Strategie,', 'spürbare Wirkung'],
   ['Persönlich betreut,', 'ohne Umwege'],
   ['Alles aus einer Hand,', 'aus München'],
+];
+
+const moments = [
+  ['/possibilities/campaign-planning.webp', 'Kampagnen', 'Zwei Personen planen eine Kampagne an einer Wand mit Plakatentwürfen'],
+  ['/possibilities/content-production.webp', 'Content-Produktion', 'Video-Dreh für Social Media in einem hellen Studio'],
+  ['/possibilities/event-planning.webp', 'Events & Aktionen', 'Team bespricht Unterlagen für ein Event an einem festlich gedeckten Tisch'],
 ];
 
 const steps = [
@@ -44,7 +49,13 @@ export default function Home() {
         </div>
       </div>
     </section>
-    <SilverSeal/>
+
+    <section className="bx" aria-label="Einblicke in unsere Arbeit">
+      {moments.map(([src, label, alt], i) => <figure className="bx-item img-reveal" style={{ ['--d' as string]: i }} key={src}>
+        <div className="bx-img" data-parallax={i === 1 ? '-0.05' : '0.04'}><Image src={src} alt={alt} fill unoptimized sizes="(max-width: 700px) 100vw, 33vw"/></div>
+        <figcaption><span>{String(i + 1).padStart(2, '0')}</span>{label}</figcaption>
+      </figure>)}
+    </section>
 
     <section className="ix section-pad" aria-label="Unser Anspruch">
       <span className="eyebrow reveal">LL Collective Studio</span>
