@@ -31,28 +31,28 @@ export default function Home() {
   const front = showcases[0];
   return <><Welcome/><Navigation/><main>
     <section className="hx" id="top">
-      <div className="hx-head">
-        <p className="hx-kicker"><span>Marketing-Agentur</span><i aria-hidden="true"/><span>München</span></p>
-        <h1 className="hx-title">
-          <span className="ln"><span>Marketing,</span></span>{' '}
-          <span className="ln"><span>das <em>wirkt.</em></span></span>
-        </h1>
+      <div className="hx-top">
+        <div className="hx-head">
+          <p className="hx-kicker"><span>Marketing-Agentur</span><i aria-hidden="true"/><span>München</span></p>
+          <h1 className="hx-title">
+            <span className="ln"><span>Marketing,</span></span>{' '}
+            <span className="ln"><span>das <em>wirkt.</em></span></span>
+          </h1>
+        </div>
+        <div className="hx-copy">
+          <p className="hx-lead">Strategie, Social Media, Kampagnen und Websites – wir machen Ihre Marke sichtbar und bringen Sie zu Ihren Kunden. Alles aus einer Hand.</p>
+          <div className="hx-actions">
+            <a className="btn btn-dark btn-small" href="#contact">Projekt anfragen <ArrowUpRight size={14} strokeWidth={1.5}/></a>
+            <a className="text-link" href="#work">Projekte ansehen <ArrowDown size={14} strokeWidth={1.5}/></a>
+          </div>
+        </div>
       </div>
       <div className="hx-panel">
-        <div className="hx-media"><HeroSilk/></div>
-        <div className="hx-inner">
-          <div className="hx-copy">
-            <p className="hx-lead">Strategie, Social Media, Kampagnen und Websites – wir machen Ihre Marke sichtbar und bringen Sie zu Ihren Kunden. Alles aus einer Hand.</p>
-            <div className="hx-actions">
-              <a className="btn btn-light" href="#contact">Projekt anfragen <ArrowUpRight size={16} strokeWidth={1.5}/></a>
-              <a className="btn btn-ghost" href="#work">Projekte ansehen <ArrowDown size={16} strokeWidth={1.5}/></a>
-            </div>
-          </div>
-          {front && <a className="hx-stage" href="#work" aria-label="Projekte ansehen">
-            <figure className="hx-frame"><div className="hx-bar"><i/><i/><i/><span>{front.title}</span></div><div className="hx-shot"><Image src={front.preview} alt="" fill priority unoptimized sizes="(max-width: 1000px) 80vw, 560px"/></div></figure>
-            <PhoneMock/>
-          </a>}
-        </div>
+        <div className="hx-media"><HeroSilk tone="light"/></div>
+        {front && <a className="hx-stage" href="#work" aria-label="Projekte ansehen">
+          <figure className="hx-frame"><div className="hx-bar"><i/><i/><i/><span>{front.title}</span></div><div className="hx-shot"><Image src={front.preview} alt="" fill priority unoptimized sizes="(max-width: 1000px) 80vw, 620px"/></div></figure>
+          <PhoneMock/>
+        </a>}
         <span className="hx-scroll" aria-hidden="true"><i/>Scroll</span>
       </div>
     </section>
