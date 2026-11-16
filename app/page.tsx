@@ -12,6 +12,7 @@ import { Welcome } from '@/components/welcome';
 import { HeroSilk } from '@/components/hero-silk';
 import { ContactForm } from '@/components/contact-form';
 import { Lines } from '@/components/lines';
+import { SilverSeal } from '@/components/silver-seal';
 
 const pillars = [
   ['Klare Strategie,', 'spürbare Wirkung'],
@@ -42,8 +43,8 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <a className="hx-scroll" href="#services" aria-label="Weiter zu den Leistungen"><i aria-hidden="true"/></a>
     </section>
+    <SilverSeal/>
 
     <section className="ix section-pad" aria-label="Unser Anspruch">
       <span className="eyebrow reveal">LL Collective Studio</span>

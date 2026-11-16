@@ -26,6 +26,7 @@ export function Motion() {
 
     const layers = [...document.querySelectorAll<HTMLElement>('[data-parallax]')];
     const hero = document.querySelector<HTMLElement>('.hx');
+    const seal = document.querySelector<HTMLElement>('.seal');
     const small = window.matchMedia('(max-width: 700px)');
     let frame = 0;
     const update = () => {
@@ -39,6 +40,7 @@ export function Motion() {
         const offset = (r.top + r.height / 2 - h / 2) * speed * damp;
         el.style.setProperty('--py', `${offset.toFixed(1)}px`);
       }
+      if (seal) seal.style.setProperty('--spin', `${(window.scrollY * .12).toFixed(1)}deg`);
       if (hero) {
         const p = Math.min(1, Math.max(0, window.scrollY / Math.max(1, hero.offsetHeight)));
         hero.style.setProperty('--hero', p.toFixed(3));
