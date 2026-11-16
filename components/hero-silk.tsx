@@ -10,17 +10,17 @@ const fragmentFor = (light: boolean) => [
   'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
   'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}',
   'float fbm(vec2 p){float v=0.,a=.5;mat2 R=mat2(.8,.6,-.6,.8);for(int i=0;i<5;i++){v+=a*n(p);p=R*p*2.03;a*=.5;}return v;}',
-  'void main(){vec2 uv=gl_FragCoord.xy/r;vec2 p=(gl_FragCoord.xy-.5*r)/r.y;p+=m*.12;float T=t*.035;',
+  'void main(){vec2 uv=gl_FragCoord.xy/r;vec2 p=(gl_FragCoord.xy-.5*r)/r.y;p+=m*'+(light?'.05':'.12')+';p*='+(light?'.8':'1.')+';float T=t*'+(light?'.014':'.035')+';',
   'vec2 q=vec2(fbm(p*1.3+T),fbm(p*1.3+vec2(5.2,1.3)-T));',
   'vec2 w=vec2(fbm(p*1.3+2.6*q+vec2(1.7,9.2)+T*1.4),fbm(p*1.3+2.6*q+vec2(8.3,2.8)-T));',
   'float f=fbm(p*1.3+2.8*w);',
   ...(light ? [
     // Helle Variante: Creme- und Sandtöne mit einem Hauch Rosé und Olive.
     'vec3 base=vec3(.925,.89,.84),sand=vec3(.84,.77,.69),rose=vec3(.74,.58,.55),olive=vec3(.70,.69,.58),pearl=vec3(.985,.97,.945);',
-    'vec3 c=mix(base,sand,smoothstep(.3,.75,f));',
+    'vec3 c=mix(base,sand,smoothstep(.3,.8,f)*.85);',
     'c=mix(c,olive,smoothstep(.55,.95,q.x)*.22);',
-    'c=mix(c,rose,smoothstep(.55,.98,f*length(w)*1.25)*.55);',
-    'float sheen=pow(smoothstep(.5,1.,f*1.1),2.);c=mix(c,pearl,sheen*.55);',
+    'c=mix(c,rose,smoothstep(.6,1.,f*length(w)*1.2)*.35);',
+    'float sheen=pow(smoothstep(.5,1.,f*1.1),2.);c=mix(c,pearl,sheen*.45);',
     'c*=1.-.08*pow(length(uv-vec2(.5,.5)),1.6);',
   ] : [
     'vec3 deep=vec3(.12,.04,.05),wine=vec3(.31,.09,.12),olive=vec3(.26,.26,.15),umber=vec3(.47,.31,.22),cream=vec3(.96,.89,.80);',

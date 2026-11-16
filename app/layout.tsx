@@ -3,7 +3,6 @@ import '@fontsource-variable/cormorant-garamond/wght.css';
 import '@fontsource-variable/cormorant-garamond/wght-italic.css';
 import '@fontsource-variable/jost/wght.css';
 import './globals.css';
-import './phone.css';
 import { site } from '@/lib/site';
 
 export const metadata: Metadata = {
