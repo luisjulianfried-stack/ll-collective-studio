@@ -57,7 +57,11 @@ export default function Home() {
       <div className="sx-copy section-pad">
         <span className="eyebrow reveal">Über uns</span>
         <Lines lines={['Junges Team.', <em key="e">Frischer Blick.</em>]}/>
-        <p className="sx-text reveal">Wir sind zwei Marketing-Studenten aus München. Wir kennen die Kanäle, auf denen Ihre Kunden unterwegs sind – und setzen Ihr Projekt persönlich um, ohne Umwege über eine große Agentur.</p>
+        <div className="sx-text reveal">
+          <p>Hinter LL Collective Studio stehen Luis Fried und Leander Ballhausen – zwei Marketing-Studenten aus München. Wir haben das Studio gegründet, weil wir täglich sehen, wie viel gute Unternehmen online verschenken: starke Produkte, aber ein Auftritt, der niemandem auffällt.</p>
+          <p>Wir kennen die Kanäle, auf denen Ihre Kunden heute unterwegs sind, aus eigener Erfahrung. Was wir im Studium über Strategie und Markenführung lernen, setzen wir direkt in der Praxis um – für Gastronomie, Beauty und lokale Marken, die mehr aus sich machen wollen.</p>
+          <p>Bei uns gibt es keine Weiterreichung an Junior-Teams und keine langen Abstimmungsschleifen. Sie sprechen immer direkt mit uns beiden, von der ersten Idee bis zum fertigen Ergebnis – persönlich, schnell und mit echtem Interesse an Ihrem Erfolg.</p>
+        </div>
         <div className="sx-founders reveal"><div><span>Co-Founder</span><strong>Luis Fried</strong></div><div><span>Co-Founder</span><strong>Leander Ballhausen</strong></div></div>
       </div>
       <figure className="sx-media sx-seal img-reveal">
