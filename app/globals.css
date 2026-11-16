@@ -162,17 +162,9 @@ html:not(.js) .welcome-screen,.intro-skip .welcome-screen{display:none}
 .text-link:hover{color:var(--burgundy)}
 @keyframes scrollCue{0%{transform:translateY(-100%)}60%,100%{transform:translateY(100%)}}
 
-/* Übergang: feine Linie und laufendes Schriftband */
+/* Übergang: feine Linie aus dem Hero */
 .tx{position:relative;z-index:2}
-.tx-line{display:block;width:1px;height:clamp(56px,6vw,96px);margin:calc(clamp(40px,4vw,64px) * -1) auto clamp(18px,2vw,30px);background:linear-gradient(180deg,rgba(200,173,134,0),var(--gold) 35%,var(--burgundy));transform-origin:top}
-.tx-band{position:relative;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(18px,2.4vw,34px) 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
-.tx-row{transform:translateX(var(--px,0))}
-.tx-track{display:flex;width:max-content;animation:txMove 70s linear infinite}
-.tx-set{display:flex;flex:none}
-.tx-word{display:inline-flex;align-items:center;gap:clamp(22px,3vw,52px);padding-right:clamp(22px,3vw,52px);font-family:var(--serif);font-size:clamp(40px,6.4vw,112px);line-height:1;font-weight:350;letter-spacing:-.015em;color:var(--ink);white-space:nowrap}
-.tx-word em{color:var(--burgundy);font-weight:380}
-.tx-word i{font-style:normal;font-size:.22em;color:var(--gold);translate:0 -.2em}
-@keyframes txMove{to{transform:translateX(-50%)}}
+.tx-line{display:block;width:1px;height:clamp(56px,6vw,96px);margin:calc(clamp(40px,4vw,64px) * -1) auto 0;background:linear-gradient(180deg,rgba(200,173,134,0),var(--gold) 35%,var(--burgundy));transform-origin:top}
 
 /* Drei Versprechen im Hero */
 .ix-pillars{list-style:none;padding:0;margin:clamp(40px,5vw,72px) 0 0;width:100%;max-width:1180px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -369,15 +361,12 @@ html:not(.js) .welcome-screen,.intro-skip .welcome-screen{display:none}
   .js .sx-seal.img-reveal.is-visible img{scale:1}
   .js .sx-seal.img-reveal.is-visible>div{clip-path:inset(-40%)}
   .js .tx-line{transform:scaleY(0);transition:transform 1.8s var(--ease-io) .5s}
-  .js .tx-band{opacity:0;transition:opacity 2s var(--ease) .9s}
   .intro-done .tx-line{transform:none}
-  .intro-done .tx-band{opacity:1}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-  .hx-media,.hx-content,.vx-img,.sx-img,.sx-disc,.tx-row{transform:none!important}
-  .tx-track{animation:none!important}
+  .hx-media,.hx-content,.vx-img,.sx-img,.sx-disc{transform:none!important}
   .hx-content{opacity:1!important}
 }
 
