@@ -14,8 +14,8 @@ export default function Impressum() {
   return <>
     <Navigation />
     <main className="legal-page">
-      <Link href="/" className="eyebrow">← ZURÜCK ZUR STARTSEITE</Link>
-      <span className="eyebrow">LEGAL / 01</span>
+      <Link href="/" className="eyebrow">← Zurück zur Startseite</Link>
+      <span className="eyebrow">Rechtliches · 01</span>
       <h1>Impressum<span>.</span></h1>
       <div className="legal-content">
         <h2>Angaben gemäß § 5 DDG</h2>

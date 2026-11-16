@@ -12,7 +12,14 @@ import { Footer } from '@/components/footer';
 import { Welcome } from '@/components/welcome';
 import { HeroSilk } from '@/components/hero-silk';
 import { ContactForm } from '@/components/contact-form';
+import { Lines } from '@/components/lines';
 import { showcases } from '@/lib/showcases';
+
+const pillars = [
+  ['Klare Strategie,', 'spürbare Wirkung'],
+  ['Persönlich betreut,', 'ohne Umwege'],
+  ['Alles aus einer Hand,', 'aus München'],
+];
 
 const steps = [
   ['01', 'Gespräch', 'Wir klären Ziel, Umfang und Zeitplan.'],
@@ -24,50 +31,73 @@ export default function Home() {
   const front = showcases[0];
   return <><Welcome/><Navigation/><main>
     <section className="hx" id="top">
-      <HeroSilk/>
-      <div className="hx-glow" aria-hidden="true"/>
-      <div className="hx-grid">
-        <div className="hx-copy">
-          <p className="hx-kicker">MARKETING-AGENTUR · MÜNCHEN</p>
-          <h1>MARKETING,<br/>DAS <em>wirkt.</em></h1>
-          <p className="hx-lead">Strategie, Social Media, Kampagnen und Websites – wir machen Ihre Marke sichtbar und bringen Sie zu Ihren Kunden. Alles aus einer Hand.</p>
-          <div className="hx-actions">
-            <a className="pill-button light" href="#contact">PROJEKT ANFRAGEN <ArrowUpRight size={18}/></a>
-            <a className="pill-button outline" href="#work">PROJEKTE ANSEHEN <ArrowDown size={18}/></a>
-          </div>
-        </div>
-        {front && <a className="hx-stage" href="#work" aria-label="Projekte ansehen">
-                    <figure className="hx-frame hx-frame-front"><div className="hx-bar"><i/><i/><i/><span>{front.title}</span></div><div className="hx-shot"><Image src={front.preview} alt="" fill priority unoptimized /></div></figure>
-          <PhoneMock/>
-        </a>}
+      <div className="hx-head">
+        <p className="hx-kicker"><span>Marketing-Agentur</span><i aria-hidden="true"/><span>München</span></p>
+        <h1 className="hx-title">
+          <span className="ln"><span>Marketing,</span></span>{' '}
+          <span className="ln"><span>das <em>wirkt.</em></span></span>
+        </h1>
       </div>
+      <div className="hx-panel">
+        <div className="hx-media"><HeroSilk/></div>
+        <div className="hx-inner">
+          <div className="hx-copy">
+            <p className="hx-lead">Strategie, Social Media, Kampagnen und Websites – wir machen Ihre Marke sichtbar und bringen Sie zu Ihren Kunden. Alles aus einer Hand.</p>
+            <div className="hx-actions">
+              <a className="btn btn-light" href="#contact">Projekt anfragen <ArrowUpRight size={16} strokeWidth={1.5}/></a>
+              <a className="btn btn-ghost" href="#work">Projekte ansehen <ArrowDown size={16} strokeWidth={1.5}/></a>
+            </div>
+          </div>
+          {front && <a className="hx-stage" href="#work" aria-label="Projekte ansehen">
+            <figure className="hx-frame"><div className="hx-bar"><i/><i/><i/><span>{front.title}</span></div><div className="hx-shot"><Image src={front.preview} alt="" fill priority unoptimized sizes="(max-width: 1000px) 80vw, 560px"/></div></figure>
+            <PhoneMock/>
+          </a>}
+        </div>
+        <span className="hx-scroll" aria-hidden="true"><i/>Scroll</span>
+      </div>
+    </section>
+
+    <section className="ix section-pad" aria-label="Unser Anspruch">
+      <span className="eyebrow reveal">LL Collective Studio</span>
+      <Lines as="p" className="ix-statement" lines={[
+        <>Marken, die man <em>sieht,</em></>,
+        <><em>versteht</em> und sich <em>merkt.</em></>,
+      ]}/>
+      <p className="ix-text reveal">Wir verbinden Strategie, Content, Kampagnen und Webdesign – damit Ihre Marke überall gleich stark auftritt.</p>
+      <ul className="ix-pillars">{pillars.map(([a, b], i) => <li className="reveal" style={{ ['--d' as string]: i }} key={a}>{a}<br/>{b}</li>)}</ul>
     </section>
 
     <Services/>
     <ProjectGallery/>
 
-    <section id="about" className="sx section-pad">
-      <div className="sx-head reveal">
-        <span className="eyebrow">ÜBER UNS</span>
-        <h2>JUNGES TEAM.<br/><em>Frischer Blick.</em></h2>
+    <section id="about" className="sx">
+      <div className="sx-copy section-pad">
+        <span className="eyebrow reveal">Über uns</span>
+        <Lines lines={['Junges Team.', <em key="e">Frischer Blick.</em>]}/>
+        <p className="sx-text reveal">Wir sind zwei Marketing-Studenten aus München. Wir kennen die Kanäle, auf denen Ihre Kunden unterwegs sind – und setzen Ihr Projekt persönlich um, ohne Umwege über eine große Agentur.</p>
+        <div className="sx-founders reveal"><div><span>Co-Founder</span><strong>Luis Fried</strong></div><div><span>Co-Founder</span><strong>Leander Ballhausen</strong></div></div>
       </div>
-      <div className="sx-body reveal">
-        <p>Wir sind zwei Marketing-Studenten aus München. Wir kennen die Kanäle, auf denen Ihre Kunden unterwegs sind – und setzen Ihr Projekt persönlich um, ohne Umwege über eine große Agentur.</p>
-        <div className="sx-founders"><div><span>CO-FOUNDER</span><strong>Luis Fried</strong></div><div><span>CO-FOUNDER</span><strong>Leander Ballhausen</strong></div></div>
+      <figure className="sx-media img-reveal">
+        <div className="sx-img" data-parallax="-0.08"><Image src="/media/ll-campaign-poster.jpg" alt="Plakat von LL Collective Studio mit dem LL-Monogramm an einer Litfaßsäule in der Stadt" fill unoptimized sizes="(max-width: 1000px) 100vw, 45vw"/></div>
+        <figcaption>LL Collective Studio · Kampagnenmotiv</figcaption>
+      </figure>
+    </section>
+
+    <section id="process" className="px section-pad">
+      <div className="px-head">
+        <span className="eyebrow reveal">So läuft es ab</span>
+        <Lines lines={['Drei Schritte.', <em key="e">Ein klarer Weg.</em>]}/>
       </div>
-      <div id="process" className="sx-steps">
-        <span className="eyebrow">SO LÄUFT ES AB</span>
-        <ol>{steps.map(([n, title, text]) => <li className="reveal" key={n}><span>{n}</span><h3>{title}</h3><p>{text}</p></li>)}</ol>
-      </div>
+      <ol>{steps.map(([n, title, text], i) => <li className="reveal" style={{ ['--d' as string]: i }} key={n}><span className="px-num">{n}</span><div><h3>{title}</h3><p>{text}</p></div></li>)}</ol>
     </section>
 
     <section id="contact" className="cx section-pad">
-      <div className="cx-inner reveal">
-        <span className="eyebrow">KONTAKT</span>
-        <h2>BEREIT FÜR EINEN<br/><em>starken Auftritt?</em></h2>
-        <p>Schreiben Sie uns kurz, worum es geht – wir melden uns mit einem ersten Vorschlag.</p>
-        <div className="cx-actions">
-          <span>ODER DIREKT PER E-MAIL</span>
+      <div className="cx-inner">
+        <span className="eyebrow reveal">Kontakt</span>
+        <Lines lines={['Bereit für einen', <em key="e">starken Auftritt?</em>]}/>
+        <p className="reveal">Schreiben Sie uns kurz, worum es geht – wir melden uns mit einem ersten Vorschlag.</p>
+        <div className="cx-actions reveal">
+          <span>Oder direkt per E-Mail</span>
           <a className="cx-mail" href={`mailto:${site.email}`}>{site.email}</a>
         </div>
       </div>

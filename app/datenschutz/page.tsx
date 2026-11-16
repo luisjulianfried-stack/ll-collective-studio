@@ -10,8 +10,8 @@ export default function Datenschutz() {
   return <>
     <Navigation />
     <main className="legal-page">
-      <Link href="/" className="eyebrow">← ZURÜCK ZUR STARTSEITE</Link>
-      <span className="eyebrow">LEGAL / 02</span>
+      <Link href="/" className="eyebrow">← Zurück zur Startseite</Link>
+      <span className="eyebrow">Rechtliches · 02</span>
       <h1>Datenschutz<span>.</span></h1>
       <div className="legal-content">
         <h2>1. Verantwortlicher</h2>

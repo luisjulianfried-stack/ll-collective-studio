@@ -1,15 +1,8 @@
-import Image from 'next/image';
+import { LOGO_PATH, LOGO_VIEWBOX } from '@/lib/logo';
 
+// Das LL-Logo als Inline-SVG: übernimmt die Textfarbe (currentColor) der Umgebung.
 export function BrandMark({ large = false }: { large?: boolean }) {
-  return (
-    <Image
-      src="/brand/ll-logo.svg"
-      alt=""
-      className={`brand-symbol ${large ? 'brand-symbol-large' : ''}`}
-      width={large ? 110 : 58}
-      height={large ? 83 : 44}
-      unoptimized
-      style={{ display: 'block', height: 'auto', objectFit: 'contain' }}
-    />
-  );
+  return <svg className={`brand-symbol${large ? ' brand-symbol-large' : ''}`} viewBox={LOGO_VIEWBOX} aria-hidden="true" focusable="false">
+    <path d={LOGO_PATH} fill="currentColor" fillRule="evenodd"/>
+  </svg>;
 }
