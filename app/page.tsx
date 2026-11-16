@@ -32,16 +32,18 @@ export default function Home() {
     <section className="hx" id="top">
       <div className="hx-media" aria-hidden="true"><HeroSilk tone="light"/></div>
       <div className="hx-content">
+        <span className="eyebrow hx-eyebrow">LL Collective Studio</span>
         <h1 className="hx-title">
-          <span className="ln"><span>Marketing,</span></span>{' '}
-          <span className="ln"><span>das <em>wirkt.</em></span></span>
+          <span className="ln"><span>Marken, die man <em>sieht,</em></span></span>{' '}
+          <span className="ln"><span><em>versteht</em> und sich <em>merkt.</em></span></span>
         </h1>
         <div className="hx-copy">
-          <p className="hx-lead">Strategie, Social Media, Kampagnen und Websites – wir machen Ihre Marke sichtbar und bringen Sie zu Ihren Kunden. Alles aus einer Hand.</p>
+          <p className="hx-lead">Wir verbinden Strategie, Content, Kampagnen und Webdesign – damit Ihre Marke überall gleich stark auftritt.</p>
           <div className="hx-actions">
             <a className="btn btn-dark btn-small" href="#contact">Projekt anfragen <ArrowUpRight size={14} strokeWidth={1.5}/></a>
             <a className="text-link" href="#work">Projekte ansehen <ArrowDown size={14} strokeWidth={1.5}/></a>
           </div>
+          <ul className="ix-pillars">{pillars.map(([a, b]) => <li key={a}>{a}<br/>{b}</li>)}</ul>
         </div>
       </div>
     </section>
@@ -53,16 +55,6 @@ export default function Home() {
           <div className="tx-track">{[0, 1].map(k => <span className="tx-set" key={k}>{fields.map((f, i) => <span className="tx-word" key={f}>{i % 2 ? <em>{f}</em> : f}<i>✦</i></span>)}</span>)}</div>
         </div>
       </div>
-    </section>
-
-    <section className="ix section-pad" aria-label="Unser Anspruch">
-      <span className="eyebrow reveal">LL Collective Studio</span>
-      <Lines as="p" className="ix-statement" lines={[
-        <>Marken, die man <em>sieht,</em></>,
-        <><em>versteht</em> und sich <em>merkt.</em></>,
-      ]}/>
-      <p className="ix-text reveal">Wir verbinden Strategie, Content, Kampagnen und Webdesign – damit Ihre Marke überall gleich stark auftritt.</p>
-      <ul className="ix-pillars">{pillars.map(([a, b], i) => <li className="reveal" style={{ ['--d' as string]: i }} key={a}>{a}<br/>{b}</li>)}</ul>
     </section>
 
     <Services/>
