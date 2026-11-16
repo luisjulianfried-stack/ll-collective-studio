@@ -246,7 +246,9 @@ html:not(.js) .welcome-screen,.intro-skip .welcome-screen{display:none}
 .sx .eyebrow{color:var(--gold)}
 .sx .lines{margin-top:26px}
 .sx em{color:var(--gold)}
-.sx-text{max-width:470px;margin:34px 0 0;font-size:17px;color:var(--on-dark-muted)}
+.sx-text{max-width:520px;margin:34px 0 0;font-size:17px;color:var(--on-dark-muted)}
+.sx-text p{margin:0}
+.sx-text p+p{margin-top:18px}
 .sx-founders{display:grid;grid-template-columns:1fr 1fr;max-width:520px;margin-top:48px;border-top:1px solid var(--line-dark);border-bottom:1px solid var(--line-dark)}
 .sx-founders>div{padding:22px 0}
 .sx-founders>div+div{padding-left:24px;border-left:1px solid var(--line-dark)}
