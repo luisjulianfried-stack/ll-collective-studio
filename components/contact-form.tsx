@@ -62,18 +62,18 @@ export function ContactForm() {
 
   return <form className="cf" onSubmit={submit}>
     <div className="cf-row">
-      <label>NAME *<input name="name" autoComplete="name" required maxLength={120}/></label>
-      <label>E-MAIL *<input name="email" type="email" autoComplete="email" required maxLength={160}/></label>
+      <label>Name *<input name="name" autoComplete="name" required maxLength={120}/></label>
+      <label>E-Mail *<input name="email" type="email" autoComplete="email" required maxLength={160}/></label>
     </div>
     <div className="cf-row">
-      <label>UNTERNEHMEN<input name="company" autoComplete="organization" maxLength={160}/></label>
-      <label>ANLIEGEN<select name="topic" defaultValue=""><option value="">Bitte wählen</option>{topics.map(t => <option key={t}>{t}</option>)}</select></label>
+      <label>Unternehmen<input name="company" autoComplete="organization" maxLength={160}/></label>
+      <label>Anliegen<select name="topic" defaultValue=""><option value="">Bitte wählen</option>{topics.map(t => <option key={t}>{t}</option>)}</select></label>
     </div>
-    <label>NACHRICHT *<textarea name="message" rows={5} required maxLength={5000} placeholder="Worum geht es, und bis wann soll es fertig sein?"/></label>
+    <label>Nachricht *<textarea name="message" rows={5} required maxLength={5000} placeholder="Worum geht es, und bis wann soll es fertig sein?"/></label>
     <input type="checkbox" name="botcheck" className="cf-trap" tabIndex={-1} autoComplete="off" aria-hidden="true"/>
     <label className="cf-check"><input type="checkbox" required/><span>Ich habe die <Link href="/datenschutz">Datenschutzerklärung</Link> gelesen und bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verarbeitet werden. *</span></label>
     <div className="cf-bottom">
-      <button className="pill-button dark" type="submit" disabled={status === 'sending'}>{status === 'sending' ? 'WIRD GESENDET …' : 'ANFRAGE SENDEN'} <ArrowUpRight size={18}/></button>
+      <button className="btn btn-dark" type="submit" disabled={status === 'sending'}>{status === 'sending' ? 'Wird gesendet …' : 'Anfrage senden'} <ArrowUpRight size={16} strokeWidth={1.5}/></button>
       <p className="cf-status" role="alert">{status === 'error' && <>Das hat leider nicht geklappt. Bitte versuchen Sie es noch einmal oder schreiben Sie direkt an <a href={`mailto:${site.email}`}>{site.email}</a>.</>}</p>
     </div>
   </form>;

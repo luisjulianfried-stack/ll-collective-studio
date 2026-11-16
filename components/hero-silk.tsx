@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 
 // Fließender Seiden-Hintergrund für den Hero, übernommen aus der LeMatcha-Demo
-// und auf die Studio-Farben (Anthrazit, Taupe, Creme) umgestellt.
+// und auf die Studio-Farben (Burgunder, Braun, ein Hauch Olive, Creme) umgestellt.
 const vertex = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
 const fragment = [
   'precision mediump float;uniform vec2 r;uniform float t;uniform vec2 m;',
@@ -14,12 +14,13 @@ const fragment = [
   'vec2 q=vec2(fbm(p*1.3+T),fbm(p*1.3+vec2(5.2,1.3)-T));',
   'vec2 w=vec2(fbm(p*1.3+2.6*q+vec2(1.7,9.2)+T*1.4),fbm(p*1.3+2.6*q+vec2(8.3,2.8)-T));',
   'float f=fbm(p*1.3+2.8*w);',
-  'vec3 deep=vec3(.063,.059,.055),umber=vec3(.17,.145,.12),taupe=vec3(.50,.43,.35),cream=vec3(.93,.89,.82);',
-  'vec3 c=mix(deep,umber,smoothstep(.25,.65,f));',
-  'c=mix(c,taupe,smoothstep(.5,.95,f*length(w)*1.25));',
-  'float sheen=pow(smoothstep(.55,1.,f*1.12),3.);c=mix(c,cream,sheen*.36);',
+  'vec3 deep=vec3(.12,.04,.05),wine=vec3(.31,.09,.12),olive=vec3(.26,.26,.15),umber=vec3(.47,.31,.22),cream=vec3(.96,.89,.80);',
+  'vec3 c=mix(deep,wine,smoothstep(.25,.68,f));',
+  'c=mix(c,olive,smoothstep(.55,.95,q.x)*.35);',
+  'c=mix(c,umber,smoothstep(.5,.95,f*length(w)*1.25));',
+  'float sheen=pow(smoothstep(.55,1.,f*1.12),3.);c=mix(c,cream,sheen*.34);',
   // Links (Text) dunkler halten, rechts darf die Seide mehr leuchten.
-  'c*=mix(.62,1.,smoothstep(.0,.75,uv.x));',
+  'c*=mix(.7,1.,smoothstep(.0,.75,uv.x));',
   'c*=1.-.55*pow(length(uv-vec2(.62,.5)),1.6);',
   'c+=(h(gl_FragCoord.xy+fract(t))-.5)*.025;',
   'gl_FragColor=vec4(c,1.);}',

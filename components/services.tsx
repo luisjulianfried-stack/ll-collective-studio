@@ -1,3 +1,6 @@
+import Image from 'next/image';
+import { Lines } from '@/components/lines';
+
 const services = [
   {
     number: '01', title: 'Strategie', kicker: 'Der Plan hinter allem',
@@ -26,25 +29,26 @@ const services = [
 ];
 
 export function Services() {
-  return <section id="services" className="vx">
-    <div className="section-pad vx-inner">
-      <div className="vx-head reveal">
-        <div>
-          <span className="eyebrow">LEISTUNGEN</span>
-          <h2>VIER BEREICHE.<br/><em>Ein Ziel.</em></h2>
-        </div>
-        <p>Sichtbarkeit, die sich auszahlt. Wir verbinden Strategie, Content, Kampagnen und Webdesign – damit Ihre Marke überall gleich stark auftritt.</p>
-      </div>
-      <div className="vx-grid">
-        {services.map(s => <article className="vx-card reveal" key={s.number}>
-          <span className="vx-num">{s.number}</span>
+  return <section id="services" className="vx section-pad">
+    <div className="vx-aside">
+      <span className="eyebrow reveal">Leistungen</span>
+      <Lines lines={['Vier Bereiche.', <em key="e">Ein Ziel.</em>]}/>
+      <p className="reveal">Sichtbarkeit, die sich auszahlt. Wir verbinden Strategie, Content, Kampagnen und Webdesign – damit Ihre Marke überall gleich stark auftritt.</p>
+      <figure className="vx-media img-reveal">
+        <div className="vx-img" data-parallax="-0.06"><Image src="/possibilities/brand-strategy.webp" alt="" fill unoptimized sizes="(max-width: 1000px) 100vw, 40vw"/></div>
+      </figure>
+    </div>
+    <ol className="vx-list">
+      {services.map(s => <li className="vx-item reveal" key={s.number}>
+        <span className="vx-num">{s.number}</span>
+        <div className="vx-body">
           <span className="vx-kicker">{s.kicker}</span>
           <h3>{s.title}</h3>
           <p>{s.text}</p>
           <ul>{s.items.map(t => <li key={t}>{t}</li>)}</ul>
-          <div className="vx-ideal"><span>IDEAL FÜR</span>{s.ideal}</div>
-        </article>)}
-      </div>
-    </div>
+          <div className="vx-ideal"><span>Ideal für</span>{s.ideal}</div>
+        </div>
+      </li>)}
+    </ol>
   </section>;
 }

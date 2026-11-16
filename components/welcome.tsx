@@ -3,6 +3,15 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { LOGO_PATH, LOGO_VIEWBOX } from '@/lib/logo';
 
+/*
+ * Eröffnung: Auf Creme zeichnet sich das LL-Logo von unten nach oben ein,
+ * eine feine Linie läuft aus, drei Worte erscheinen nacheinander.
+ * Dann hebt sich der Vorhang, das Logo gleitet an seinen Platz im Header
+ * und die Startseite baut sich darunter auf. Einmal pro Sitzung, überspringbar.
+ */
+const LEAVE_AT = 3300;
+const DONE_AT = 4700;
+
 export function Welcome() {
   const [phase, setPhase] = useState<'enter' | 'leave' | 'done'>('enter');
   const timers = useRef<number[]>([]);
@@ -12,20 +21,15 @@ export function Welcome() {
   const finish = useCallback(() => {
     timers.current.forEach(id => window.clearTimeout(id));
     timers.current = [];
+    document.documentElement.classList.add('intro-done', 'intro-landed');
     setPhase('done');
   }, []);
 
   useEffect(() => {
-    let seen = false;
-    try { seen = window.sessionStorage.getItem('ll-welcome-seen') === '1'; } catch {}
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-        window.location.hash || seen) {
-      finish();
-      return;
-    }
+    const root = document.documentElement;
+    if (root.classList.contains('intro-skip')) { finish(); return; }
 
     try { window.sessionStorage.setItem('ll-welcome-seen', '1'); } catch {}
-    // Zum Abschluss fliegt das Logo an seinen Platz oben links im Header.
     const leave = window.setTimeout(() => {
       const target = document.querySelector('.site-header .brand-symbol')?.getBoundingClientRect();
       const from = logo.current?.getBoundingClientRect();
@@ -34,15 +38,13 @@ export function Welcome() {
         logo.current.style.setProperty('--fly-y', `${target.top + target.height / 2 - (from.top + from.height / 2)}px`);
         logo.current.style.setProperty('--fly-s', `${target.width / from.width}`);
       }
+      root.classList.add('intro-done');
       setPhase('leave');
-    }, 3700);
-    const done = window.setTimeout(finish, 4500);
+    }, LEAVE_AT);
+    const done = window.setTimeout(finish, DONE_AT);
     timers.current = [leave, done];
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') finish();
-    };
+    const onKeyDown = (event: KeyboardEvent) => { if (event.key === 'Escape') finish(); };
     window.addEventListener('keydown', onKeyDown);
-
     return () => {
       timers.current.forEach(id => window.clearTimeout(id));
       timers.current = [];
@@ -59,23 +61,16 @@ export function Welcome() {
 
   if (phase === 'done') return null;
 
-  return <section className={`welcome-screen ${phase === 'leave' ? 'welcome-leaving' : ''}`} aria-label="Willkommen">
-    <span className="welcome-eyebrow">LL COLLECTIVE STUDIO <span aria-hidden="true">—</span> MÜNCHEN</span>
-    <div className="welcome-words" aria-hidden="true">
-      <div className="welcome-track">
-        <span>Strategie.</span>
-        <span>Content.</span>
-        <span>Webdesign.</span>
-        <span>Marketing, das <em>wirkt.</em></span>
+  return <section className={`welcome-screen${phase === 'leave' ? ' welcome-leaving' : ''}`} aria-label="Willkommen">
+    <div className="welcome-curtain" aria-hidden="true"/>
+    <span className="welcome-eyebrow">LL Collective Studio <i aria-hidden="true"/> München</span>
+    <div className="welcome-center">
+      <div className="welcome-logo" ref={logo} aria-hidden="true">
+        <svg viewBox={LOGO_VIEWBOX}><path d={LOGO_PATH} fill="currentColor" fillRule="evenodd"/></svg>
       </div>
+      <span className="welcome-line" aria-hidden="true"/>
+      <p className="welcome-words" aria-hidden="true"><span>Strategie</span><span>Content</span><span>Webdesign</span></p>
     </div>
-    <div className="welcome-logo" ref={logo} aria-hidden="true">
-      <svg viewBox={LOGO_VIEWBOX}>
-        <path d={LOGO_PATH} fill="#efede7" fillRule="evenodd"/>
-      </svg>
-    </div>
-    <div className="welcome-progress" aria-hidden="true"/>
-    <span className="welcome-count" aria-hidden="true"/>
-    <button type="button" className="welcome-skip" onClick={finish}>ÜBERSPRINGEN <span aria-hidden="true">↗</span></button>
+    <button type="button" className="welcome-skip" onClick={finish}>Überspringen</button>
   </section>;
 }

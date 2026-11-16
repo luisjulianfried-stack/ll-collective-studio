@@ -30,14 +30,14 @@ function DemoModal({ project, onClose }: { project: ShowcaseProject; onClose: ()
   return createPortal(
     <div className="demo-modal" ref={dialog} role="dialog" aria-modal="true" aria-labelledby={titleId}>
       <div className="demo-modal-bar">
-        <div className="demo-modal-title"><span>LL COLLECTIVE / KONZEPT-DEMO</span><strong id={titleId}>{project.title}</strong></div>
+        <div className="demo-modal-title"><span>LL Collective · Konzept-Demo</span><strong id={titleId}>{project.title}</strong></div>
         <div className="demo-modal-actions">
-          <a href={project.demoUrl} target="_blank" rel="noopener">IN NEUEM TAB <ArrowUpRight size={16} strokeWidth={1.5}/></a>
-          <button ref={closeButton} type="button" onClick={onClose} aria-label="Demo schließen">CLOSE <X size={18} strokeWidth={1.5}/></button>
+          <a href={project.demoUrl} target="_blank" rel="noopener">In neuem Tab <ArrowUpRight size={15} strokeWidth={1.5}/></a>
+          <button ref={closeButton} type="button" onClick={onClose} aria-label="Demo schließen">Schließen <X size={16} strokeWidth={1.5}/></button>
         </div>
       </div>
       <div className="demo-modal-frame">
-        {!loaded && <div className="demo-modal-loading" aria-hidden="true"><span/>DEMO WIRD GELADEN</div>}
+        {!loaded && <div className="demo-modal-loading" aria-hidden="true"><span/>Demo wird geladen</div>}
         <iframe src={project.demoUrl} title={`${project.title} – interaktive Konzept-Demo`} onLoad={() => setLoaded(true)}/>
       </div>
       <p className="demo-modal-note">{project.note}</p>
@@ -57,27 +57,29 @@ export function WebsiteShowcase({ project, index, total }: { project: ShowcasePr
     requestAnimationFrame(() => trigger.current?.focus({ preventScroll: true }));
   }, []);
 
-  return <div className="possibility-canvas possibility-web possibility-web-demo">
-    <div className="possibility-top"><span>LL COLLECTIVE / PROJEKT</span><span>{pad(index + 1)} / {pad(total)}</span></div>
-    <div className="study-web study-web-demo">
-      <div className="web-chrome"><span aria-hidden="true">● &nbsp; ● &nbsp; ●</span><span>{project.chromeLabel}</span></div>
-      <button
-        ref={trigger}
-        type="button"
-        className="web-demo-preview"
-        aria-haspopup="dialog"
-        onPointerDown={e => { pointer.current = e.clientX; }}
-        onClick={e => {
-          const moved = pointer.current !== null && e.clientX !== 0 && Math.abs(e.clientX - pointer.current) > 6;
-          pointer.current = null;
-          if (!moved) setOpen(true);
-        }}
-      >
-        <Image src={project.preview} alt={project.previewAlt} fill unoptimized sizes="(max-width: 700px) 88vw, 820px" className="web-demo-image"/>
-        <span className="web-demo-shade" aria-hidden="true"/>
-        <span className="web-demo-cta">LIVE-DEMO ÖFFNEN <ArrowUpRight size={16} strokeWidth={1.5}/></span>
-      </button>
-      <div className="web-flow web-demo-flow"><span>INTERAKTIV</span>{project.features.map((f, i) => <Fragment key={f}>{i > 0 && <i>·</i>}<strong>{f}</strong></Fragment>)}</div>
+  return <div className="pj">
+    <button
+      ref={trigger}
+      type="button"
+      className="pj-preview"
+      aria-haspopup="dialog"
+      onPointerDown={e => { pointer.current = e.clientX; }}
+      onClick={e => {
+        const moved = pointer.current !== null && e.clientX !== 0 && Math.abs(e.clientX - pointer.current) > 6;
+        pointer.current = null;
+        if (!moved) setOpen(true);
+      }}
+    >
+      <Image src={project.preview} alt={project.previewAlt} fill unoptimized sizes="(max-width: 700px) 86vw, 760px" className="pj-image"/>
+      <span className="pj-cta">Live-Demo öffnen <ArrowUpRight size={15} strokeWidth={1.5}/></span>
+    </button>
+    <div className="pj-info">
+      <span className="pj-index">{pad(index + 1)} <i>/ {pad(total)}</i></span>
+      <div>
+        <span className="eyebrow">{project.category}</span>
+        <h3>{project.title}</h3>
+        <p className="pj-features">Konzept-Demo · {project.features.map((f, i) => <Fragment key={f}>{i > 0 && ' · '}{f}</Fragment>)}</p>
+      </div>
     </div>
     {open && <DemoModal project={project} onClose={close}/>}
   </div>;
