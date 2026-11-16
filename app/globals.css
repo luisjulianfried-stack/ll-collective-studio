@@ -174,15 +174,15 @@ html:not(.js) .welcome-screen,.intro-skip .welcome-screen{display:none}
 @keyframes txMove{to{transform:translateX(-50%)}}
 
 /* ---------- Anspruch ---------- */
-.ix{text-align:center;display:flex;flex-direction:column;align-items:center;padding-top:clamp(56px,6vw,96px)}
+.ix{text-align:center;display:flex;flex-direction:column;align-items:center;padding-top:clamp(56px,6vw,96px);padding-bottom:clamp(56px,6vw,96px)}
 .ix-statement{margin:30px 0 0;font-family:var(--serif);font-size:clamp(36px,5vw,82px);line-height:1.08;font-weight:350;letter-spacing:-.015em;max-width:1100px}
 .ix-text{max-width:470px;margin:34px auto 0;color:var(--muted)}
-.ix-pillars{list-style:none;padding:0;margin:clamp(64px,8vw,120px) 0 0;width:100%;max-width:1180px;display:grid;grid-template-columns:repeat(3,1fr)}
-.ix-pillars li{padding:30px 20px 0;border-top:1px solid var(--line);font-family:var(--serif);font-size:clamp(22px,2vw,29px);line-height:1.22}
+.ix-pillars{list-style:none;padding:0;margin:clamp(64px,8vw,120px) 0 0;width:100%;max-width:1180px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.ix-pillars li{padding:30px 20px;font-family:var(--serif);font-size:clamp(22px,2vw,29px);line-height:1.22}
 .ix-pillars li+li{border-left:1px solid var(--line)}
 
 /* ---------- Leistungen ---------- */
-.vx{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(40px,8vw,140px);border-top:1px solid var(--line);margin:0 var(--pad);padding-left:0;padding-right:0}
+.vx{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(40px,8vw,140px);margin:0 var(--pad);padding-top:clamp(40px,5vw,80px);padding-left:0;padding-right:0}
 .vx-aside{align-self:start;position:sticky;top:110px}
 .vx-aside .lines{margin-top:26px}
 .vx-aside>p{max-width:400px;margin:30px 0 0;color:var(--muted)}
@@ -411,7 +411,7 @@ html:not(.js) .welcome-screen,.intro-skip .welcome-screen{display:none}
   .ix-text{margin-left:0}
   .ix-pillars{grid-template-columns:1fr}
   .ix-pillars li{padding:22px 0}
-  .ix-pillars li+li{border-left:0}
+  .ix-pillars li+li{border-left:0;border-top:1px solid var(--line)}
   .vx-item{grid-template-columns:1fr;gap:8px;padding:36px 0 40px}
   .vx-item:first-child{padding-top:0}
   .wx-head{flex-direction:column;align-items:flex-start;gap:24px}
