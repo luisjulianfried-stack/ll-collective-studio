@@ -32,11 +32,11 @@ export default function Home() {
       <div className="hx-content">
         <span className="eyebrow hx-eyebrow">LL Collective Studio</span>
         <h1 className="hx-title">
-          <span className="ln"><span>Marken, die man <em>sieht,</em></span></span>{' '}
-          <span className="ln"><span><em>versteht</em> und sich <em>merkt.</em></span></span>
+          <span className="ln"><span>Ihre Kunden scrollen.</span></span>{' '}
+          <span className="ln"><span><em>Wir bringen sie zum Stoppen.</em></span></span>
         </h1>
         <div className="hx-copy">
-          <p className="hx-lead">Wir verbinden Strategie, Content, Kampagnen und Webdesign – damit Ihre Marke überall gleich stark auftritt.</p>
+          <p className="hx-lead">Zwei Marketing-Studenten aus München, selbst täglich dort unterwegs, wo Ihre Kunden scrollen. Wir machen Ihre Marke zu dem Moment, bei dem sie hängen bleiben.</p>
           <div className="hx-actions">
             <a className="btn btn-dark btn-small" href="#contact">Projekt anfragen <ArrowUpRight size={14} strokeWidth={1.5}/></a>
             <a className="text-link" href="#work">Projekte ansehen <ArrowDown size={14} strokeWidth={1.5}/></a>
