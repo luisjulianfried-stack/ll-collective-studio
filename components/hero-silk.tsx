@@ -10,18 +10,18 @@ const fragmentFor = (light: boolean) => [
   'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
   'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}',
   'float fbm(vec2 p){float v=0.,a=.5;mat2 R=mat2(.8,.6,-.6,.8);for(int i=0;i<5;i++){v+=a*n(p);p=R*p*2.03;a*=.5;}return v;}',
-  'void main(){vec2 uv=gl_FragCoord.xy/r;vec2 p=(gl_FragCoord.xy-.5*r)/r.y;p+=m*'+(light?'.05':'.12')+';p*='+(light?'.8':'1.')+';float T=t*'+(light?'.014':'.035')+';',
+  'void main(){vec2 uv=gl_FragCoord.xy/r;vec2 p=(gl_FragCoord.xy-.5*r)/r.y;p+=m*'+(light?'.05':'.12')+';p*='+(light?'.8':'1.')+';float T=t*'+(light?'.022':'.035')+';',
   'vec2 q=vec2(fbm(p*1.3+T),fbm(p*1.3+vec2(5.2,1.3)-T));',
   'vec2 w=vec2(fbm(p*1.3+2.6*q+vec2(1.7,9.2)+T*1.4),fbm(p*1.3+2.6*q+vec2(8.3,2.8)-T));',
   'float f=fbm(p*1.3+2.8*w);',
   ...(light ? [
-    // Helle Variante: Creme und Taupe, durchzogen von Burgunder- und Olivbahnen, damit der Start Farbe bekommt.
-    'vec3 base=vec3(.93,.89,.83),taupe=vec3(.74,.64,.55),umber=vec3(.38,.26,.20),wine=vec3(.46,.11,.17),olive=vec3(.33,.37,.18),pearl=vec3(.99,.975,.95);',
+    // Helle Variante: Creme mit kräftigen Burgunder-, Umbra- und Olivbahnen und hellem Glanz.
+    'vec3 base=vec3(.92,.86,.79),taupe=vec3(.70,.57,.48),umber=vec3(.30,.17,.13),wine=vec3(.50,.08,.15),olive=vec3(.30,.35,.14),pearl=vec3(1.,.98,.95);',
     'vec3 c=mix(base,taupe,smoothstep(.3,.8,f));',
-    'c=mix(c,umber,smoothstep(.58,.95,f*length(w)*1.2)*.55);',
-    'c=mix(c,wine,smoothstep(.42,.95,q.y)*smoothstep(.35,.85,f)*.9);',
-    'c=mix(c,olive,smoothstep(.5,.95,q.x)*smoothstep(.35,.8,f)*smoothstep(.6,.3,q.y)*.85);',
-    'float sheen=pow(smoothstep(.45,1.,f*1.1),2.2);c=mix(c,pearl,sheen*.6);',
+    'c=mix(c,umber,smoothstep(.5,.92,f*length(w)*1.25)*.8);',
+    'c=mix(c,wine,smoothstep(.32,.85,q.y)*smoothstep(.28,.8,f)*.97);',
+    'c=mix(c,olive,smoothstep(.5,.95,q.x)*smoothstep(.35,.8,f)*smoothstep(.6,.3,q.y)*.95);',
+    'float sheen=pow(smoothstep(.45,1.,f*1.1),2.2);c=mix(c,pearl,sheen*.75);',
     'c*=1.-.12*pow(length(uv-vec2(.5,.55)),1.6);',
   ] : [
     'vec3 deep=vec3(.12,.04,.05),wine=vec3(.31,.09,.12),olive=vec3(.26,.26,.15),umber=vec3(.47,.31,.22),cream=vec3(.96,.89,.80);',
