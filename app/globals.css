@@ -167,30 +167,33 @@ html:not(.js) .welcome-screen,.intro-skip .welcome-screen{display:none}
 .tx-line{display:block;width:1px;height:clamp(56px,6vw,96px);margin:calc(clamp(40px,4vw,64px) * -1) auto 0;background:linear-gradient(180deg,rgba(200,173,134,0),var(--gold) 35%,var(--burgundy));transform-origin:top}
 
 /* Drei Versprechen im Hero */
-.ix-pillars{list-style:none;padding:0;margin:clamp(40px,5vw,72px) 0 0;width:100%;max-width:1180px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.ix-pillars{counter-reset:pillar;list-style:none;padding:0;margin:clamp(40px,5vw,72px) 0 0;width:100%;max-width:1180px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.ix-pillars li::before{counter-increment:pillar;content:counter(pillar,decimal-leading-zero);display:block;margin-bottom:12px;font-family:var(--sans);font-size:10.5px;font-weight:450;letter-spacing:.24em;color:var(--burgundy)}
 .ix-pillars li{padding:30px 20px;font-family:var(--serif);font-size:clamp(22px,2vw,29px);line-height:1.22}
 .ix-pillars li+li{border-left:1px solid var(--line)}
 
 /* ---------- Leistungen ---------- */
-.vx{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(40px,8vw,140px);margin:0 var(--pad);padding-top:clamp(40px,5vw,80px);padding-left:0;padding-right:0}
+.vx{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(40px,8vw,140px);background:var(--burgundy-deep);color:var(--on-dark)}
+.vx .eyebrow{color:var(--gold)}
+.vx em{color:var(--gold)}
 .vx-aside{align-self:start;position:sticky;top:110px}
 .vx-aside .lines{margin-top:26px}
-.vx-aside>p{max-width:400px;margin:30px 0 0;color:var(--muted)}
-.vx-media{position:relative;margin:44px 0 0;aspect-ratio:3/2;overflow:hidden;background:var(--sand)}
+.vx-aside>p{max-width:400px;margin:30px 0 0;color:var(--on-dark-muted)}
+.vx-media{position:relative;margin:44px 0 0;aspect-ratio:3/2;overflow:hidden;background:#2a0b10}
 .vx-img{position:absolute;inset:-14% 0;transform:translateY(var(--py,0))}
 .vx-img img{object-fit:cover;filter:saturate(.85) sepia(.12)}
 .vx-list{list-style:none;margin:0;padding:0}
-.vx-item{display:grid;grid-template-columns:clamp(70px,8vw,120px) 1fr;gap:20px;padding:44px 0 48px;border-top:1px solid var(--line)}
+.vx-item{display:grid;grid-template-columns:clamp(70px,8vw,120px) 1fr;gap:20px;padding:44px 0 48px;border-top:1px solid var(--line-dark)}
 .vx-item:first-child{border-top:0;padding-top:0}
-.vx-num{font-family:var(--serif);font-size:clamp(52px,5.4vw,84px);line-height:.85;font-weight:300;color:var(--olive);transition:color .8s var(--ease)}
-.vx-item:hover .vx-num{color:var(--burgundy)}
-.vx-kicker{display:block;font-family:var(--serif);font-style:italic;font-size:20px;color:var(--brown)}
+.vx-num{font-family:var(--serif);font-size:clamp(52px,5.4vw,84px);line-height:.85;font-weight:300;color:var(--gold);transition:color .8s var(--ease)}
+.vx-item:hover .vx-num{color:var(--on-dark)}
+.vx-kicker{display:block;font-family:var(--serif);font-style:italic;font-size:20px;color:var(--gold)}
 .vx-body h3{font-size:clamp(32px,3vw,46px);line-height:1.05;margin:8px 0 18px}
-.vx-body>p{max-width:520px;margin:0 0 24px;color:var(--ink-soft)}
-.vx-body ul{list-style:none;margin:0 0 24px;padding:0;display:flex;flex-wrap:wrap;gap:8px 0;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}
-.vx-body ul li:not(:last-child)::after{content:'/';margin:0 14px;color:var(--sand)}
-.vx-ideal{font-size:14px;color:var(--muted)}
-.vx-ideal span{margin-right:14px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--olive)}
+.vx-body>p{max-width:520px;margin:0 0 24px;color:var(--on-dark-muted)}
+.vx-body ul{list-style:none;margin:0 0 24px;padding:0;display:flex;flex-wrap:wrap;gap:8px 0;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--on-dark)}
+.vx-body ul li:not(:last-child)::after{content:'/';margin:0 14px;color:rgba(200,173,134,.5)}
+.vx-ideal{font-size:14px;color:var(--on-dark-muted)}
+.vx-ideal span{margin-right:14px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
 
 /* ---------- Projekte ---------- */
 .wx{background:var(--paper)}
