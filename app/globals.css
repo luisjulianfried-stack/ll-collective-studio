@@ -17,6 +17,7 @@
   --brown:#7b5b45;
   --olive:#5d603c;
   --olive-deep:#2f3120;
+  --taupe:#6e625a;
   --gold:#c8ad86;
   --on-dark:#f1e9dc;
   --on-dark-muted:rgba(241,233,220,.68);
@@ -67,7 +68,7 @@ p{line-height:1.7}
 .btn-ghost{color:var(--on-dark);border-color:rgba(241,233,220,.45)}
 .btn-ghost::before{background:var(--cream)}
 .btn-ghost:hover{color:var(--burgundy-deep);border-color:var(--cream)}
-.btn-dark{background:var(--olive);border-color:var(--olive);color:var(--cream)}
+.btn-dark{background:var(--taupe);border-color:var(--taupe);color:var(--cream)}
 .btn-dark::before{background:var(--burgundy)}
 .btn-dark:hover{border-color:var(--burgundy)}
 
